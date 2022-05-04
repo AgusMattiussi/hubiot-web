@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <div id="app">
+    <div id="app" class="fill-height">
       <NavigationBar/>
       <router-view :key="$route.path"/>
       <BottomBar/>

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import RegisterView from '@/views/RegisterView'
 
 Vue.use(VueRouter)
 
@@ -8,6 +9,11 @@ const routes = [
     path: '/',
     name: 'loadingPage',
     component: () => import(/* webpackChunkName: "about" */ '../views/LoadingPageView.vue')
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: RegisterView
   },
   {
     path: '/about',
