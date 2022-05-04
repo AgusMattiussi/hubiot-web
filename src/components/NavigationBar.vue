@@ -2,7 +2,7 @@
   <v-toolbar class="primary" dense elevation="2" >
     <v-toolbar-title>
       <router-link to="/">
-        <p class="text-h4 white--text">Hubiot</p>
+        <p class="text-h4 white--text ma-2">Hubiot</p>
       </router-link>
     </v-toolbar-title>
     <v-spacer></v-spacer>

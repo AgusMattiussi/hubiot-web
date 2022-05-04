@@ -1,14 +1,16 @@
 <template>
   <v-container fluid class="indigo lighten-5">
     <v-row class="bgWelcome" align="center">
-      <v-col md="8"></v-col>
-      <v-col md="2" >
+      <v-col md="6"></v-col>
+      <v-col md="4" >
         <div class="ma-auto">
           <h1>Bienvenido a <span class="accent--text">Hubiot</span> la solución para el control de tu hogar</h1>
-          <v-btn color="primary" rounded x-large elevation="4">
-            <span>Regístrate</span>
-            <span>Para comenzar a usar Hubiot</span>
-          </v-btn>
+          <router-link to="register">
+            <v-btn color="primary" rounded x-large elevation="4">
+              <span>Regístrate</span>
+              <span>Para comenzar a usar Hubiot</span>
+            </v-btn>
+          </router-link>
         </div>
       </v-col>
       <v-col md="2"></v-col>
