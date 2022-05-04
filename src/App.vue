@@ -3,6 +3,7 @@
     <div id="app">
       <NavigationBar/>
       <router-view :key="$route.path"/>
+      <BottomBar/>
     </div>
   </v-app>
 </template>
@@ -32,9 +33,10 @@ nav a {
 
 <script>
 import NavigationBar from '@/components/NavigationBar'
+import BottomBar from '@/components/BottomBar'
 export default {
   name: 'App',
-  components: { NavigationBar },
+  components: { NavigationBar, BottomBar },
   data: () => ({
 
   })

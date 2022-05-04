@@ -1,36 +1,39 @@
 <template>
-  <v-container fluid class="indigo lighten-5">
+  <v-container fluid>
     <v-row class="bgWelcome" align="center">
-      <v-col md="8"></v-col>
-      <v-col md="2" >
+      <v-col md="6"></v-col>
+      <v-col md="1"></v-col>
+      <v-col md="4">
         <div class="ma-auto">
           <h1>Bienvenido a <span class="accent--text">Hubiot</span> la solución para el control de tu hogar</h1>
-          <v-btn color="primary" rounded x-large elevation="4">
-            <span>Regístrate</span>
-            <span>Para comenzar a usar Hubiot</span>
+          <v-btn class="registerButton" color="primary" width="400px" height="auto" >
+            <span class="registerText">Regístrate<br/>
+              <span class="registerDescriptionText" >Para comenzar a usar Hubiot</span>
+            </span>
           </v-btn>
+          <h4 class="primary--text ma-2">¿Ya tienes cuenta? <span class="text-decoration-underline">Inicia sesión</span></h4>
         </div>
       </v-col>
-      <v-col md="2"></v-col>
+      <v-col md="1"></v-col>
     </v-row>
     <v-row class="" align="center">
       <v-col md="6">
-        <h2>Saca el máximo provecho a tus dispositivos inteligentes</h2>
-        <p>Hubiot funciona como un control universal para todo tu hogar. Puedes encender la calefacción antes de llegar a casa o activar tu aspiradora mientras sales de paseo. ¡Las posibilidades son ilimitadas!</p>
+        <p class="heading">Saca el máximo provecho a tus dispositivos inteligentes</p>
+        <p class="descriptionText">Hubiot funciona como un control universal para todo tu hogar. Puedes encender la calefacción antes de llegar a casa o activar tu aspiradora mientras sales de paseo. ¡Las posibilidades son ilimitadas!</p>
       </v-col>
       <v-col md="6">
         <v-img :src="require('../assets/loading_img_2.jpg')" :alt="img2" />
       </v-col>
     </v-row>
-    <v-row align="center">
-      <v-col>
+    <v-row class="grey lighten-3" align="center">
+      <v-col md="6">
         <v-img :src="require('../assets/loading_img_3.jpg')" :alt="img2" />
       </v-col>
-      <v-col>
-        <h2>Cada vez más dispositivos soportados</h2>
-        <p>Lámparas, parlantes, puertas y más. Hubiot se expande día a día para brindarte una mayor variedad de dispositivos a tu disposición.</p>
-        <h4 class="accent--text mt-6">¿Puedo conectar mi dispositivo?</h4>
-        <v-btn color="primary" class="mt-2" rounded large elevation="4">Dispositivos soportados</v-btn>
+      <v-col md="6">
+        <p class="heading">Cada vez más dispositivos soportados</p>
+        <p class="descriptionText">Lámparas, parlantes, puertas y más. Hubiot se expande día a día para brindarte una mayor variedad de dispositivos a tu disposición.</p>
+        <h3 class="accent--text mt-5">¿Puedo conectar mi dispositivo?</h3>
+        <v-btn color="primary" class="mt-2" rounded large elevation="4" >Mira nuestra lista de dispositivos soportados</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -48,6 +51,38 @@ export default {
 .bgWelcome {
   background: url("../assets/loading_img_01.png") no-repeat center center;
   min-height: 600px;
+}
+
+.registerButton{
+  elevation: above;
+  border-radius: 50px;
+  box-shadow: 4px 4px 4px darkgrey;
+}
+
+.registerText{
+  font-size: 25px;
+  color: #FFFFFF;
+  font-weight: bold;
+  padding-top: 4px;
+}
+
+.registerDescriptionText{
+  font-size: 18px;
+  color: #FFFFFF;
+  font-weight: normal;
+  padding-top: 4px;
+}
+
+.descriptionText{
+  font-size: 22px;
+  color: #636363;
+}
+
+.heading{
+  font-size: 28px;
+  color: #000000;
+  text-shadow: 2px 2px 2px darkgrey;
+  font-weight: bold;
 }
 
 </style>

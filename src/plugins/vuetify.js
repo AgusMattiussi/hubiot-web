@@ -8,9 +8,9 @@ export default new Vuetify({
   theme: {
     themes: {
       light: {
-        primary: colors.indigo.lighten1,
-        secondary: colors.indigo.lighten5,
-        accent: colors.indigo.accent1
+        primary: colors.indigo.lighten1, /* #5C6BC0 */
+        secondary: colors.indigo.lighten5, /* #E8EAF6 */
+        accent: colors.indigo.accent1 /* #8C9EFF */
       }
     }
   }
