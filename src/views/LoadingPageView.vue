@@ -6,7 +6,7 @@
       <v-col md="4">
         <div class="ma-auto">
           <h1>Bienvenido a <span class="accent--text">Hubiot</span> la solución para el control de tu hogar</h1>
-          <v-btn class="registerButton" color="primary" width="400px" height="auto" >
+          <v-btn class="registerButton" color="primary" width="400px" height="auto">
             <span class="registerText">Regístrate<br/>
               <span class="registerDescriptionText" >Para comenzar a usar Hubiot</span>
             </span>
@@ -49,7 +49,8 @@ export default {
 <style scoped>
 
 .bgWelcome {
-  background: url("../assets/loading_img_01.png") no-repeat center center;
+  background-image: url("../assets/loading_img_01.png");
+  background-size: contain;
   min-height: 600px;
 }
 

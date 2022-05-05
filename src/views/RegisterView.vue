@@ -1,23 +1,24 @@
 <template>
   <v-container class="fill-height bg" fluid>
     <v-row>
-      <v-col md="6"></v-col>
+      <v-col md="7"></v-col>
       <v-col md="4">
-        <v-card class="secondary pa-4 rounded-xl" elevation="4">
-          <v-card-title class="primary pa-2">
-            Iniciar sesión
-          </v-card-title>
-          <v-form ref="form" v-model="valid" lazy-validation>
+        <v-card class="secondary rounded-xl " elevation="4">
+          <div class="cardTitle">
+            <h1> Regístrate </h1>
+          </div>
+          <v-form class="pa-4" ref="form" v-model="valid" lazy-validation>
             <v-text-field v-model="name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
-            <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-            <p>¿Ha olvidado su contrazeña?</p>
+            <v-text-field v-model="email" :rules="emailRules" label="Correo electrónico" required></v-text-field>
+            <v-text-field v-model="password" :rules="passwordRules" label="Contraseña" required></v-text-field>
+            <p class="text-decoration-underline">¿Ha olvidado su contraseña?</p>
             <v-btn :disabled="!valid" color="primary" class="mr-4" @click="validate">
-              Registrarse
+              <h3 class="white--text">Regístrate</h3>
             </v-btn>
           </v-form>
         </v-card>
       </v-col>
-      <v-col md="2"></v-col>
+      <v-col md="1"></v-col>
     </v-row>
   </v-container>
 </template>
@@ -28,13 +29,17 @@ export default {
     valid: true,
     name: '',
     nameRules: [
-      v => !!v || 'Name is required',
-      v => (v && v.length <= 10) || 'Name must be less than 10 characters'
+      v => !!v || 'El nombre es obligatorio',
+      v => (v && v.length <= 10) || 'El nombre debe ser menor a 10 caracteres'
     ],
     email: '',
     emailRules: [
-      v => !!v || 'E-mail is required',
-      v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
+      v => !!v || 'El correo electrónico es obligatorio',
+      v => /.+@.+\..+/.test(v) || 'El correo electrónico debe ser válido'
+    ],
+    password: '',
+    passwordRules: [
+      v => !!v || 'La contraseña es obligatoria'
     ],
     select: null
   }),
@@ -52,9 +57,13 @@ export default {
 }
 </script>
 <style scoped>
-
 .bg {
-  background: url("../assets/register_background.png") no-repeat center center;
+  background-image: url("../assets/login_background.png");
+  background-size: contain;
 }
 
+.cardTitle{
+  background-color: #5C6BC0;
+  color: #FFFFFF;
+}
 </style>
