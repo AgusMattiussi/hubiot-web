@@ -57,7 +57,7 @@
               <v-content mt="10">
                 <div class="devicesParent">
                   <v-card class="deviceCard" v-for="device in devices" :key="device.id">
-                    <router-link :to="{ name: 'devicesDetails', params: {id: device.id}}">
+                    <router-link :to="{ name: 'deviceDetails', params: {id: device.id}}">
                       <v-img :src="require('../assets/loading_img_3.jpg')" />
                       <h4>{{ device.name }}</h4>
                     </router-link>
