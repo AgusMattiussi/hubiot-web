@@ -1,11 +1,11 @@
 <template>
-  <v-app>
-    <div id="app" class="fill-height">
+    <div id="app">
+      <v-app>
       <NavigationBar/>
       <router-view :key="$route.path"/>
-      <BottomBar/>
+      <BottomBar class="mt-6"/>
+      </v-app>
     </div>
-  </v-app>
 </template>
 
 <style>
