@@ -10,7 +10,8 @@ export default new Vuetify({
       light: {
         primary: colors.indigo.lighten1, /* #5C6BC0 */
         secondary: colors.indigo.lighten5, /* #E8EAF6 */
-        accent: colors.indigo.accent1 /* #8C9EFF */
+        accent: colors.indigo.accent1, /* #8C9EFF */
+        contras: colors.deepOrange.lighten2 /* #FF8A65 */
       }
     }
   }
