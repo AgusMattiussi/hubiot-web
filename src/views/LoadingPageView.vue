@@ -6,12 +6,16 @@
       <v-col md="4">
         <div class="ma-auto">
           <h1>Bienvenido a <span class="accent--text">Hubiot</span> la solución para el control de tu hogar</h1>
-          <v-btn class="registerButton" color="primary" width="400px" height="auto">
-            <span class="registerText">Regístrate<br/>
-              <span class="registerDescriptionText" >Para comenzar a usar Hubiot</span>
-            </span>
-          </v-btn>
-          <h4 class="primary--text ma-2">¿Ya tienes cuenta? <span class="text-decoration-underline">Inicia sesión</span></h4>
+          <router-link to="/register">
+            <v-btn class="registerButton" color="primary" width="400px" height="auto">
+              <span class="registerText">Regístrate<br/>
+                <span class="registerDescriptionText" >Para comenzar a usar Hubiot</span>
+              </span>
+            </v-btn>
+          </router-link>
+          <router-link to="/login">
+            <h4 class="primary--text ma-2">¿Ya tienes cuenta? <span class="text-decoration-underline">Inicia sesión</span></h4>
+          </router-link>
         </div>
       </v-col>
       <v-col md="1"></v-col>

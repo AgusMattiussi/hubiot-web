@@ -7,7 +7,6 @@
     </router-link>
     <router-link to="/">
       <v-container>
-<!--         <v-img class="img" :src="require('../assets/logo.png')" :alt="logo"/>-->
         <p class="text-h4 white--text pt-3">Hubiot</p>
       </v-container>
     </router-link>
