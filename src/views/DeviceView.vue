@@ -2,7 +2,7 @@
   <v-container class="fill-height bg" fluid>
     <v-card class="card">
       <div>
-        <h1 class="cardTitle">Mi Dispositivo</h1>
+        <h1 class="cardTitle">{{ device.name }}</h1>
       </div>
       <v-img :src="require(`@/assets/parlante.png`)" alt="parlante" class="img"></v-img>
       <v-card-title class="sectionTitle">Estado</v-card-title>
@@ -25,8 +25,21 @@
 </template>
 
 <script>
+
+import store from '@/store/store'
+
 export default {
-  name: 'DeviceView'
+  name: 'DeviceView',
+  data () {
+    return {
+      deviceID: this.$route.params.id
+    }
+  },
+  computed: {
+    device () {
+      return store.devices.find(device => device.id === this.deviceID)
+    }
+  }
 }
 </script>
 

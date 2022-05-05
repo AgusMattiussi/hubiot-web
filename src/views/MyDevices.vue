@@ -57,9 +57,9 @@
               <v-content mt="10">
                 <div class="devicesParent">
                   <v-card class="deviceCard" v-for="device in devices" :key="device.id">
-                    <router-link :to="{ name: 'devicesDetails', params: {name: device.name}}">
+                    <router-link :to="{ name: 'devicesDetails', params: {id: device.id}}">
                       <v-img :src="require('../assets/loading_img_3.jpg')" />
-                      <h4>{{ device.deviceName }}</h4>
+                      <h4>{{ device.name }}</h4>
                     </router-link>
                   </v-card>
                 </div>
@@ -75,42 +75,14 @@
 </template>
 
 <script>
+
+import store from '@/store/store'
+
 export default {
   name: 'MyRooms',
   data () {
     return {
-      devices: [
-        {
-          id: 0,
-          deviceName: 'Luz',
-          deviceIcon: 'mdi-sun',
-          slug: 'piezamatias-luz'
-        },
-        {
-          id: 1,
-          deviceName: 'Agua',
-          deviceIcon: 'mdi-water',
-          slug: 'piezamatias-agua'
-        },
-        {
-          id: 2,
-          deviceName: 'Aire',
-          deviceIcon: 'mdi-water',
-          slug: 'piezamatias-aire'
-        },
-        {
-          id: 3,
-          deviceName: 'Fuego',
-          deviceIcon: 'mdi-water',
-          slug: 'piezamatias-fuego'
-        },
-        {
-          id: 4,
-          deviceName: 'Tierra',
-          deviceIcon: 'mdi-water',
-          slug: 'piezamatias-tierra'
-        }
-      ],
+      devices: store.devices,
       rooms: [
         {
           id: 0,
