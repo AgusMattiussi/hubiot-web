@@ -21,6 +21,16 @@ const routes = [
     component: () => import('../views/LoginView.vue')
   },
   {
+    path: '/routines',
+    name: 'routines',
+    component: () => import('../views/MyRoutinesView.vue')
+  },
+  {
+    path: '/routines/:id',
+    name: 'routineDetails',
+    component: () => import('../views/RoutineDetail.vue')
+  },
+  {
     path: '/devices',
     name: 'devices',
     component: () => import('../views/MyDeviceView.vue')
@@ -31,7 +41,7 @@ const routes = [
     component: () => import('../views/AddNewDeviceView.vue')
   },
   {
-    path: '/device/:id',
+    path: '/devices/:id',
     name: 'deviceDetails',
     component: () => import('../views/DeviceView.vue')
   },
