@@ -59,7 +59,7 @@ export default {
 <style scoped>
 .bg {
   background-image: url("../assets/login_background.png");
-  background-size: contain;
+  background-size: cover;
 }
 
 .cardTitle{

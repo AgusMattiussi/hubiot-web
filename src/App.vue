@@ -1,9 +1,9 @@
 <template>
     <div id="app">
-      <v-app>
-      <NavigationBar/>
-      <router-view :key="$route.path"/>
-      <BottomBar class="mt-6"/>
+      <v-app id="app">
+        <NavigationBar/>
+        <router-view :key="$route.path"/>
+        <BottomBar/>
       </v-app>
     </div>
 </template>
@@ -13,6 +13,7 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0;
   text-align: center;
   color: #000000;
 }

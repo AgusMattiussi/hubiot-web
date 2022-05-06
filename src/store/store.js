@@ -3,7 +3,7 @@ export default {
     {
       name: 'Parlante',
       slug: 'parlante',
-      image: 'parlante.jpg',
+      image: 'parlante.png',
       id: 1,
       description:
         'parlantoide',
@@ -90,7 +90,7 @@ export default {
     {
       name: 'Puerta',
       slug: 'puerta',
-      image: 'puerta.jpg',
+      image: 'puerta.png',
       id: 2,
       description:
         'puertoide',
@@ -133,9 +133,9 @@ export default {
       ]
     },
     {
-      name: 'Aire acondicionado',
-      slug: 'aire-acondicionado',
-      image: 'aire.jpg',
+      name: 'Aire',
+      slug: 'aire',
+      image: 'aire.png',
       id: 3,
       description:
         'aire acondionadoide',

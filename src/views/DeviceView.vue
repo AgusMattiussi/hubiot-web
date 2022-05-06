@@ -4,7 +4,7 @@
       <div>
         <h1 class="cardTitle">{{ device.name }}</h1>
       </div>
-      <v-img :src="require(`@/assets/parlante.png`)" alt="parlante" class="img"></v-img>
+      <v-img :src="require(`@/assets/${device.image}`)" alt="parlante" class="img"></v-img>
       <v-card-title class="sectionTitle">Estado</v-card-title>
       <v-card-text class="text-left">
         <ul class="stateText">

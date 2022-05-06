@@ -1,25 +1,6 @@
 <template>
   <v-container class="fill-height" fluid>
-    <v-card class="accent" height="100%" elevation="24">
-      <v-navigation-drawer permanent expand-on-hover>
-        <v-list class="primary">
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title class="text-h6">
-                Ambientes
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-        <v-divider></v-divider>
-        <v-list class="accent" nav dense>
-          <v-list-item v-for="room in rooms" :key="room.id" link>
-            <v-list-item-title>{{ room.roomName }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-    </v-card>
-    <v-main class="fill-height accent ma-2">
+    <v-main class="fill-height accent mx-2">
       <v-sheet class="fill-height" elevation="24">
         <v-container class="accent fill-height" fluid>
         <v-row>
@@ -58,7 +39,7 @@
                 <div class="devicesParent">
                   <v-card class="deviceCard" v-for="device in devices" :key="device.id">
                     <router-link :to="{ name: 'deviceDetails', params: {id: device.id}}">
-                      <v-img :src="require('../assets/loading_img_3.jpg')" />
+                      <v-img :src="require(`@/assets/${device.image}`)" />
                       <h4>{{ device.name }}</h4>
                     </router-link>
                   </v-card>
@@ -83,26 +64,6 @@ export default {
   data () {
     return {
       devices: store.devices,
-      rooms: [
-        {
-          id: 0,
-          roomName: 'Heladera',
-          iconName: 'mdi-sun',
-          slug: 'piezadematias'
-        },
-        {
-          id: 1,
-          roomName: 'Cocina',
-          iconName: 'mdi-kitchen',
-          slug: 'cocina'
-        },
-        {
-          id: 2,
-          roomName: 'Living',
-          iconName: 'mdi-room',
-          slug: 'living'
-        }
-      ],
       valid: true,
       device: '',
       deviceRules: [
@@ -134,9 +95,8 @@ export default {
 .deviceCard {
   margin: 10px;
   padding: 10px;
-  border-radius: 5px 20px 5px;
+  border-radius: 20px;
   width: 25%;
   height: 25%;
 }
-
 </style>
