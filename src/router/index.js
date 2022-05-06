@@ -41,7 +41,7 @@ const routes = [
     component: () => import('../views/AddNewDeviceView.vue')
   },
   {
-    path: '/devices/:id',
+    path: '/devices/:slug',
     name: 'deviceDetails',
     component: () => import('../views/DeviceView.vue')
   },

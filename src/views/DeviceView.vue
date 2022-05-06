@@ -37,12 +37,12 @@ export default {
   },
   data () {
     return {
-      deviceID: this.$route.params.id
+      deviceSlug: this.$route.params.slug
     }
   },
   computed: {
     device () {
-      return store.devices.find(device => device.id === this.deviceID)
+      return store.devices.find(device => device.slug === this.deviceSlug)
     }
   }
 }
