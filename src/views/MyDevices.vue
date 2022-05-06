@@ -37,12 +37,12 @@
               </form>
               <v-content mt="10">
                 <div class="devicesParent">
-                  <v-card class="deviceCard" v-for="device in devices" :key="device.id">
+                  <v-sheet class="deviceCard" v-for="device in devices" :key="device.id">
                     <router-link :to="{ name: 'deviceDetails', params: {id: device.id}}">
                       <v-img :src="require(`@/assets/${device.image}`)" />
                       <h4>{{ device.name }}</h4>
                     </router-link>
-                  </v-card>
+                  </v-sheet>
                 </div>
               </v-content>
             </v-container>
@@ -90,6 +90,8 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-self: stretch;
 }
 
 .deviceCard {
