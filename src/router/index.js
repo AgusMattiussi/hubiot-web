@@ -33,7 +33,7 @@ const routes = [
   {
     path: '/devices',
     name: 'devices',
-    component: () => import('../views/MyDeviceView.vue')
+    component: () => import('../views/MyDevicesView.vue')
   },
   {
     path: '/new_device',

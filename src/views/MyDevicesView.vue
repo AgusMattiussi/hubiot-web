@@ -45,6 +45,7 @@
                   </v-sheet>
                 </div>
               </v-content>
+              <AddButton/>
             </v-container>
           </v-col>
           <v-col md="2"></v-col>
@@ -58,9 +59,11 @@
 <script>
 
 import store from '@/store/store'
+import AddButton from '@/components/AddButton'
 
 export default {
   name: 'MyRooms',
+  components: { AddButton },
   data () {
     return {
       devices: store.devices,

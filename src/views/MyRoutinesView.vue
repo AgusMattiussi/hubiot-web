@@ -43,6 +43,7 @@
                         <h4>{{ routine.name }}</h4>
                       </router-link>
                     </v-sheet>
+                    <AddButton/>
                   </div>
                 </v-content>
               </v-container>
@@ -57,9 +58,11 @@
 
 <script>
 import store from '@/store/store'
+import AddButton from '@/components/AddButton'
 
 export default {
   name: 'MyRoutines',
+  components: { AddButton },
   data () {
     return {
       routines: store.routines,
