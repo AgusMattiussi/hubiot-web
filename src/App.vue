@@ -1,11 +1,11 @@
 <template>
-  <v-app>
-    <div id="app" class="fill-height">
-      <NavigationBar/>
-      <router-view :key="$route.path"/>
-      <BottomBar/>
+    <div id="app">
+      <v-app id="app">
+        <NavigationBar/>
+        <router-view :key="$route.path"/>
+        <BottomBar/>
+      </v-app>
     </div>
-  </v-app>
 </template>
 
 <style>
@@ -13,6 +13,7 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0;
   text-align: center;
   color: #000000;
 }

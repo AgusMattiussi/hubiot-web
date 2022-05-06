@@ -1,5 +1,5 @@
 <template>
-  <v-container class="fill-height bg" fluid>
+  <v-container class="bg fill-height" fluid>
     <v-row>
       <v-col md="7"></v-col>
       <v-col md="4">
@@ -59,7 +59,7 @@ export default {
 <style scoped>
 .bg {
   background-image: url("../assets/login_background.png");
-  background-size: contain;
+  background-size: cover;
 }
 
 .cardTitle{

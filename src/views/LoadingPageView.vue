@@ -20,18 +20,18 @@
       </v-col>
       <v-col md="1"></v-col>
     </v-row>
-    <v-row class="" align="center">
+    <v-row class="white" align="center">
       <v-col md="6">
         <p class="heading">Saca el máximo provecho a tus dispositivos inteligentes</p>
         <p class="descriptionText">Hubiot funciona como un control universal para todo tu hogar. Puedes encender la calefacción antes de llegar a casa o activar tu aspiradora mientras sales de paseo. ¡Las posibilidades son ilimitadas!</p>
       </v-col>
       <v-col md="6">
-        <v-img :src="require('../assets/loading_img_2.jpg')" :alt="img2" />
+        <v-img :src="require('../assets/loading_img_2.jpg')" alt="Dad helping his son to set up a smart house" class="img"/>
       </v-col>
     </v-row>
     <v-row class="grey lighten-3" align="center">
       <v-col md="6">
-        <v-img :src="require('../assets/loading_img_3.jpg')" :alt="img2" />
+        <v-img :src="require('../assets/loading_img_3.jpg')" alt="Lady resting on the sofa while the vacuum cleaner is working" class="img"/>
       </v-col>
       <v-col md="6">
         <p class="heading">Cada vez más dispositivos soportados</p>
@@ -54,8 +54,12 @@ export default {
 
 .bgWelcome {
   background-image: url("../assets/loading_img_01.png");
-  background-size: contain;
-  min-height: 600px;
+  background-size: cover;
+  height: 600px;
+}
+
+.img{
+  box-shadow: 4px 4px 4px darkgrey;
 }
 
 .registerButton{
