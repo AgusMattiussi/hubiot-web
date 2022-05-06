@@ -23,7 +23,7 @@ const routes = [
   {
     path: '/devices',
     name: 'devices',
-    component: () => import('../views/MyDevices.vue')
+    component: () => import('../views/MyDeviceView.vue')
   },
   {
     path: '/new_device',
@@ -42,6 +42,12 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+  },
+  {
+    path: '/error404',
+    alias: '*',
+    name: 'notFound',
+    component: () => import('../views/NotFoundView.vue')
   }
 ]
 
