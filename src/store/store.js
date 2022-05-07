@@ -2,10 +2,22 @@ export default {
   routines: [
     {
       id: 0,
-      name: 'Rutina 1',
-      slug: 'rutina1',
+      name: 'ModoSexo',
+      slug: 'modosexo',
       iconName: 'mdi-cat',
-      descrption: 'Sape.'
+      descrption: 'Sape.',
+      actions: [
+        {
+          id: 0,
+          deviceID: 1,
+          actionID: 1
+        },
+        {
+          id: 1,
+          deviceID: 2,
+          actionID: 1
+        }
+      ]
     }
   ],
   devices: [
@@ -18,6 +30,7 @@ export default {
         'parlantoide',
       actions: [
         {
+          id: 0,
           name: 'Subir volumen',
           slug: 'subir-volumen',
           image: 'subir-volumen.jpg',
@@ -25,6 +38,7 @@ export default {
             'Permite incrementar (+1) el volumen del parlante. No recibe parámetros.'
         },
         {
+          id: 1,
           name: 'Bajar volumen',
           slug: 'bajar-volumen',
           image: 'bajar-volumen.jpg',
@@ -32,6 +46,7 @@ export default {
             'Permite decrementar (-1) el volumen del parlante. No recibe parámetros.'
         },
         {
+          id: 2,
           name: 'Establecer volumen',
           slug: 'establecer-volumen',
           image: 'establecen-volumen.jpg',
@@ -39,6 +54,7 @@ export default {
             'Permite establecer el volumen del parlante. Recibe el nivel (valor entre 0 y 10) como parámetro.'
         },
         {
+          id: 3,
           name: 'Reproducir',
           slug: 'reproducir',
           image: 'reproducir.jpg',
@@ -46,6 +62,7 @@ export default {
             'Permite reproducir la música. No recibe parámetros.'
         },
         {
+          id: 4,
           name: 'Detener',
           slug: 'detener',
           image: 'detener.jpg',
@@ -53,6 +70,7 @@ export default {
             'Permite detener la música. No recibe parámetros.'
         },
         {
+          id: 5,
           name: 'Pausar',
           slug: 'pausar',
           image: 'pausar.jpg',
@@ -60,6 +78,7 @@ export default {
             'Permite pausar la música. No recibe parámetros.'
         },
         {
+          id: 6,
           name: 'Siguiente Canción',
           slug: 'siguiente',
           image: 'siguiente.jpg',
@@ -67,6 +86,7 @@ export default {
             'Permite reproducir la siguiente canción. No recibe parámetros.'
         },
         {
+          id: 7,
           name: 'Anterior Canción',
           slug: 'anterior',
           image: 'anterior.jpg',
@@ -74,6 +94,7 @@ export default {
             'Permite reproducir la anterior canción. No recibe parámetros.'
         },
         {
+          id: 8,
           name: 'Cambiar Género',
           slug: 'cambiar-genero',
           image: 'cambiar-genero.jpg',
@@ -81,6 +102,7 @@ export default {
             'Permite cambiar el género de la música. Recibe el género (valores posibles: clasica, country, dance, latina, pop, rock, etc.) como parámetro.'
         },
         {
+          id: 9,
           name: 'Obtener Lista Reproducción ',
           slug: 'obtener-lista',
           image: 'obtener-lista.jpg',
@@ -88,6 +110,7 @@ export default {
             'Permite obtener la lista de canciones y su duración para el género de la música.'
         },
         {
+          id: 10,
           name: 'Obtener Estado ',
           slug: 'obtener-estado',
           image: 'obtener-estado.jpg',
@@ -105,6 +128,7 @@ export default {
         'puertoide',
       actions: [
         {
+          id: 0,
           name: 'Abrir',
           slug: 'abrir',
           image: 'abrir.jpg',
@@ -112,6 +136,7 @@ export default {
             'Permite abrir la puerta. No recibe parámetros'
         },
         {
+          id: 1,
           name: 'Cerrar',
           slug: 'cerrar',
           image: 'cerrar.jpg',
@@ -119,6 +144,7 @@ export default {
             'Permite cerrar la puerta. No recibe parámetros'
         },
         {
+          id: 2,
           name: 'Bloquear',
           slug: 'bloquear',
           image: 'bloquear.jpg',
@@ -126,6 +152,7 @@ export default {
             'Permite bloquear (mayor seguridad que la acción de cierre) la puerta. No recibe parámetros.'
         },
         {
+          id: 3,
           name: 'Desbloquear',
           slug: 'desbloquear',
           image: 'desbloquear.jpg',
@@ -133,6 +160,7 @@ export default {
             'Permite desbloquear la puerta. No recibe parámetros.'
         },
         {
+          id: 4,
           name: 'Obtener Estado',
           slug: 'obtener-estado',
           image: 'obtener-estado.jpg',
@@ -150,6 +178,7 @@ export default {
         'aire acondionadoide',
       actions: [
         {
+          id: 0,
           name: 'Encender',
           slug: 'encender',
           image: 'encender.jpg',
@@ -157,6 +186,7 @@ export default {
             'Permite encender el aire acondicionado. No recibe parámetros.'
         },
         {
+          id: 1,
           name: 'Apagar',
           slug: 'apagar',
           image: 'apagar.jpg',
@@ -164,6 +194,7 @@ export default {
             'Permite apagar el aire acondicionado. No recibe parámetros.'
         },
         {
+          id: 2,
           name: 'Establecer Temperatura',
           slug: 'temperatura',
           image: 'temperatura.jpg',
@@ -171,6 +202,7 @@ export default {
             'Permite establecer la temperatura del aire acondicionado. Recibe la temperatura (valor entre 18 y 38 [grados centígrados]) como parámetro. '
         },
         {
+          id: 3,
           name: 'Establecer Modo',
           slug: 'modo',
           image: 'modo.jpg',
@@ -178,6 +210,7 @@ export default {
             'Permite establecer el modo del aire acondicionado. Recibe el modo (valores posibles: ventilación, frío o calor) como parámetro.'
         },
         {
+          id: 4,
           name: 'Establecer Desplazamiento Aspas Verticales',
           slug: 'aspasv',
           image: 'aspasv.jpg',
@@ -185,6 +218,7 @@ export default {
             'Permite establecer el modo de desplazamiento de las aspas verticales del aire acondicionado. Recibe el modo de desplazamiento (valores posibles: automático, 22, 45, 67 o 90 [grados]) como parámetro'
         },
         {
+          id: 5,
           name: 'Establecer Desplazamiento Aspas Horizontales',
           slug: 'aspash',
           image: 'aspash.jpg',
@@ -192,6 +226,7 @@ export default {
             'Permite establecer el modo de desplazamiento de las aspas horizontales del aire acondicionado. Recibe el modo de desplazamiento (valores posibles: automático, -90, -45, 0, 45 o 90 [grados]) como parámetro.'
         },
         {
+          id: 6,
           name: 'Establecer Velocidad Ventilador',
           slug: 'velocidad',
           image: 'velocidad.jpg',
@@ -199,6 +234,7 @@ export default {
             'Permite establecer la velocidad del ventilador del aire acondicionado. Recibe la velocidad del ventilador (valores posibles: automático, 25, 50, 75 o 100 [porcentaje]) como parámetro'
         },
         {
+          id: 7,
           name: 'Obtener Estado',
           slug: 'obtener-estado',
           image: 'obtener-estado.jpg',

@@ -2,7 +2,7 @@
   <v-container class="fill-height" fluid>
     <v-main class="fill-height accent mx-2">
       <v-sheet class="fill-height" elevation="24">
-        <v-container class="accent fill-height" fluid>
+        <v-container class="secondary fill-height" fluid>
           <v-row>
             <v-col md="2"></v-col>
             <v-col md="8">
