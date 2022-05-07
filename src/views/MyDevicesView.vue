@@ -1,8 +1,8 @@
 <template>
   <v-container class="fill-height" fluid>
-    <v-main class="fill-height accent mx-2">
+    <v-main class="fill-height mx-2">
       <v-sheet class="fill-height" elevation="24">
-        <v-container class="accent fill-height" fluid>
+        <v-container class="secondary fill-height" fluid>
         <v-row>
           <v-col md="2"></v-col>
           <v-col md="8">
@@ -37,14 +37,15 @@
               </form>
               <v-content mt="10">
                 <div class="devicesParent">
-                  <v-card class="deviceCard" v-for="device in devices" :key="device.id">
-                    <router-link :to="{ name: 'deviceDetails', params: {id: device.id}}">
+                  <v-sheet class="deviceCard" v-for="device in devices" :key="device.slug">
+                    <router-link :to="{ name: 'deviceDetails', params: {slug: device.slug}}">
                       <v-img :src="require(`@/assets/${device.image}`)" />
                       <h4>{{ device.name }}</h4>
                     </router-link>
-                  </v-card>
+                  </v-sheet>
                 </div>
               </v-content>
+              <AddButton/>
             </v-container>
           </v-col>
           <v-col md="2"></v-col>
@@ -58,9 +59,11 @@
 <script>
 
 import store from '@/store/store'
+import AddButton from '@/components/AddButton'
 
 export default {
   name: 'MyRooms',
+  components: { AddButton },
   data () {
     return {
       devices: store.devices,
@@ -90,6 +93,8 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-self: stretch;
 }
 
 .deviceCard {

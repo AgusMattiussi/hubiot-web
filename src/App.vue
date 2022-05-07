@@ -39,7 +39,6 @@ export default {
   name: 'App',
   components: { NavigationBar, BottomBar },
   data: () => ({
-
   })
 }
 </script>

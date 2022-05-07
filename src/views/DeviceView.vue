@@ -1,8 +1,10 @@
 <template>
   <v-container class="fill-height bg" fluid>
     <v-card class="card">
-      <div>
-        <h1 class="cardTitle">{{ device.name }}</h1>
+      <div class="cardTitle">
+        <GoBackButton/>
+        <h1 class="mx-auto">{{ device.name }}</h1>
+        <DeleteButton class="deleteBtn"/>
       </div>
       <v-img :src="require(`@/assets/${device.image}`)" alt="parlante" class="img"></v-img>
       <v-card-title class="sectionTitle">Estado</v-card-title>
@@ -17,9 +19,6 @@
       <v-card-actions>
         <v-btn color="contras" class="actionBtn">Accion1</v-btn>
       </v-card-actions>
-      <v-btn color="primary" class="deleleBtn">
-        Eliminar Dispositivo
-      </v-btn>
     </v-card>
   </v-container>
 </template>
@@ -27,17 +26,23 @@
 <script>
 
 import store from '@/store/store'
+import GoBackButton from '@/components/GoBackButton'
+import DeleteButton from '@/components/DeleteButton'
 
 export default {
   name: 'DeviceView',
+  components: {
+    DeleteButton,
+    GoBackButton
+  },
   data () {
     return {
-      deviceID: this.$route.params.id
+      deviceSlug: this.$route.params.slug
     }
   },
   computed: {
     device () {
-      return store.devices.find(device => device.id === this.deviceID)
+      return store.devices.find(device => device.slug === this.deviceSlug)
     }
   }
 }
@@ -59,10 +64,16 @@ export default {
   background-color: #5C6BC0;
   color: #FFFFFF;
   text-align: center;
+  display: flex;
   border-radius: 20px 20px 0 0;
+}
+.deleteBtn{
+  margin: 5px;
+  float: right;
 }
 .img{
   border-radius: 50%;
+  padding-left: 10px;
   height: 200px;
   width: 200px;
   overflow: hidden;
@@ -82,11 +93,5 @@ export default {
   background-color: #FF8A65;
   color: black;
   border-radius: 20px;
-}
-.deleleBtn{
-  background-color: #5C6BC0;
-  color: #FFFFFF;
-  font-weight: bolder;
-  text-align: right;
 }
 </style>

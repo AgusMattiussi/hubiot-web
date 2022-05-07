@@ -21,9 +21,19 @@ const routes = [
     component: () => import('../views/LoginView.vue')
   },
   {
+    path: '/routines',
+    name: 'routines',
+    component: () => import('../views/MyRoutinesView.vue')
+  },
+  {
+    path: '/routines/:id',
+    name: 'routineDetails',
+    component: () => import('../views/RoutineDetail.vue')
+  },
+  {
     path: '/devices',
     name: 'devices',
-    component: () => import('../views/MyDevices.vue')
+    component: () => import('../views/MyDevicesView.vue')
   },
   {
     path: '/new_device',
@@ -31,7 +41,7 @@ const routes = [
     component: () => import('../views/AddNewDeviceView.vue')
   },
   {
-    path: '/device/:id',
+    path: '/devices/:slug',
     name: 'deviceDetails',
     component: () => import('../views/DeviceView.vue')
   },
@@ -42,6 +52,12 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+  },
+  {
+    path: '/error404',
+    alias: '*',
+    name: 'notFound',
+    component: () => import('../views/NotFoundView.vue')
   }
 ]
 

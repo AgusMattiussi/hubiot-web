@@ -1,4 +1,13 @@
 export default {
+  routines: [
+    {
+      id: 0,
+      name: 'Rutina 1',
+      slug: 'rutina1',
+      iconName: 'mdi-cat',
+      descrption: 'Sape.'
+    }
+  ],
   devices: [
     {
       name: 'Parlante',
