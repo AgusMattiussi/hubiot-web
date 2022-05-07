@@ -1,4 +1,5 @@
 <template>
+  <router-link to="new_device">
   <span class="go-back">
     <button class="btn icon">
       <v-icon class="mx-auto" x-large color="white">
@@ -6,6 +7,7 @@
       </v-icon>
     </button>
   </span>
+  </router-link>
 </template>
 
 <script>

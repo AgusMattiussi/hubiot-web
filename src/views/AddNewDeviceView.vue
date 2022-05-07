@@ -23,6 +23,9 @@
           <v-btn class="nextButton v-size--x-large accent black--text"
                  :disabled="newDevice.id == null"
                  @click="currentStep = 2"> Siguiente </v-btn>
+          <router-link class="text-decoration-none" to="devices">
+            <v-btn class="ma-5 v-size--x-large grey black--text"> Cancelar </v-btn>
+          </router-link>
         </v-stepper-content>
         <v-stepper-content step="2" class="pa-0">
           <h1 class="cardTitle"> Nombre del Dispositivo </h1>
@@ -42,7 +45,10 @@
         <v-stepper-content step="3" class="pa-0">
           <h1 class="cardTitle"> ¡Todo Listo! </h1>
           <h2 class="pa-6"> El dispostivo "{{newDeviceName}}" fue creado con éxito</h2>
-          <v-icon color="success" class="checkIcon" size="150px">mdi-check-circle</v-icon>
+          <v-icon color="success" class="checkIcon d-block" size="150px">mdi-check-circle</v-icon>
+          <router-link class="text-decoration-none" to="devices">
+            <v-btn class="ma-5 v-size--x-large accent black--text"> Volver a "Mis Dispositivos" </v-btn>
+          </router-link>
         </v-stepper-content>
       </v-stepper-items>
       <v-stepper-header class="elevation-0 white">
