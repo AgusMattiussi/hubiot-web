@@ -5,7 +5,7 @@ export default {
       name: 'ModoSexo',
       slug: 'modosexo',
       iconName: 'mdi-cat',
-      descrption: 'Sape.',
+      description: 'Sape.',
       actions: [
         {
           id: 0,
@@ -111,7 +111,7 @@ export default {
         },
         {
           id: 10,
-          name: 'Obtener Estado ',
+          name: 'Obtener Estado',
           slug: 'obtener-estado',
           image: 'obtener-estado.jpg',
           description:

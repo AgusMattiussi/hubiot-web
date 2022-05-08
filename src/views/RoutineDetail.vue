@@ -60,7 +60,7 @@ export default {
       return store.devices.find(device => device.id === parseInt(id))
     },
     actionForDevice (deviceID, actionID) {
-      var device = store.devices.find(device => device.id === parseInt(deviceID))
+      const device = store.devices.find(device => device.id === parseInt(deviceID))
       return device.actions.find(action => action.id === parseInt(actionID))
     }
   }

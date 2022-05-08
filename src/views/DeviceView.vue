@@ -16,8 +16,10 @@
       </v-card-text>
       <v-divider class="mx-4"></v-divider>
       <v-card-title class="sectionTitle">Acciones</v-card-title>
-      <v-card-actions>
-        <v-btn color="contras" class="actionBtn">Accion1</v-btn>
+      <v-card-actions class="actions" v-for="action in device.actions" :key="action.slug">
+          <v-btn v-if="action.name !== 'Obtener Estado'" color="contras" class="actionBtn">
+            {{ action.name }}
+          </v-btn>
       </v-card-actions>
     </v-card>
   </v-container>
@@ -89,8 +91,16 @@ export default {
   font-size: 16px;
   font-weight: normal;
 }
+.actions{
+  display: flex;
+  overflow: hidden;
+  justify-content: space-between;
+}
 .actionBtn{
   background-color: #FF8A65;
+  text-align: center;
+  width: 100%;
+  margin-left: 5px;
   color: black;
   border-radius: 20px;
 }
