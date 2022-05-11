@@ -2,15 +2,15 @@ export default {
   routines: [
     {
       id: 0,
-      name: 'ModoSexo',
-      slug: 'modosexo',
-      iconName: 'mdi-cat',
+      name: 'Chill Time',
+      slug: 'chilltime',
+      iconName: 'mdi-bell-cancel',
       description: 'Sape.',
       actions: [
         {
           id: 0,
           deviceID: 1,
-          actionID: 1
+          actionID: 0
         },
         {
           id: 1,

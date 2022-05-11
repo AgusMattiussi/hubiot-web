@@ -11,7 +11,7 @@
       <v-card-text class="text-left">
         <ul class="stateText">
           <li>Apagado</li>
-          <li>90% de bateria restante</li>
+          <li>90% de batería restante</li>
         </ul>
       </v-card-text>
       <v-divider class="mx-4"></v-divider>
@@ -61,6 +61,7 @@ export default {
   margin: auto;
   width: 500px;
   padding-bottom: 10px;
+  padding-right: 10px;
 }
 .cardTitle{
   background-color: #5C6BC0;

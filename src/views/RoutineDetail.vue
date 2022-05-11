@@ -9,18 +9,17 @@
           <v-row v-for="action in routine.actions" :key="action.id">
             <v-col md="4"></v-col>
             <v-col md="4">
-              <v-card class="primary">
+              <v-card class="accent">
               <div class="d-flex flex-no-wrap justify-space-between">
                 <div>
-                  <v-card-title class="text-h5">{{ device(action.deviceID).name }}</v-card-title>
-                  <v-card-subtitle>{{ actionForDevice(action.deviceID, action.actionID).name }}</v-card-subtitle>
-
+                  <v-card-title class="text-h5 font-weight-bold">
+                    {{ device(action.deviceID).name }}
+                  </v-card-title>
+                  <v-card-subtitle>
+                    {{ actionForDevice(action.deviceID, action.actionID).name }}
+                  </v-card-subtitle>
                   <v-card-actions>
-                    <v-btn class="ml-2 mt-5 btn" outlined rounded small>
-                      <v-icon class="mx-auto" color="black">
-                        mdi-trash-can-outline
-                      </v-icon>
-                    </v-btn>
+                    <DeleteButton/>
                   </v-card-actions>
                 </div>
                 <v-avatar class="ma-3" size="125">
@@ -40,9 +39,13 @@
 
 <script>
 import store from '@/store/store'
+import DeleteButton from '@/components/DeleteButton'
 
 export default {
   name: 'RoutineDetail.vue',
+  components: {
+    DeleteButton
+  },
   data () {
     return {
       routineID: this.$route.params.id
@@ -68,11 +71,9 @@ export default {
 </script>
 
 <style scoped>
-
 .btn{
   background-color: #d14545;
   border-radius: 100px;
   border: 0;
 }
-
 </style>
