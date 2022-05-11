@@ -45,7 +45,9 @@
                   </v-sheet>
                 </div>
               </v-content>
-              <AddButton/>
+              <router-link to="new_device">
+                <AddButton/>
+              </router-link>
             </v-container>
           </v-col>
           <v-col md="2"></v-col>

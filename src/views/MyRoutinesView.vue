@@ -43,7 +43,9 @@
                         <h4>{{ routine.name }}</h4>
                       </router-link>
                     </v-sheet>
-                    <AddButton/>
+                    <router-link to="new_routine">
+                      <AddButton/>
+                    </router-link>
                   </div>
                 </v-content>
               </v-container>

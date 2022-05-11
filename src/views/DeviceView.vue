@@ -61,7 +61,6 @@ export default {
   margin: auto;
   width: 500px;
   padding-bottom: 10px;
-  padding-right: 10px;
 }
 .cardTitle{
   background-color: #5C6BC0;
