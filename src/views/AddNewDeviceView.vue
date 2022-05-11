@@ -111,7 +111,7 @@ export default {
     height: auto;
     display: block;
     margin: 30px auto;
-    border-radius: 50% !important;
+    border-radius: 50%;
     background-color: #FFFFFF;
     border: 1px solid #5C6BC0;
   }

@@ -22,7 +22,6 @@
                       class="pt-2 mr-2"
                       append-icon="mdi-magnify"
                     ></v-text-field>
-                    <!--
                     <v-btn
                       x-large
                       :disabled="!valid"
@@ -32,7 +31,6 @@
                     >
                       Search
                     </v-btn>
-                    -->
                   </div>
                 </form>
                 <v-content mt="10">

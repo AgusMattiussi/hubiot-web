@@ -5,48 +5,14 @@
         <v-stepper-items>
           <v-stepper-content step="1" class="pa-0">
             <h1 class="cardTitle"> Agrega una Nueva Rutina </h1>
-            <v-row>
-              <v-col md="6">
-                <v-autocomplete
-                  height="10px"
-                  class="autocomplete pa-2"
-                  :items="devices"
-                  placeholder="Seleccionar dispositivo"
-                  rounded
-                  solo
-                  item-text="name"
-                  auto-select-first
-                  return-object
-                  hide-no-data
-                  v-model="selectedDevice"
-                >
-                </v-autocomplete>
-              </v-col>
-              <v-col md="6">
-                <v-autocomplete
-                  height="10px"
-                  class="autocomplete pa-2"
-                  :items="selectedDevice.actions"
-                  :disabled="selectedDevice.id == null"
-                  placeholder="Seleccionar acción"
-                  rounded
-                  solo
-                  item-text="name"
-                  auto-select-first
-                  return-object
-                  hide-no-data
-                  v-model="selectedAction"
-                >
-                </v-autocomplete>
-              </v-col>
-            </v-row>
+              <RoutineStep v-for="step in steps" :key="step" @updated=""/>
             <div>
-              <v-btn class="nextButton v-size--small contras black--text">
+              <v-btn class="nextButton v-size--small contras black--text"
+              @click="steps.push({})">
                 Añadir acción
               </v-btn>
             </div>
             <v-btn class="nextButton v-size--x-large accent black--text"
-                   :disabled="selectedDevice.id == null"
                    @click="currentStep = 2"> Siguiente </v-btn>
             <router-link class="text-decoration-none" to="routines">
               <v-btn class="ma-5 v-size--x-large grey black--text"> Cancelar </v-btn>
@@ -89,15 +55,16 @@
 
 <script>
 import store from '@/store/store'
+import RoutineStep from '@/components/RoutineStep'
 
 export default {
   name: 'AddNewRoutineView',
+  components: { RoutineStep },
   data () {
     return {
       currentStep: 1,
       devices: store.devices,
-      selectedDevice: {},
-      selectedAction: {},
+      steps: [{}],
       newRoutineName: null
     }
   }
