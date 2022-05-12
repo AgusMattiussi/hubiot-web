@@ -20,10 +20,14 @@
                       outlined
                       clearable
                     ></v-text-field>
-                    <v-btn fab dark medium color="primary" class="ml-2">
-                      <v-icon>
-                        mdi-magnify
-                      </v-icon>
+                    <v-btn
+                      x-large
+                      :disabled="!valid"
+                      color="primary"
+                      class="mr-4"
+                      @click="validate"
+                    >
+                      Search
                     </v-btn>
                   </div>
                 </form>
