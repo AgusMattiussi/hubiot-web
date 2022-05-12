@@ -11,12 +11,19 @@
               <v-main>
                 <form action="">
                   <div class="d-flex">
-                    <v-text-field v-model="device" :rules="deviceRules" :counter="18" :append-icon="'mdi-magnify'" @click:append="searchedClicked" placeholder="Buscar dispositivo" solo required outlined clearable></v-text-field>
-                    <v-btn class="mx-2" fab dark color="primary">
-                      <v-icon dark>
-                        mdi-magnify
-                      </v-icon>
-                    </v-btn>
+                    <v-text-field v-model="device"
+                                  :rules="deviceRules"
+                                  :counter="18"
+                                  :append-icon="'mdi-magnify'"
+                                  @click:append="searchedClicked"
+                                  placeholder="Buscar dispositivo"
+                                  solo
+                                  required
+                                  outlined
+                                  clearable/>
+                    <router-link to="new_routine">
+                      <AddButton/>
+                    </router-link>
                   </div>
                 </form>
               </v-main>
@@ -43,11 +50,11 @@
 <script>
 
 import store from '@/store/store'
-// import AddButton from '@/components/AddButton'
+import AddButton from '@/components/AddButton'
 
 export default {
   name: 'MyRooms',
-  components: { },
+  components: { AddButton },
   data () {
     return {
       devices: store.devices,
@@ -64,7 +71,7 @@ export default {
       this.$refs.form.validate()
     },
     searchedClicked () {
-      console.log('funakndo')
+      console.log('funkando')
     }
   }
 }

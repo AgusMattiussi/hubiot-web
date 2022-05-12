@@ -6,11 +6,23 @@
           <v-row>
             <v-col md="2"></v-col>
             <v-col md="8">
-              <v-container class="niceWidth"><!-- Container para centrar contenido -->
+              <v-container class="niceWidth"> <!-- Container para centrar contenido -->
                 <h1 class="mb-3">Mis rutinas</h1>
                 <form action="">
                   <div class="d-flex">
-                    <v-text-field v-model="device" :rules="deviceRules" :counter="18" :append-icon="'mdi-magnify'" @click:append="searchedClicked" placeholder="Buscar dispositivo" solo required outlined clearable></v-text-field>
+                    <v-text-field v-model="device"
+                                  :rules="deviceRules"
+                                  :counter="18"
+                                  :append-icon="'mdi-magnify'"
+                                  @click:append="searchedClicked"
+                                  placeholder="Buscar dispositivo"
+                                  solo
+                                  required
+                                  outlined
+                                  clearable/>
+                    <router-link to="new_routine">
+                      <AddButton class="addButton"/>
+                    </router-link>
                   </div>
                 </form>
                 <v-main mt="10">
@@ -35,11 +47,11 @@
 
 <script>
 import store from '@/store/store'
-// import AddButton from '@/components/AddButton'
+import AddButton from '@/components/AddButton'
 
 export default {
   name: 'MyRoutines',
-  components: {},
+  components: { AddButton },
   data () {
     return {
       routines: store.routines,
