@@ -4,12 +4,12 @@
       <v-stepper class="stepper secondary" v-model="currentStep" elevation="0">
         <v-stepper-items>
           <v-stepper-content step="1" class="pa-0">
-            <h1 class="cardTitle"> Agrega una Nueva Rutina </h1>
-              <RoutineStep v-for="step in steps" :key="step" @updated=""/>
+            <h1 class="cardTitle mb-5"> Agrega una Nueva Rutina </h1>
+              <RoutineStep v-for="i in deviceIndex" :key="i-1" :id="i-1" @updatedStep="updateRoutine"/>
             <div>
               <v-btn class="nextButton v-size--small contras black--text"
-              @click="steps.push({})">
-                Añadir acción
+              @click="deviceIndex++">
+                Añadir Paso
               </v-btn>
             </div>
             <v-btn class="nextButton v-size--x-large accent black--text"
@@ -63,9 +63,18 @@ export default {
   data () {
     return {
       currentStep: 1,
+      deviceIndex: 1,
       devices: store.devices,
       steps: [{}],
       newRoutineName: null
+    }
+  },
+  methods: {
+    updateRoutine (step) {
+      this.steps[step.id] = ({ device: step.device, action: step.action })
+      console.log(step.id.toString())
+      console.log(step.device)
+      console.log(step.action)
     }
   }
 }
@@ -89,10 +98,6 @@ export default {
   background-color: #5C6BC0;
   color: #FFFFFF;
   margin: 0;
-}
-.autocomplete{
-  width: 400px;
-  margin: 20px auto;
 }
 .deviceNameBox{
   background-color: #FFFFFF;
