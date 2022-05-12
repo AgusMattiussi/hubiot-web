@@ -10,20 +10,10 @@
                 <h1 class="mb-3">Mis rutinas</h1>
                 <form action="">
                   <div class="d-flex">
-                    <v-text-field v-model="device"
-                                  :rules="deviceRules"
-                                  :counter="18"
-                                  placeholder="Buscar dispositivo"
-                                  solo
-                                  required
-                                  outlined
-                                  clearable/>
-                    <router-link to="new_routine">
-                      <AddButton class="addButton"/>
-                    </router-link>
+                    <v-text-field v-model="device" :rules="deviceRules" :counter="18" :append-icon="'mdi-magnify'" @click:append="searchedClicked" placeholder="Buscar dispositivo" solo required outlined clearable></v-text-field>
                   </div>
                 </form>
-                <v-content mt="10">
+                <v-main mt="10">
                   <div class="devicesParent">
                     <v-sheet class="deviceCard" v-for="routine in routines" :key="routine.id">
                       <router-link :to="{ name: 'routineDetails', params: {id: routine.id}}" class="routineName">
@@ -32,7 +22,7 @@
                       </router-link>
                     </v-sheet>
                   </div>
-                </v-content>
+                </v-main>
               </v-container>
             </v-col>
             <v-col md="2"></v-col>
@@ -45,11 +35,11 @@
 
 <script>
 import store from '@/store/store'
-import AddButton from '@/components/AddButton'
+// import AddButton from '@/components/AddButton'
 
 export default {
   name: 'MyRoutines',
-  components: { AddButton },
+  components: {},
   data () {
     return {
       routines: store.routines,
@@ -58,12 +48,16 @@ export default {
       deviceRules: [
         v => !!v || 'Name is required',
         v => v.length <= 10 || 'Name must be less than 10 characters'
-      ],
-      methods: {
-        validate () {
-          this.$refs.form.validate()
-        }
-      }
+      ]
+    }
+  },
+  methods: {
+    validate () {
+      this.$refs.form.validate()
+    },
+    searchedClicked () {
+      console.log('BUENAS')
+      this.valid = false
     }
   }
 }

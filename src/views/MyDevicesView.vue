@@ -7,24 +7,19 @@
           <v-col md="2"></v-col>
           <v-col md="8">
             <v-container><!-- Container para centrar contenido -->
-              <h1 class="mb-3">Mis dispositivos</h1>
-              <v-content>
+              <h1>Mis dispositivos</h1>
+              <v-main>
                 <form action="">
                   <div class="d-flex">
-                    <v-text-field v-model="device"
-                                  :rules="deviceRules"
-                                  :counter="18"
-                                  placeholder="Buscar dispositivo"
-                                  solo
-                                  required
-                                  outlined
-                                  clearable/>
-                    <router-link to="new_routine">
-                      <AddButton class="addButton"/>
-                    </router-link>
+                    <v-text-field v-model="device" :rules="deviceRules" :counter="18" :append-icon="'mdi-magnify'" @click:append="searchedClicked" placeholder="Buscar dispositivo" solo required outlined clearable></v-text-field>
+                    <v-btn class="mx-2" fab dark color="primary">
+                      <v-icon dark>
+                        mdi-magnify
+                      </v-icon>
+                    </v-btn>
                   </div>
                 </form>
-              </v-content>
+              </v-main>
               <v-content mt="10">
                 <div class="devicesParent">
                   <v-sheet class="deviceCard" v-for="device in devices" :key="device.slug">
@@ -48,11 +43,11 @@
 <script>
 
 import store from '@/store/store'
-import AddButton from '@/components/AddButton'
+// import AddButton from '@/components/AddButton'
 
 export default {
   name: 'MyRooms',
-  components: { AddButton },
+  components: { },
   data () {
     return {
       devices: store.devices,
@@ -61,12 +56,15 @@ export default {
       deviceRules: [
         v => !!v || 'Name is required',
         v => v.length <= 10 || 'Name must be less than 10 characters'
-      ],
-      methods: {
-        validate () {
-          this.$refs.form.validate()
-        }
-      }
+      ]
+    }
+  },
+  methods: {
+    validate () {
+      this.$refs.form.validate()
+    },
+    searchedClicked () {
+      console.log('funakndo')
     }
   }
 }
