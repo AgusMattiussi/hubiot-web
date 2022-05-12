@@ -78,6 +78,9 @@ export default {
       methods: {
         validate () {
           this.$refs.form.validate()
+        },
+        probando () {
+          console.log('asd')
         }
       }
     }

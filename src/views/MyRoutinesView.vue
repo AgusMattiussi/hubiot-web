@@ -19,8 +19,6 @@
                       required
                       outlined
                       clearable
-                      class="pt-2 mr-2"
-                      append-icon="mdi-magnify"
                     ></v-text-field>
                     <v-btn
                       x-large
@@ -41,15 +39,15 @@
                         <h4>{{ routine.name }}</h4>
                       </router-link>
                     </v-sheet>
-                    <router-link to="new_routine">
-                      <AddButton/>
-                    </router-link>
                   </div>
                 </v-content>
               </v-container>
             </v-col>
             <v-col md="2"></v-col>
           </v-row>
+          <router-link to="new_routine">
+            <AddButton/>
+          </router-link>
         </v-container>
       </v-sheet>
     </v-main>
