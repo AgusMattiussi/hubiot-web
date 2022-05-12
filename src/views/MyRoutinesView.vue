@@ -19,20 +19,12 @@
                       required
                       outlined
                       clearable
-                      class="pt-2 mr-2"
-                      append-icon="mdi-magnify"
                     ></v-text-field>
-                    <!--
-                    <v-btn
-                      x-large
-                      :disabled="!valid"
-                      color="primary"
-                      class="mr-4"
-                      @click="validate"
-                    >
-                      Search
+                    <v-btn fab dark medium color="primary" class="ml-2">
+                      <v-icon>
+                        mdi-magnify
+                      </v-icon>
                     </v-btn>
-                    -->
                   </div>
                 </form>
                 <v-content mt="10">
@@ -43,15 +35,15 @@
                         <h4>{{ routine.name }}</h4>
                       </router-link>
                     </v-sheet>
-                    <router-link to="new_routine">
-                      <AddButton/>
-                    </router-link>
                   </div>
                 </v-content>
               </v-container>
             </v-col>
             <v-col md="2"></v-col>
           </v-row>
+          <router-link to="new_routine">
+            <AddButton/>
+          </router-link>
         </v-container>
       </v-sheet>
     </v-main>
