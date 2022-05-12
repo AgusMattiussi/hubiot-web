@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col md="6">
+      <v-col>
         <v-autocomplete
           height="10px"
           class="autocomplete ps-2"
@@ -19,7 +19,7 @@
          @change="updated">
         </v-autocomplete>
       </v-col>
-      <v-col md="6">
+      <v-col>
         <v-autocomplete
           height="10px"
           class="autocomplete ps-2"

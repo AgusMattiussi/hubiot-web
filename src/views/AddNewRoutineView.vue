@@ -5,8 +5,29 @@
         <v-stepper-items>
           <v-stepper-content step="1" class="pa-0">
             <h1 class="cardTitle mb-5"> Agrega una Nueva Rutina </h1>
-              <RoutineStep v-for="i in deviceIndex" :key="i-1" :id="i-1" @updatedStep="updateRoutine"/>
-            <div>
+            <!--
+            <v-row>
+              <v-col md="6">
+                <h3> Dispositivos </h3>
+              </v-col>
+              <v-col md="6">
+                <h3 class="pr-16"> Acciones </h3>
+              </v-col>
+            </v-row>
+            -->
+            <v-row class="fila" v-for="i in deviceIndex" :key="i-1">
+              <v-col md="11">
+                <RoutineStep :id="i-1" @updatedStep="updateRoutine"/>
+              </v-col>
+              <v-col md="1">
+                <v-container class="fill-height justify-center pl-0 pt-0 pb-0 pr-8" >
+                  <v-icon v-if="i===deviceIndex && i!==1" class="icon" @click="removeLast">
+                    mdi-close
+                  </v-icon>
+                </v-container>
+              </v-col>
+            </v-row>
+            <div class="mt-5">
               <v-btn class="nextButton v-size--small contras black--text"
               @click="deviceIndex++">
                 Añadir Paso
@@ -34,7 +55,7 @@
           </v-stepper-content>
           <v-stepper-content step="3" class="pa-0">
             <h1 class="cardTitle"> ¡Todo Listo! </h1>
-            <h2 class="pa-6"> La rutina "{{newRoutineName}}" fue creado con éxito</h2>
+            <h2 class="pa-6"> La rutina "{{newRoutineName}}" fue creada con éxito</h2>
             <v-icon color="success" class="checkIcon d-block" size="150px">mdi-check-circle</v-icon>
             <router-link class="text-decoration-none" to="routines">
               <v-btn class="ma-5 v-size--x-large accent black--text"> Volver a "Mis Rutinas" </v-btn>
@@ -72,9 +93,10 @@ export default {
   methods: {
     updateRoutine (step) {
       this.steps[step.id] = ({ device: step.device, action: step.action })
-      console.log(step.id.toString())
-      console.log(step.device)
-      console.log(step.action)
+    },
+    removeLast () {
+      this.steps.pop()
+      this.deviceIndex--
     }
   }
 }
@@ -116,5 +138,11 @@ export default {
 .checkIcon{
   height: auto;
   margin: 20px auto;
+}
+.icon{
+  vertical-align: center;
+}
+.fila{
+  max-height: 70px;
 }
 </style>
