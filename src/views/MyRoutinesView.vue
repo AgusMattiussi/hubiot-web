@@ -34,7 +34,7 @@
                 <v-content mt="10">
                   <div class="devicesParent">
                     <v-sheet class="deviceCard" v-for="routine in routines" :key="routine.id">
-                      <router-link :to="{ name: 'routineDetails', params: {id: routine.id}}">
+                      <router-link :to="{ name: 'routineDetails', params: {id: routine.id}}" class="routineName">
                         <v-icon>{{ routine.iconName }}</v-icon>
                         <h4>{{ routine.name }}</h4>
                       </router-link>
@@ -100,5 +100,9 @@ export default {
   border-radius: 20px;
   width: 25%;
   height: 25%;
+}
+.routineName{
+  text-decoration: none;
+  font-size: 1.5vw;
 }
 </style>

@@ -38,7 +38,7 @@
               <v-content mt="10">
                 <div class="devicesParent">
                   <v-sheet class="deviceCard" v-for="device in devices" :key="device.slug">
-                    <router-link :to="{ name: 'deviceDetails', params: {slug: device.slug}}" class="ax">
+                    <router-link :to="{ name: 'deviceDetails', params: {slug: device.slug}}" class="deviceName">
                       <v-img :src="require(`@/assets/${device.image}`)" />
                       <h4>{{ device.name }}</h4>
                     </router-link>
@@ -109,7 +109,8 @@ export default {
   width: 25%;
   height: 25%;
 }
-.ax{
+.deviceName{
   text-decoration: none;
+  font-size: 1.5vw;
 }
 </style>

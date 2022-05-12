@@ -12,9 +12,11 @@
             <v-text-field v-model="email" :rules="emailRules" label="Correo electrónico" required></v-text-field>
             <v-text-field v-model="password" :rules="passwordRules" label="Contraseña" required></v-text-field>
             <p class="text-decoration-underline">¿Ha olvidado su contraseña?</p>
-            <v-btn :disabled="!valid" color="primary" class="mr-4" @click="validate">
-              <h3 class="white--text">Regístrate</h3>
-            </v-btn>
+            <router-link to="devices">
+              <v-btn :disabled="!valid" color="primary" class="mr-4" @click="validate">
+                <h3 class="white--text">Regístrate</h3>
+              </v-btn>
+            </router-link>
           </v-form>
         </v-card>
       </v-col>

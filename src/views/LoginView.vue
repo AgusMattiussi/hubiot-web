@@ -11,9 +11,11 @@
             <v-text-field  label="Correo electrónico"></v-text-field>
             <v-text-field label="Contraseña"></v-text-field>
             <p class="forgotPassword">¿Ha olvidado su contraseña?</p>
-            <v-btn color="primary" class="mr-4">
-              <h3 class="white--text">Ingresar</h3>
-            </v-btn>
+            <router-link to="devices">
+              <v-btn color="primary" class="mr-4">
+                <h3 class="white--text">Ingresar</h3>
+              </v-btn>
+            </router-link>
           </v-form>
         </v-card>
       </v-col>

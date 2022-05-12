@@ -3,7 +3,7 @@
     <v-main class="fill-height mx-2">
       <v-sheet class="fill-height" elevation="24">
         <v-container class="secondary fill-height" fluid>
-          <v-row>
+          <v-row class="ma-0">
             <v-col><h1>Acciones</h1></v-col>
           </v-row>
           <v-row v-for="action in routine.actions" :key="action.id">
@@ -15,7 +15,7 @@
                   <v-card-title class="text-h5 font-weight-bold">
                     {{ device(action.deviceID).name }}
                   </v-card-title>
-                  <v-card-subtitle>
+                  <v-card-subtitle class="text-left">
                     {{ actionForDevice(action.deviceID, action.actionID).name }}
                   </v-card-subtitle>
                   <v-card-actions>
