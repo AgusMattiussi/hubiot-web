@@ -7,7 +7,7 @@
           <v-col md="2"></v-col>
           <v-col md="8">
             <v-container><!-- Container para centrar contenido -->
-              <h1>Mis dispositivos</h1>
+              <h1 class="mb-3">Mis dispositivos</h1>
               <v-main>
                 <form action="">
                   <div class="d-flex">
