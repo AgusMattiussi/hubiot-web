@@ -6,35 +6,20 @@
         <v-row>
           <v-col md="2"></v-col>
           <v-col md="8">
-            <v-container class="niceWidth"><!-- Container para centrar contenido -->
+            <v-container><!-- Container para centrar contenido -->
               <h1>Mis dispositivos</h1>
-              <form action="">
-                <div class="d-flex">
-                  <v-text-field
-                    v-model="device"
-                    :rules="deviceRules"
-                    :counter="18"
-                    placeholder="Buscar dispositivo"
-                    solo
-                    required
-                    outlined
-                    clearable
-                    class="pt-5 mr-2"
-                    append-icon="mdi-magnify"
-                  ></v-text-field>
-                  <!--
-                  <v-btn
-                    x-large
-                    :disabled="!valid"
-                    color="primary"
-                    class="mr-4"
-                    @click="validate"
-                  >
-                    Search
-                  </v-btn>
-                  -->
-                </div>
-              </form>
+              <v-content>
+                <form action="">
+                  <div class="d-flex">
+                    <v-text-field v-model="device" :rules="deviceRules" :counter="18" placeholder="Buscar dispositivo" solo required outlined clearable></v-text-field>
+                    <v-btn class="mx-2" fab dark color="primary">
+                      <v-icon dark>
+                        mdi-magnify
+                      </v-icon>
+                    </v-btn>
+                  </div>
+                </form>
+              </v-content>
               <v-content mt="10">
                 <div class="devicesParent">
                   <v-sheet class="deviceCard" v-for="device in devices" :key="device.slug">
@@ -43,11 +28,17 @@
                       <h4>{{ device.name }}</h4>
                     </router-link>
                   </v-sheet>
+                  <v-main class="deviceCard">
+                    <router-link to="new_routine">
+                      <v-btn fab dark color="#FF8A65">
+                        <v-icon dark>
+                          mdi-plus
+                        </v-icon>
+                      </v-btn>
+                    </router-link>
+                  </v-main>
                 </div>
               </v-content>
-              <router-link to="new_device">
-                <AddButton/>
-              </router-link>
             </v-container>
           </v-col>
           <v-col md="2"></v-col>
@@ -61,11 +52,10 @@
 <script>
 
 import store from '@/store/store'
-import AddButton from '@/components/AddButton'
 
 export default {
   name: 'MyRooms',
-  components: { AddButton },
+  components: { },
   data () {
     return {
       devices: store.devices,
@@ -78,9 +68,6 @@ export default {
       methods: {
         validate () {
           this.$refs.form.validate()
-        },
-        probando () {
-          console.log('asd')
         }
       }
     }
@@ -90,12 +77,8 @@ export default {
 
 <style scoped>
 
-.niceWidth {
-  width: 50%;
-}
-
 .devicesParent {
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -104,10 +87,9 @@ export default {
 
 .deviceCard {
   margin: 10px;
-  padding: 10px;
   border-radius: 20px;
-  width: 25%;
-  height: 25%;
+  max-width: 100px;
+  max-height: 140px;
 }
 .ax{
   text-decoration: none;
