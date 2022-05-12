@@ -8,10 +8,10 @@
           <v-col md="8">
             <v-container><!-- Container para centrar contenido -->
               <h1>Mis dispositivos</h1>
-              <v-content>
+              <v-main>
                 <form action="">
                   <div class="d-flex">
-                    <v-text-field v-model="device" :rules="deviceRules" :counter="18" placeholder="Buscar dispositivo" solo required outlined clearable></v-text-field>
+                    <v-text-field v-model="device" :rules="deviceRules" :counter="18" :append-icon="'mdi-magnify'" @click:append="searchedClicked" placeholder="Buscar dispositivo" solo required outlined clearable></v-text-field>
                     <v-btn class="mx-2" fab dark color="primary">
                       <v-icon dark>
                         mdi-magnify
@@ -19,7 +19,7 @@
                     </v-btn>
                   </div>
                 </form>
-              </v-content>
+              </v-main>
               <v-content mt="10">
                 <div class="devicesParent">
                   <v-sheet class="deviceCard" v-for="device in devices" :key="device.slug">
@@ -64,12 +64,15 @@ export default {
       deviceRules: [
         v => !!v || 'Name is required',
         v => v.length <= 10 || 'Name must be less than 10 characters'
-      ],
-      methods: {
-        validate () {
-          this.$refs.form.validate()
-        }
-      }
+      ]
+    }
+  },
+  methods: {
+    validate () {
+      this.$refs.form.validate()
+    },
+    searchedClicked () {
+      console.log('funakndo')
     }
   }
 }

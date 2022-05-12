@@ -10,15 +10,10 @@
                 <h1>Mis rutinas</h1>
                 <form action="">
                   <div class="d-flex">
-                    <v-text-field v-model="device" :rules="deviceRules" :counter="18" placeholder="Buscar dispositivo" solo required outlined clearable></v-text-field>
-                    <v-btn class="mx-2" fab dark medium color="primary">
-                      <v-icon dark>
-                        mdi-magnify
-                      </v-icon>
-                    </v-btn>
+                    <v-text-field v-model="device" :rules="deviceRules" :counter="18" :append-icon="'mdi-magnify'" @click:append="searchedClicked" placeholder="Buscar dispositivo" solo required outlined clearable></v-text-field>
                   </div>
                 </form>
-                <v-content mt="10">
+                <v-main mt="10">
                   <div class="devicesParent">
                     <v-sheet class="deviceCard" v-for="routine in routines" :key="routine.id">
                       <router-link :to="{ name: 'routineDetails', params: {id: routine.id}}" class="routineName">
@@ -36,7 +31,7 @@
                     </router-link>
                     </v-container>
                   </div>
-                </v-content>
+                </v-main>
               </v-container>
             </v-col>
             <v-col md="2"></v-col>
@@ -52,7 +47,7 @@ import store from '@/store/store'
 
 export default {
   name: 'MyRoutines',
-  components: { },
+  components: {},
   data () {
     return {
       routines: store.routines,
@@ -61,12 +56,16 @@ export default {
       deviceRules: [
         v => !!v || 'Name is required',
         v => v.length <= 10 || 'Name must be less than 10 characters'
-      ],
-      methods: {
-        validate () {
-          this.$refs.form.validate()
-        }
-      }
+      ]
+    }
+  },
+  methods: {
+    validate () {
+      this.$refs.form.validate()
+    },
+    searchedClicked () {
+      console.log('BUENAS')
+      this.valid = false
     }
   }
 }
