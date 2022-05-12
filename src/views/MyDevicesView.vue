@@ -7,16 +7,21 @@
           <v-col md="2"></v-col>
           <v-col md="8">
             <v-container><!-- Container para centrar contenido -->
-              <h1>Mis dispositivos</h1>
+              <h1 class="mb-3">Mis dispositivos</h1>
               <v-content>
                 <form action="">
                   <div class="d-flex">
-                    <v-text-field v-model="device" :rules="deviceRules" :counter="18" placeholder="Buscar dispositivo" solo required outlined clearable></v-text-field>
-                    <v-btn class="mx-2" fab dark color="primary">
-                      <v-icon dark>
-                        mdi-magnify
-                      </v-icon>
-                    </v-btn>
+                    <v-text-field v-model="device"
+                                  :rules="deviceRules"
+                                  :counter="18"
+                                  placeholder="Buscar dispositivo"
+                                  solo
+                                  required
+                                  outlined
+                                  clearable/>
+                    <router-link to="new_routine">
+                      <AddButton class="addButton"/>
+                    </router-link>
                   </div>
                 </form>
               </v-content>
@@ -28,15 +33,6 @@
                       <h4>{{ device.name }}</h4>
                     </router-link>
                   </v-sheet>
-                  <v-main class="deviceCard">
-                    <router-link to="new_routine">
-                      <v-btn fab dark color="#FF8A65">
-                        <v-icon dark>
-                          mdi-plus
-                        </v-icon>
-                      </v-btn>
-                    </router-link>
-                  </v-main>
                 </div>
               </v-content>
             </v-container>
@@ -52,10 +48,11 @@
 <script>
 
 import store from '@/store/store'
+import AddButton from '@/components/AddButton'
 
 export default {
   name: 'MyRooms',
-  components: { },
+  components: { AddButton },
   data () {
     return {
       devices: store.devices,

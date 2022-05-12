@@ -16,12 +16,13 @@ export default {
 
 <style scoped>
 .btn{
-  margin: 5px;
+  margin-left: 5px;
   background-color: #FF8A65;
   border-radius: 100px;
   border: 0;
-  height: 100px;
-  width: 100px;
+  height: 60px;
+  width: 60px;
   box-shadow: 2px 0 4px 1px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
 }
 </style>

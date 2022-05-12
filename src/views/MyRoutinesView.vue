@@ -7,15 +7,20 @@
             <v-col md="2"></v-col>
             <v-col md="8">
               <v-container class="niceWidth"><!-- Container para centrar contenido -->
-                <h1>Mis rutinas</h1>
+                <h1 class="mb-3">Mis rutinas</h1>
                 <form action="">
                   <div class="d-flex">
-                    <v-text-field v-model="device" :rules="deviceRules" :counter="18" placeholder="Buscar dispositivo" solo required outlined clearable></v-text-field>
-                    <v-btn class="mx-2" fab dark medium color="primary">
-                      <v-icon dark>
-                        mdi-magnify
-                      </v-icon>
-                    </v-btn>
+                    <v-text-field v-model="device"
+                                  :rules="deviceRules"
+                                  :counter="18"
+                                  placeholder="Buscar dispositivo"
+                                  solo
+                                  required
+                                  outlined
+                                  clearable/>
+                    <router-link to="new_routine">
+                      <AddButton class="addButton"/>
+                    </router-link>
                   </div>
                 </form>
                 <v-content mt="10">
@@ -26,15 +31,6 @@
                         <h4>{{ routine.name }}</h4>
                       </router-link>
                     </v-sheet>
-                    <v-container class="deviceCard">
-                      <router-link to="new_routine">
-                      <v-btn class="mx-2" large fab dark color="#FF8A65">
-                        <v-icon dark>
-                          mdi-plus
-                        </v-icon>
-                      </v-btn>
-                    </router-link>
-                    </v-container>
                   </div>
                 </v-content>
               </v-container>
@@ -49,10 +45,11 @@
 
 <script>
 import store from '@/store/store'
+import AddButton from '@/components/AddButton'
 
 export default {
   name: 'MyRoutines',
-  components: { },
+  components: { AddButton },
   data () {
     return {
       routines: store.routines,
