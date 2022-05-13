@@ -49,7 +49,7 @@
             />
             <v-btn class="nextButton v-size--x-large accent black--text"
                    :disabled="newRoutineName == null"
-                   @click="currentStep = 3"> Siguiente </v-btn>
+                   @click="save"> Siguiente </v-btn>
             <v-btn class="ms-5 v-size--x-large grey black--text"
                    @click="currentStep = 1"> Atrás </v-btn>
           </v-stepper-content>
@@ -75,8 +75,8 @@
 </template>
 
 <script>
-import store from '@/store/store'
 import RoutineStep from '@/components/RoutineStep'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'AddNewRoutineView',
@@ -85,19 +85,42 @@ export default {
     return {
       currentStep: 1,
       deviceIndex: 1,
-      devices: store.devices,
       steps: [{}],
       newRoutineName: null
     }
   },
+  computed: {
+    ...mapState('routines', {
+      routines: (state) => state.routines
+    }),
+    ...mapState('devices', {
+      devices: (state) => state.devices
+    })
+  },
   methods: {
+    ...mapActions('routines', {
+      $createRoutine: 'create',
+      // $modifyRoutine: 'modify',
+      // $deleteDevice: 'delete',
+      // $getDevice: 'get',
+      $getAllRoutines: 'getAll'
+    }),
     updateRoutine (step) {
       this.steps[step.id] = ({ device: step.device, action: step.action })
     },
     removeLast () {
       this.steps.pop()
       this.deviceIndex--
+    },
+    save () {
+      this.currentStep = 3 // Al haberlo agregado...
+    },
+    setResult (result) {
+      this.result = JSON.stringify(result, null, 2)
     }
+  },
+  async created () {
+    await this.$getAllRoutines()
   }
 }
 </script>

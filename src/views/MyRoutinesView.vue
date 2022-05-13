@@ -10,8 +10,8 @@
                 <h1 class="mb-3">Mis rutinas</h1>
                 <form action="">
                   <div class="d-flex">
-                    <v-text-field v-model="device"
-                                  :rules="deviceRules"
+                    <v-text-field v-model="routine"
+                                  :rules="routinesRules"
                                   :counter="18"
                                   :append-icon="'mdi-magnify'"
                                   @click:append="searchedClicked"
@@ -46,31 +46,56 @@
 </template>
 
 <script>
-import store from '@/store/store'
 import AddButton from '@/components/AddButton'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'MyRoutines',
   components: { AddButton },
   data () {
     return {
-      routines: store.routines,
       valid: true,
-      device: '',
-      deviceRules: [
+      routine: null,
+      result: null,
+      routinesRules: [
         v => !!v || 'Name is required',
         v => v.length <= 10 || 'Name must be less than 10 characters'
       ]
     }
   },
+  computed: {
+    ...mapState('routines', {
+      routines: (state) => state.routines
+    })
+  },
   methods: {
+    ...mapActions('routines', {
+      // $createDevice: 'create',
+      // $modifyDevice: 'modify',
+      // $deleteDevice: 'delete',
+      // $getDevice: 'get',
+      $getAllRoutines: 'getAll'
+    }),
     validate () {
       this.$refs.form.validate()
     },
     searchedClicked () {
-      console.log('BUENAS')
       this.valid = false
+    },
+    setResult (result) {
+      this.result = JSON.stringify(result, null, 2)
+    },
+    async getAllRoutines () {
+      try {
+        await this.$getAllRoutines()
+        this.setResult(this.routines)
+      } catch (e) {
+        this.setResult(e)
+      }
     }
+  },
+  async created () {
+    await this.$getAllRoutines()
   }
 }
 </script>

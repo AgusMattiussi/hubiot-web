@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import store from '@/store/store'
+import { mapActions, mapState } from 'vuex'
 export default {
   name: 'RoutineStep.vue',
   props: {
@@ -53,15 +53,25 @@ export default {
   },
   data () {
     return {
-      devices: store.devices,
       selectedDevice: {},
       selectedAction: {}
     }
   },
+  computed: {
+    ...mapState('devices', {
+      devices: (state) => state.devices
+    })
+  },
   methods: {
+    ...mapActions('routines', {
+      $getAllDevices: 'getAll'
+    }),
     updated () {
       this.$emit('updatedStep', { id: this.id, device: this.selectedDevice, action: this.selectedAction })
     }
+  },
+  async created () {
+    await this.$getAllDevices()
   }
 }
 </script>
