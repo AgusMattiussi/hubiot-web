@@ -29,9 +29,10 @@
               </v-main>
               <v-content mt="10">
                 <div class="devicesParent">
-                  <v-sheet class="deviceCard" v-for="device in devices" :key="device.slug">
+                  <v-sheet class="deviceCard" v-for="device in devices" :key="device.id">
                     <router-link :to="{ name: 'deviceDetails', params: {slug: device.slug}}" class="deviceName">
                       <v-img :src="require(`@/assets/${device.image}`)" />
+                      <h1>todo device: {{ device}}</h1>
                       <h4>{{ device.name }}</h4>
                     </router-link>
                   </v-sheet>
@@ -49,15 +50,13 @@
 
 <script>
 
-import store from '@/store/store'
 import AddButton from '@/components/AddButton'
-
+import { mapState, mapActions } from 'vuex'
 export default {
-  name: 'MyRooms',
+  name: 'MyDevices',
   components: { AddButton },
   data () {
     return {
-      devices: store.devices,
       valid: true,
       device: '',
       deviceRules: [
@@ -66,14 +65,24 @@ export default {
       ]
     }
   },
+  computed: {
+    ...mapState('devices', {
+      devices: (state) => state.items
+    })
+  },
   methods: {
-    ...mapActions(),
+    ...mapActions('devices', ['fetchDevices']),
     validate () {
       this.$refs.form.validate()
     },
     searchedClicked () {
       console.log('funkando')
     }
+  },
+  async created () {
+    await this.fetchDevices().then(() => {
+      console.log('Funka')
+    })
   }
 }
 </script>

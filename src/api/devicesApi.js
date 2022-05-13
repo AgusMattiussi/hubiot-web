@@ -2,6 +2,7 @@ import Api from '@/api/api'
 
 class DevicesApi {
   static getUrl (slug) {
+    console.log(`${Api.baseURL}/devices${slug ? `/${slug}` : ''}`)
     return `${Api.baseURL}/devices${slug ? `/${slug}` : ''}`
   }
 
@@ -22,6 +23,7 @@ class DevicesApi {
   }
 
   static async getAll () {
+    console.log(DevicesApi.getUrl())
     return await Api.get(DevicesApi.getUrl())
   }
 
