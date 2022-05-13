@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     device () {
-      return store.devices.find(device => device.id === this.deviceSlug)
+      return store.devices.find(device => device.type.id === this.deviceSlug)
     }
   }
 }
