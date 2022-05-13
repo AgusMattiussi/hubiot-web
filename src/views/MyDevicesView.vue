@@ -52,6 +52,7 @@
 <script>
 
 import store from '@/store/store'
+// import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'MyRooms',
@@ -68,6 +69,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(),
     validate () {
       this.$refs.form.validate()
     },
