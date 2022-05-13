@@ -123,7 +123,7 @@ export default {
       name: 'Puerta',
       slug: 'puerta',
       image: 'puerta.png',
-      id: 2,
+      id: 'go46xmbqeomjrsjr',
       description:
         'puertoide',
       actions: [

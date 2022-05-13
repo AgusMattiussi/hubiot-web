@@ -30,7 +30,7 @@
               <v-content mt="10">
                 <div class="devicesParent">
                   <v-sheet class="deviceCard" v-for="device in devices" :key="device.id">
-                    <router-link :to="{ name: 'deviceDetails', params: {slug: device.slug}}" class="deviceName">
+                    <router-link :to="{ name: 'deviceDetails', params: {slug: device.type.id}}" class="deviceName">
 <!--                      <v-img :src="require(`@/assets/${device.image}`)" />-->
 <!--                      <h1>todoo device: {{ device}}</h1>-->
                       <h4>{{ device.name }}</h4>

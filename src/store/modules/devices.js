@@ -6,6 +6,7 @@ export default {
     devices: []
   },
   // getters: {
+  // Chequear si hay que agregar getters
   // },
   actions: {
     async create (context, device) {
