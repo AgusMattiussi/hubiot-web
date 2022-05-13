@@ -105,6 +105,9 @@ export default {
       // $getDevice: 'get',
       $getAllRoutines: 'getAll'
     }),
+    ...mapActions('devices', {
+      $getAllDevices: 'getAll'
+    }),
     updateRoutine (step) {
       this.steps[step.id] = ({ device: step.device, action: step.action })
     },
@@ -113,6 +116,21 @@ export default {
       this.deviceIndex--
     },
     save () {
+      /*
+      devicesIDs = []
+      for (const step in this.steps) {
+        const id = devices.find(device => {
+          device.id === step.device.id
+        })
+        devicesIDS.append(id)
+      }
+      */
+      this.$createRoutine({
+        name: this.newRoutineName,
+        actions: [
+
+        ]
+      })
       this.currentStep = 3 // Al haberlo agregado...
     },
     setResult (result) {
@@ -121,6 +139,7 @@ export default {
   },
   async created () {
     await this.$getAllRoutines()
+    await this.$getAllDevices()
   }
 }
 </script>
