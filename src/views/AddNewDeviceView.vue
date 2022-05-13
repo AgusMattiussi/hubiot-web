@@ -38,7 +38,8 @@
           <img class="deviceImage" :src="require(`@/assets/${newDevice.name != null? newDevice.image : 'logo.png'}`)" :alt="newDevice.name">
           <v-btn class="nextButton v-size--x-large accent black--text"
                  :disabled="newDeviceName == null"
-                 @click="currentStep = 3"> Siguiente </v-btn>
+                 @click="createDevice()"> Siguiente </v-btn>
+<!--          @click="currentStep = 3"> Siguiente </v-btn>-->
           <v-btn class="ms-5 v-size--x-large grey black--text"
                  @click="currentStep = 1"> Atrás </v-btn>
         </v-stepper-content>
@@ -65,6 +66,8 @@
 
 <script>
 import store from '@/store/store'
+import { mapActions } from 'vuex'
+import { Device, DeviceMeta } from '@/api/devicesApi'
 
 export default {
   name: 'AddNewDeviceView.vue',
@@ -73,7 +76,30 @@ export default {
       currentStep: 1,
       devices: store.devices,
       newDevice: {},
-      newDeviceName: null
+      newDeviceName: null,
+      result: null,
+      device: null
+    }
+  },
+  methods: {
+    ...mapActions('devices', {
+      $createDevice: 'create'
+    }),
+    setResult (result) {
+      this.result = JSON.stringify(result, null, 2)
+    },
+    async createDevice () {
+      const deviceMeta = new DeviceMeta(this.newDevice.image)
+      const device = new Device(this.newDevice.type, this.newDeviceName, deviceMeta)
+      // console.log(device)
+      try {
+        this.device = await this.$createDevice(device)
+        this.device = Object.assign(new Device(), this.device)
+        this.setResult(this.device)
+        this.currentStep = 3
+      } catch (e) {
+        this.setResult(e)
+      }
     }
   }
 }

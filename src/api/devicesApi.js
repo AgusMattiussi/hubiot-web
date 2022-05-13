@@ -41,10 +41,11 @@ class DevicesApi {
 }
 
 class Device {
-  constructor (id, name, meta) {
-    if (id) {
-      this.id = id
-    }
+  constructor (type, name, meta) {
+    // if (id) {
+    //   this.id = id
+    // }
+    this.type = type
     this.name = name
     this.meta = meta
   }
@@ -54,9 +55,10 @@ class Device {
   }
 }
 
-// class DeviceMeta {
-//   constructor(size, color) {
-//   }
-// }
+class DeviceMeta {
+  constructor (image) {
+    this.image = image
+  }
+}
 
-export { DevicesApi, Device }
+export { DevicesApi, Device, DeviceMeta }
