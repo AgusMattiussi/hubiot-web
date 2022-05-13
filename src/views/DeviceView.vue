@@ -4,7 +4,9 @@
       <div class="cardTitle">
         <GoBackButton/>
         <h1 class="mx-auto">{{ device.name }}</h1>
-        <DeleteButton class="deleteBtn"/>
+        <button @click="deleteDevice">
+          <DeleteButton class="deleteBtn"/>
+        </button>
       </div>
       <v-img :src="require(`@/assets/${device.image}`)" alt="parlante" class="img"></v-img>
       <v-card-title class="sectionTitle">Estado</v-card-title>
@@ -16,10 +18,10 @@
       </v-card-text>
       <v-divider class="mx-4"></v-divider>
       <v-card-title class="sectionTitle">Acciones</v-card-title>
-      <v-card-actions class="actions" v-for="action in device.actions" :key="action.slug">
-          <v-btn v-if="action.name !== 'Obtener Estado'" color="contras" class="actionBtn">
-            {{ action.name }}
-          </v-btn>
+      <v-card-actions class="actions">
+<!--          <v-btn v-if="action.name !== 'Obtener Estado'" color="contras" class="actionBtn">-->
+<!--            {{ action.name }}-->
+<!--          </v-btn>-->
       </v-card-actions>
     </v-card>
   </v-container>
@@ -30,6 +32,7 @@
 import store from '@/store/store'
 import GoBackButton from '@/components/GoBackButton'
 import DeleteButton from '@/components/DeleteButton'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'DeviceView',
@@ -43,8 +46,27 @@ export default {
     }
   },
   computed: {
+    ...mapState('devices', {
+      devices: (state) => state.devices
+    }),
     device () {
       return store.devices.find(device => device.type.id === this.deviceSlug)
+    }
+  },
+  methods: {
+    ...mapActions('devices', {
+      $deleteDevice: 'delete'
+    }),
+    async deleteDevice () {
+      const dev = this.devices.find(dev => this.device.type.id === this.deviceSlug)
+      try {
+        await this.$deleteDevice(dev.id)
+        this.$router.go(-1)
+        this.device = null
+        this.clearResult()
+      } catch (e) {
+        this.setResult(e)
+      }
     }
   }
 }

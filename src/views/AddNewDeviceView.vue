@@ -30,6 +30,7 @@
         <v-stepper-content step="2" class="pa-0">
           <h1 class="cardTitle"> Nombre del Dispositivo </h1>
           <h2 class="mt-6"> ¿Cómo se llamará el nuevo dispositivo?</h2>
+          <!-- todo check deviceNameFormat -->
           <input type="text"
                  class="deviceNameBox rounded"
                  placeholder="Nuevo Dispositivo"
@@ -39,7 +40,6 @@
           <v-btn class="nextButton v-size--x-large accent black--text"
                  :disabled="newDeviceName == null"
                  @click="createDevice()"> Siguiente </v-btn>
-<!--          @click="currentStep = 3"> Siguiente </v-btn>-->
           <v-btn class="ms-5 v-size--x-large grey black--text"
                  @click="currentStep = 1"> Atrás </v-btn>
         </v-stepper-content>
@@ -91,7 +91,6 @@ export default {
     async createDevice () {
       const deviceMeta = new DeviceMeta(this.newDevice.image)
       const device = new Device(this.newDevice.type, this.newDeviceName, deviceMeta)
-      // console.log(device)
       try {
         this.device = await this.$createDevice(device)
         this.device = Object.assign(new Device(), this.device)

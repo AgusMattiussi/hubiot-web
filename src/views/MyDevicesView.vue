@@ -30,8 +30,7 @@
                 <div class="devicesParent">
                   <v-sheet class="deviceCard" v-for="device in devices" :key="device.id">
                     <router-link :to="{ name: 'deviceDetails', params: {slug: device.type.id}}" class="deviceName">
-<!--                      <v-img :src="require(`@/assets/${device.image}`)" />-->
-<!--                      <h1>todoo device: {{ device}}</h1>-->
+                      <v-img :src="require(`@/assets/${device.meta.image}`)" />
                       <h4>{{ device.name }}</h4>
                     </router-link>
                   </v-sheet>
@@ -82,6 +81,9 @@ export default {
     },
     setResult (result) {
       this.result = JSON.stringify(result, null, 2)
+    },
+    clearResult () {
+      this.result = null
     },
     async getAllDevices () {
       try {
