@@ -1,5 +1,5 @@
 <template>
-  <span class="go-back">
+  <span>
     <button class="btn icon">
       <v-icon class="mx-auto" x-large color="white">
         mdi-plus

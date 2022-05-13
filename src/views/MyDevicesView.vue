@@ -12,7 +12,6 @@
                 <form action="">
                   <div class="d-flex">
                     <v-text-field v-model="device"
-                                  :rules="deviceRules"
                                   :counter="18"
                                   :append-icon="'mdi-magnify'"
                                   @click:append="searchedClicked"
@@ -21,7 +20,7 @@
                                   required
                                   outlined
                                   clearable/>
-                    <router-link to="new_routine">
+                    <router-link to="new_device">
                       <AddButton/>
                     </router-link>
                   </div>
@@ -59,11 +58,7 @@ export default {
     return {
       valid: true,
       device: null,
-      result: null,
-      deviceRules: [
-        v => !!v || 'Name is required',
-        v => v.length <= 10 || 'Name must be less than 10 characters'
-      ]
+      result: null
     }
   },
   computed: {

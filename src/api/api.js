@@ -38,10 +38,11 @@ class Api {
   }
 
   static async post (url, data) {
+    console.log(JSON.stringify(data))
     return await Api.fetch(url, {
       method: 'POST',
       headers: {
-        'content-type': 'application/json; charset=utf-8'
+        'Content-Type': 'application/json; charset=utf-8'
       },
       body: JSON.stringify(data)
     })
