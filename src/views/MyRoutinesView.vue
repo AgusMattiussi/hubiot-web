@@ -11,7 +11,6 @@
                 <form action="">
                   <div class="d-flex">
                     <v-text-field v-model="routine"
-                                  :rules="routinesRules"
                                   :counter="18"
                                   :append-icon="'mdi-magnify'"
                                   @click:append="searchedClicked"
@@ -56,11 +55,11 @@ export default {
     return {
       valid: true,
       routine: null,
-      result: null,
-      routinesRules: [
-        v => !!v || 'Name is required',
-        v => v.length <= 10 || 'Name must be less than 10 characters'
-      ]
+      result: null
+      // routinesRules: [
+      //   v => !!v || 'Name is required',
+      //   v => v.length <= 10 || 'Name must be less than 10 characters'
+      // ]
     }
   },
   computed: {
@@ -70,10 +69,6 @@ export default {
   },
   methods: {
     ...mapActions('routines', {
-      // $createDevice: 'create',
-      // $modifyDevice: 'modify',
-      // $deleteDevice: 'delete',
-      // $getDevice: 'get',
       $getAllRoutines: 'getAll'
     }),
     validate () {

@@ -49,7 +49,7 @@
             />
             <v-btn class="nextButton v-size--x-large accent black--text"
                    :disabled="newRoutineName == null"
-                   @click="save"> Siguiente </v-btn>
+                   @click="createRoutine"> Siguiente </v-btn>
             <v-btn class="ms-5 v-size--x-large grey black--text"
                    @click="currentStep = 1"> Atrás </v-btn>
           </v-stepper-content>
@@ -76,7 +76,8 @@
 
 <script>
 import RoutineStep from '@/components/RoutineStep'
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
+import { Routine } from '@/api/routinesApi'
 
 export default {
   name: 'AddNewRoutineView',
@@ -86,28 +87,18 @@ export default {
       currentStep: 1,
       deviceIndex: 1,
       steps: [{}],
-      newRoutineName: null
+      newRoutineName: null,
+      result: null,
+      routine: null
     }
-  },
-  computed: {
-    ...mapState('routines', {
-      routines: (state) => state.routines
-    }),
-    ...mapState('devices', {
-      devices: (state) => state.devices
-    })
   },
   methods: {
     ...mapActions('routines', {
-      $createRoutine: 'create',
-      // $modifyRoutine: 'modify',
-      // $deleteDevice: 'delete',
-      // $getDevice: 'get',
-      $getAllRoutines: 'getAll'
+      $createRoutine: 'create'
     }),
-    ...mapActions('devices', {
-      $getAllDevices: 'getAll'
-    }),
+    setResult (result) {
+      this.result = JSON.stringify(result, null, 2)
+    },
     updateRoutine (step) {
       this.steps[step.id] = ({ device: step.device, action: step.action })
     },
@@ -115,7 +106,8 @@ export default {
       this.steps.pop()
       this.deviceIndex--
     },
-    save () {
+    async createRoutine () {
+      const actions = []
       /*
       devicesIDs = []
       for (const step in this.steps) {
@@ -125,21 +117,16 @@ export default {
         devicesIDS.append(id)
       }
       */
-      this.$createRoutine({
-        name: this.newRoutineName,
-        actions: [
-
-        ]
-      })
-      this.currentStep = 3 // Al haberlo agregado...
-    },
-    setResult (result) {
-      this.result = JSON.stringify(result, null, 2)
+      const routine = new Routine(this.newRoutineName, actions, {})
+      try {
+        this.routine = await this.$createRoutine(routine)
+        this.routine = Object.assign(new Routine(), this.routine)
+        this.setResult(this.routine)
+        this.currentStep = 3 // Al haberlo agregado...
+      } catch (e) {
+        this.setResult(e)
+      }
     }
-  },
-  async created () {
-    await this.$getAllRoutines()
-    await this.$getAllDevices()
   }
 }
 </script>
