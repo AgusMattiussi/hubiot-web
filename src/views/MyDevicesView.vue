@@ -51,9 +51,10 @@
 
 import store from '@/store/store'
 import AddButton from '@/components/AddButton'
+// import { mapActions } from 'vuex'
 
 export default {
-  name: 'MyRooms',
+  name: 'MyDevices',
   components: { AddButton },
   data () {
     return {
@@ -67,7 +68,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(),
+    // ...mapActions(),
     validate () {
       this.$refs.form.validate()
     },

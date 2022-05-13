@@ -28,7 +28,7 @@ const routes = [
   {
     path: '/routines/:id',
     name: 'routineDetails',
-    component: () => import('../views/RoutineDetail.vue')
+    component: () => import('../views/RoutineDetailView.vue')
   },
   {
     path: '/new_routine',

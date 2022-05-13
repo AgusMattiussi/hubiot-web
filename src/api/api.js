@@ -31,7 +31,7 @@ class Api {
           ]
         }
       }
-      throw eror
+      throw error
     } finally {
       clearTimeout(timer)
     }
