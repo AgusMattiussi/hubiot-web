@@ -1,16 +1,13 @@
-import Api from '@/api/api'
+import { Api } from '@/api/api'
 
 class DevicesApi {
   static getUrl (slug) {
+    // console.log(`${Api.baseURL}/devices${slug ? `/${slug}` : ''}`)
     return `${Api.baseURL}/devices${slug ? `/${slug}` : ''}`
   }
 
-  static async create (device) {
+  static async add (device) {
     return await Api.post(DevicesApi.getUrl(), device)
-  }
-
-  static async get (deviceID) {
-    return await Api.get(DevicesApi.getUrl(deviceID))
   }
 
   static async modify (device) {
@@ -21,7 +18,12 @@ class DevicesApi {
     return await Api.delete(DevicesApi.getUrl(deviceID))
   }
 
+  static async get (deviceID) {
+    return await Api.get(DevicesApi.getUrl(deviceID))
+  }
+
   static async getAll () {
+    // console.log(DevicesApi.getUrl())
     return await Api.get(DevicesApi.getUrl())
   }
 
@@ -29,13 +31,32 @@ class DevicesApi {
     return await Api.get(DevicesApi.getUrl(`${deviceID}/state`))
   }
 
-  static async getType (deviceID) {
-    return await Api.get(DevicesApi.getUrl(`devicetypes/${deviceID}`))
-  }
+  // static async getType (deviceID) {
+  //   return await Api.get(DevicesApi.getUrl(`devicetypes/${deviceID}`))
+  // }
 
-  static async modifyAction (deviceID, action) {
+  static async executeAction (deviceID, action) {
     return await Api.put(DevicesApi.getUrl(`${deviceID}/${action.name}`), action)
   }
 }
 
-export { DevicesApi }
+class Device {
+  constructor (id, name, meta) {
+    if (id) {
+      this.id = id
+    }
+    this.name = name
+    this.meta = meta
+  }
+
+  toString () {
+    return JSON.stringify(this, null, 2)
+  }
+}
+
+// class DeviceMeta {
+//   constructor(size, color) {
+//   }
+// }
+
+export { DevicesApi, Device }

@@ -29,9 +29,10 @@
               </v-main>
               <v-content mt="10">
                 <div class="devicesParent">
-                  <v-sheet class="deviceCard" v-for="device in devices" :key="device.slug">
+                  <v-sheet class="deviceCard" v-for="device in devices" :key="device.id">
                     <router-link :to="{ name: 'deviceDetails', params: {slug: device.slug}}" class="deviceName">
-                      <v-img :src="require(`@/assets/${device.image}`)" />
+<!--                      <v-img :src="require(`@/assets/${device.image}`)" />-->
+<!--                      <h1>todoo device: {{ device}}</h1>-->
                       <h4>{{ device.name }}</h4>
                     </router-link>
                   </v-sheet>
@@ -49,32 +50,58 @@
 
 <script>
 
-import store from '@/store/store'
 import AddButton from '@/components/AddButton'
-// import { mapActions } from 'vuex'
-
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'MyDevices',
   components: { AddButton },
   data () {
     return {
-      devices: store.devices,
       valid: true,
-      device: '',
+      device: null,
+      result: null,
       deviceRules: [
         v => !!v || 'Name is required',
         v => v.length <= 10 || 'Name must be less than 10 characters'
       ]
     }
   },
+  computed: {
+    ...mapState('devices', {
+      devices: (state) => state.devices
+    })
+  },
   methods: {
-    // ...mapActions(),
+    ...mapActions('devices', {
+      // $createDevice: 'create',
+      // $modifyDevice: 'modify',
+      // $deleteDevice: 'delete',
+      // $getDevice: 'get',
+      $getAllDevices: 'getAll'
+    }),
     validate () {
       this.$refs.form.validate()
     },
     searchedClicked () {
       console.log('funkando')
+    },
+    setResult (result) {
+      this.result = JSON.stringify(result, null, 2)
+    },
+    async getAllRooms () {
+      try {
+        await this.$getAllDevices()
+        this.setResult(this.devices)
+      } catch (e) {
+        this.setResult(e)
+      }
     }
+  },
+  async created () {
+    await this.$getAllDevices()
+    //   .then(() => {
+    //   console.log('Funka')
+    // })
   }
 }
 </script>
