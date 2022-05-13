@@ -31,8 +31,8 @@
                 <div class="devicesParent">
                   <v-sheet class="deviceCard" v-for="device in devices" :key="device.id">
                     <router-link :to="{ name: 'deviceDetails', params: {slug: device.slug}}" class="deviceName">
-                      <v-img :src="require(`@/assets/${device.image}`)" />
-                      <h1>todo device: {{ device}}</h1>
+<!--                      <v-img :src="require(`@/assets/${device.image}`)" />-->
+<!--                      <h1>todoo device: {{ device}}</h1>-->
                       <h4>{{ device.name }}</h4>
                     </router-link>
                   </v-sheet>
@@ -58,7 +58,8 @@ export default {
   data () {
     return {
       valid: true,
-      device: '',
+      device: null,
+      result: null,
       deviceRules: [
         v => !!v || 'Name is required',
         v => v.length <= 10 || 'Name must be less than 10 characters'
@@ -67,22 +68,40 @@ export default {
   },
   computed: {
     ...mapState('devices', {
-      devices: (state) => state.items
+      devices: (state) => state.devices
     })
   },
   methods: {
-    ...mapActions('devices', ['fetchDevices']),
+    ...mapActions('devices', {
+      // $createDevice: 'create',
+      // $modifyDevice: 'modify',
+      // $deleteDevice: 'delete',
+      // $getDevice: 'get',
+      $getAllDevices: 'getAll'
+    }),
     validate () {
       this.$refs.form.validate()
     },
     searchedClicked () {
       console.log('funkando')
+    },
+    setResult (result) {
+      this.result = JSON.stringify(result, null, 2)
+    },
+    async getAllRooms () {
+      try {
+        await this.$getAllDevices()
+        this.setResult(this.devices)
+      } catch (e) {
+        this.setResult(e)
+      }
     }
   },
   async created () {
-    await this.fetchDevices().then(() => {
-      console.log('Funka')
-    })
+    await this.$getAllDevices()
+    //   .then(() => {
+    //   console.log('Funka')
+    // })
   }
 }
 </script>
