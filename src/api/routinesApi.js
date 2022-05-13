@@ -31,11 +31,9 @@ class RoutinesApi {
 }
 
 class Routine {
-  constructor (id, name, meta) {
-    if (id) {
-      this.id = id
-    }
+  constructor (name, actions, meta) {
     this.name = name
+    this.actions = actions
     this.meta = meta
   }
 
@@ -44,4 +42,38 @@ class Routine {
   }
 }
 
-export { RoutinesApi, Routine }
+class Action {
+  constructor (device, actionName, params, meta) {
+    this.device = device
+    this.actionName = actionName
+    this.params = params
+    this.meta = meta
+  }
+}
+
+// {
+//   "name": "good night",
+//   "actions": [
+//   {
+//     "device": {
+//       "id": "e27c57a632b9769e" -> particular
+//     },
+//     "actionName": "stop",
+//     "params": [],
+//     "meta": {}
+//   },
+//   {
+//     "device": {
+//       "id": "eb478da01168c7c4"
+//     },
+//     "actionName": "turnOff",
+//     "params": [
+//       "1234"
+//     ],
+//     "meta": {}
+//   }
+// ],
+//   "meta": {}
+// }
+
+export { RoutinesApi, Routine, Action }

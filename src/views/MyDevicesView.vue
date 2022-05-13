@@ -88,6 +88,9 @@ export default {
     setResult (result) {
       this.result = JSON.stringify(result, null, 2)
     },
+    clearResult () {
+      this.result = null
+    },
     async getAllDevices () {
       try {
         await this.$getAllDevices()
