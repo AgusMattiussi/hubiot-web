@@ -11,7 +11,7 @@ export default {
   actions: {
     async get (context, deviceTypeId) {
       const result = await DeviceTypesApi.get(deviceTypeId)
-      context.dispatch('getAll')
+      await context.dispatch('getAll')
       return Object.assign(new DeviceType(), result)
     },
     async getAll (context) {

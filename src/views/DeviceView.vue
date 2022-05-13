@@ -9,17 +9,18 @@
       <v-img :src="require(`@/assets/${device.image}`)" alt="parlante" class="img"></v-img>
       <v-card-title class="sectionTitle">Estado</v-card-title>
       <v-card-text class="text-left">
-        <ul class="stateText">
+<!--        <ul class="stateText">
           <li>Apagado</li>
           <li>90% de batería restante</li>
-        </ul>
+        </ul>-->
+        <state-container :device-id="deviceId.toString()"
+                         :device-type-id="deviceTypeId.toString()"
+                         :device-type-name="deviceTypeName.toString()"/>
       </v-card-text>
       <v-divider class="mx-4"></v-divider>
       <v-card-title class="sectionTitle">Acciones</v-card-title>
       <v-card-actions class="actions" v-for="action in device.actions" :key="action.slug">
-          <v-btn v-if="action.name !== 'Obtener Estado'" color="contras" class="actionBtn">
-            {{ action.name }}
-          </v-btn>
+          <!-- ACA VAN LAS ACCIONES -->
       </v-card-actions>
     </v-card>
   </v-container>
@@ -30,21 +31,26 @@
 import store from '@/store/store'
 import GoBackButton from '@/components/GoBackButton'
 import DeleteButton from '@/components/DeleteButton'
+import StateContainer from '@/components/StateContainer'
 
 export default {
   name: 'DeviceView',
   components: {
+    StateContainer,
     DeleteButton,
     GoBackButton
   },
   data () {
     return {
-      deviceSlug: this.$route.params.slug
+      deviceSlug: this.$route.params.slug,
+      deviceId: this.$route.params.deviceId,
+      deviceTypeId: this.$route.params.deviceTypeId,
+      deviceTypeName: this.$route.params.deviceTypeName
     }
   },
   computed: {
     device () {
-      return store.devices.find(device => device.type.id === this.deviceSlug)
+      return store.devices.find(device => device.type.id === this.deviceTypeId)
     }
   }
 }
