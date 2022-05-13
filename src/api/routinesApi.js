@@ -1,11 +1,11 @@
-import Api from '@/api/api'
+import { Api } from '@/api/api'
 
 class RoutinesApi {
   static getUrl (slug) {
     return `${Api.baseURL}/routines${slug ? `/${slug}` : ''}`
   }
 
-  static async create (routine) {
+  static async add (routine) {
     return await Api.post(RoutinesApi.getUrl(), routine)
   }
 
@@ -30,4 +30,18 @@ class RoutinesApi {
   }
 }
 
-export { RoutinesApi }
+class Routine {
+  constructor (id, name, meta) {
+    if (id) {
+      this.id = id
+    }
+    this.name = name
+    this.meta = meta
+  }
+
+  toString () {
+    return JSON.stringify(this, null, 2)
+  }
+}
+
+export { RoutinesApi, Routine }
