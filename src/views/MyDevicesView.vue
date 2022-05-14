@@ -35,8 +35,7 @@
                                                  deviceTypeId: device.type.id,
                                                  deviceTypeName: device.type.name}}"
                                  class="deviceName">
-<!--                      <v-img :src="require(`@/assets/${device.image}`)" />-->
-<!--                      <h1>todoo device: {{ device}}</h1>-->
+                      <v-img :src="require(`@/assets/${device.meta.image}`)" />
                       <h4>{{ device.name }}</h4>
                     </router-link>
                   </v-sheet>
