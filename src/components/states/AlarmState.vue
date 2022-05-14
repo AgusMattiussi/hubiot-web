@@ -1,21 +1,17 @@
 <template>
-<v-container @click="getDoorState" class="fill-height pa-0 ma-0">
-  <ul class="list">
-    <li v-if="door.status === 'closed'">Cerrada</li>
-    <li v-else>Abierta</li>
-
-    <li v-if="door.lock === 'unlocked'">Desbloqueada</li>
-    <li v-else>Bloqueada</li>
-  </ul>
-</v-container>
+  <v-container @click="getAlarmState" class="fill-height pa-0 ma-0">
+    <ul class="list">
+      <li v-if="alarm.status === 'disarmed'">Apagada</li>
+      <li v-else>Encendida</li>
+    </ul>
+  </v-container>
 </template>
 
 <script>
-
 import { mapActions, mapState } from 'vuex'
 
 export default {
-  name: 'DoorState',
+  name: 'AlarmState',
   props: {
     deviceId: {
       type: String,
@@ -25,7 +21,7 @@ export default {
   data () {
     return {
       result: null,
-      door: null
+      alarm: null
     }
   },
   computed: {
@@ -35,14 +31,14 @@ export default {
   },
   methods: {
     ...mapActions('devices', {
-      $getDoorState: 'getState'
+      $getAlarmState: 'getState'
     }),
     setResult (result) {
       this.result = JSON.stringify(result, null, 2)
     },
-    async getDoorState () {
+    async getAlarmState () {
       try {
-        this.door = await this.$getDoorState(this.deviceId)
+        this.alarm = await this.$getAlarmState(this.deviceId)
       } catch (e) {
         // this.setResult(e)
         console.log('xd')
@@ -50,7 +46,7 @@ export default {
     }
   },
   async created () {
-    await this.getDoorState()
+    await this.getAlarmState()
   }
 }
 </script>

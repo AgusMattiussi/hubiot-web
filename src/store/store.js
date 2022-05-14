@@ -72,8 +72,7 @@ export default {
       image: 'heladera.png',
       id: 6,
       type: {
-        id: 'go46xmbqeomjrsjr'
-        // rnizejqr2di0okho
+        id: 'rnizejqr2di0okho'
       }
     }
   ]

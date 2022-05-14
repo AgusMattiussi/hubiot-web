@@ -1,21 +1,26 @@
 <template>
 <v-container class="fill-height">
   <door-state v-if="deviceTypeName === 'door'" :device-id="deviceId"/>
-  <h1 v-else-if="deviceTypeName === 'speaker'"> ES UN PARLANTE </h1>
-  <h1 v-else-if="deviceTypeName === 'alarm'"> ES UNA ALARMA </h1>
-  <h1 v-else-if="deviceTypeName === 'blinds'"> ES UNA PERSIANA </h1>
-  <h1 v-else-if="deviceTypeName === 'ac'"> ES UN AIRE ACONDICIONADO </h1>
-  <h1 v-else-if="deviceTypeName === 'refrigerator'"> ES UNA HEALDERA </h1>
-  <h1 v-else> NO SE ENCONTRO EL DISPOSITIVO </h1>
+  <speaker-state v-if="deviceTypeName === 'speaker'" :device-id="deviceId"/>
+  <alarm-state v-if="deviceTypeName === 'alarm'" :device-id="deviceId"/>
+  <blinds-state v-if="deviceTypeName === 'blinds'" :device-id="deviceId"/>
+  <ac-state v-if="deviceTypeName === 'ac'" :device-id="deviceId"/>
+  <refrigerator-state v-if="deviceTypeName === 'refrigerator'" :device-id="deviceId"/>
+<!--  <h1 v-else> NO SE ENCONTRO EL DISPOSITIVO </h1>-->
 </v-container>
 </template>
 
 <script>
 import DoorState from '@/components/states/DoorState'
+import SpeakerState from '@/components/states/SpeakerState'
+import AcState from '@/components/states/AcState'
+import AlarmState from '@/components/states/AlarmState'
+import BlindsState from '@/components/states/BlindsState'
+import RefrigeratorState from '@/components/states/RefrigeratorState'
 
 export default {
   name: 'StateContainer',
-  components: { DoorState },
+  components: { RefrigeratorState, BlindsState, AlarmState, AcState, SpeakerState, DoorState },
   props: {
     deviceId: {
       type: String,
