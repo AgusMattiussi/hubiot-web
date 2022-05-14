@@ -11,18 +11,17 @@
       <v-img :src="require(`@/assets/${device.image}`)" alt="parlante" class="img"></v-img>
       <v-card-title class="sectionTitle">Estado</v-card-title>
       <v-card-text class="text-left">
-<!--        <ul class="stateText">
-          <li>Apagado</li>
-          <li>90% de batería restante</li>
-        </ul>-->
         <state-container :device-id="deviceId.toString()"
                          :device-type-id="deviceTypeId.toString()"
                          :device-type-name="deviceTypeName.toString()"/>
       </v-card-text>
       <v-divider class="mx-4"></v-divider>
       <v-card-title class="sectionTitle">Acciones</v-card-title>
-      <v-card-actions class="actions" v-for="action in device.actions" :key="action.slug">
+      <v-card-actions class="actions">
           <!-- ACA VAN LAS ACCIONES -->
+        <actions-container :device-id="deviceId.toString()"
+                           :device-type-id="deviceTypeId.toString()"
+                           :device-type-name="deviceTypeName.toString()"/>
       </v-card-actions>
     </v-card>
   </v-container>
@@ -34,6 +33,7 @@ import store from '@/store/store'
 import GoBackButton from '@/components/GoBackButton'
 import DeleteButton from '@/components/DeleteButton'
 import StateContainer from '@/components/StateContainer'
+import ActionsContainer from '@/components/ActionsContainer'
 import { mapActions, mapState } from 'vuex'
 
 export default {
@@ -41,7 +41,8 @@ export default {
   components: {
     StateContainer,
     DeleteButton,
-    GoBackButton
+    GoBackButton,
+    ActionsContainer
   },
   data () {
     return {
