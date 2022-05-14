@@ -1,21 +1,26 @@
 <template>
-<v-container @click="getDoorState" class="fill-height pa-0 ma-0">
-  <ul class="list">
-    <li v-if="door.status === 'closed'">Cerrada</li>
-    <li v-else>Abierta</li>
+  <v-container @click="getACState" class="fill-height pa-0 ma-0">
+    <ul class="list">
+      <li v-if="ac.status === 'off'">Apagado</li>
+      <li v-else>Encendido</li>
 
-    <li v-if="door.lock === 'unlocked'">Desbloqueada</li>
-    <li v-else>Bloqueada</li>
-  </ul>
-</v-container>
+      <li>Temperatura: {{ac.temperature}}°C</li>
+
+      <li>Modo: {{ ac.mode }}</li>
+
+      <li>Aspas verticales: {{ ac.verticalSwing }}</li>
+
+      <li>Aspas horizontales: {{ ac.horizontalSwing }}</li>
+
+      <li>Velocidad: {{ ac.fanSpeed }}</li>
+    </ul>
+  </v-container>
 </template>
 
 <script>
-
 import { mapActions, mapState } from 'vuex'
-
 export default {
-  name: 'DoorState',
+  name: 'AcState',
   props: {
     deviceId: {
       type: String,
@@ -25,7 +30,7 @@ export default {
   data () {
     return {
       result: null,
-      door: null
+      ac: null
     }
   },
   computed: {
@@ -35,14 +40,14 @@ export default {
   },
   methods: {
     ...mapActions('devices', {
-      $getDoorState: 'getState'
+      $getAcState: 'getState'
     }),
     setResult (result) {
       this.result = JSON.stringify(result, null, 2)
     },
-    async getDoorState () {
+    async getAcState () {
       try {
-        this.door = await this.$getDoorState(this.deviceId)
+        this.ac = await this.$getAcState(this.deviceId)
       } catch (e) {
         // this.setResult(e)
         console.log('xd')
@@ -50,7 +55,7 @@ export default {
     }
   },
   async created () {
-    await this.getDoorState()
+    await this.getAcState()
   }
 }
 </script>

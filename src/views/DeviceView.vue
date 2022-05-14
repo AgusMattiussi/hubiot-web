@@ -64,9 +64,8 @@ export default {
       $deleteDevice: 'delete'
     }),
     async deleteDevice () {
-      const dev = this.devices.find(dev => this.device.type.id === this.deviceSlug)
       try {
-        await this.$deleteDevice(dev.id)
+        await this.$deleteDevice(this.deviceId)
         this.$router.go(-1)
         this.device = null
         this.clearResult()
@@ -113,6 +112,7 @@ export default {
   color: black;
   font-weight: bold;
   font-size: 20px;
+  padding: 16px 0 0 16px;
 }
 .stateText{
   color: black;

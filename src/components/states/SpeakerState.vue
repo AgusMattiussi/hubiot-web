@@ -1,21 +1,20 @@
 <template>
-<v-container @click="getDoorState" class="fill-height pa-0 ma-0">
-  <ul class="list">
-    <li v-if="door.status === 'closed'">Cerrada</li>
-    <li v-else>Abierta</li>
+  <v-container @click="getSpeakerState" class="fill-height pa-0 ma-0">
+    <ul class="list">
+      <li v-if="speaker.status === 'stopped'">Parado</li>
+      <li v-else>Reproduciendo</li>
 
-    <li v-if="door.lock === 'unlocked'">Desbloqueada</li>
-    <li v-else>Bloqueada</li>
-  </ul>
-</v-container>
+      <li>Volumen: {{speaker.volume}}</li>
+
+      <li>Género: {{ speaker.genre }}</li>
+    </ul>
+  </v-container>
 </template>
 
 <script>
-
 import { mapActions, mapState } from 'vuex'
-
 export default {
-  name: 'DoorState',
+  name: 'SpeakerState',
   props: {
     deviceId: {
       type: String,
@@ -25,7 +24,7 @@ export default {
   data () {
     return {
       result: null,
-      door: null
+      speaker: null
     }
   },
   computed: {
@@ -35,14 +34,14 @@ export default {
   },
   methods: {
     ...mapActions('devices', {
-      $getDoorState: 'getState'
+      $getSpeakerState: 'getState'
     }),
     setResult (result) {
       this.result = JSON.stringify(result, null, 2)
     },
-    async getDoorState () {
+    async getSpeakerState () {
       try {
-        this.door = await this.$getDoorState(this.deviceId)
+        this.speaker = await this.$getSpeakerState(this.deviceId)
       } catch (e) {
         // this.setResult(e)
         console.log('xd')
@@ -50,7 +49,7 @@ export default {
     }
   },
   async created () {
-    await this.getDoorState()
+    await this.getSpeakerState()
   }
 }
 </script>
