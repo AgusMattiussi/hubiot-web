@@ -23,7 +23,7 @@
         <v-autocomplete
           height="10px"
           class="autocomplete ps-2"
-          :items="selectedDevice.actions"
+          :items="typeSelectedDevice.actions"
           :disabled="selectedDevice.id == null"
           placeholder="Seleccionar acción"
           rounded
@@ -53,6 +53,7 @@ export default {
   },
   data () {
     return {
+      typeSelectedDevice: [],
       selectedDevice: {},
       selectedAction: {}
     }
@@ -60,17 +61,25 @@ export default {
   computed: {
     ...mapState('devices', {
       devices: (state) => state.devices
+    }),
+    ...mapState('deviceTypes', {
+      devicesTypes: (state) => state.deviceTypes
     })
   },
   methods: {
     ...mapActions('routines', {
       $getAllDevices: 'getAll'
     }),
+    ...mapActions('deviceTypes', {
+      $getAllTypes: 'getAll'
+    }),
     updated () {
+      this.typeSelectedDevice = this.$store.getters['deviceTypes/getTypeForDeviceID'](this.selectedDevice.type.id)
       this.$emit('updatedStep', { id: this.id, device: this.selectedDevice, action: this.selectedAction })
     }
   },
   async created () {
+    await this.$getAllTypes()
     await this.$getAllDevices()
   }
 }

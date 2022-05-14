@@ -5,9 +5,12 @@ export default {
   state: {
     deviceTypes: []
   },
-  // getters: {
-  // Chequear si hay que agregar getters
-  // },
+  getters: {
+    getTypeForDeviceID: (state) => (id) => {
+      console.log(state.deviceTypes.find(deviceType => deviceType.id === id))
+      return state.deviceTypes.find(deviceType => deviceType.id === id)
+    }
+  },
   actions: {
     async get (context, deviceTypeId) {
       const result = await DeviceTypesApi.get(deviceTypeId)

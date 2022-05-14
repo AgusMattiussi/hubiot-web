@@ -108,15 +108,6 @@ export default {
     },
     async createRoutine () {
       const actions = []
-      /*
-      devicesIDs = []
-      for (const step in this.steps) {
-        const id = devices.find(device => {
-          device.id === step.device.id
-        })
-        devicesIDS.append(id)
-      }
-      */
       const routine = new Routine(this.newRoutineName, actions, {})
       try {
         this.routine = await this.$createRoutine(routine)
