@@ -1,6 +1,6 @@
 <template>
 <v-container class="fill-height">
-  <door-state v-if="deviceTypeName === 'door'"/>
+  <door-state v-if="deviceTypeName === 'door'" :device-id="deviceId"/>
   <h1 v-else-if="deviceTypeName === 'speaker'"> ES UN PARLANTE </h1>
   <h1 v-else-if="deviceTypeName === 'alarm'"> ES UNA ALARMA </h1>
   <h1 v-else-if="deviceTypeName === 'blinds'"> ES UNA PERSIANA </h1>
@@ -35,8 +35,6 @@ export default {
       result: null,
       deviceType: null
     }
-  },
-  computed: {
   }
 }
 </script>

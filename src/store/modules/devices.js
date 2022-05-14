@@ -34,6 +34,11 @@ export default {
       let result = await DevicesApi.getAll()
       result = result.map((device) => Object.assign(new Device(), device))
       context.commit('setDevices', result)
+    },
+    async getState (context, deviceID) {
+      const result = await DevicesApi.getState(deviceID)
+      context.dispatch('getAll')
+      return result
     }
   },
   mutations: {
