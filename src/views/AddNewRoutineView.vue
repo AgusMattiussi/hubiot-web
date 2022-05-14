@@ -107,14 +107,25 @@ export default {
       this.deviceIndex--
     },
     async createRoutine () {
-      const actions = []
+      const actions = this.steps.map((step) => {
+        return {
+          device: {
+            id: step.device.id
+          },
+          actionName: step.action.name,
+          params: [], // Acá irían los métodos obtenidos del step.
+          meta: {}
+        }
+      })
       const routine = new Routine(this.newRoutineName, actions, {})
       try {
         this.routine = await this.$createRoutine(routine)
         this.routine = Object.assign(new Routine(), this.routine)
+        console.log(this.routine)
         this.setResult(this.routine)
         this.currentStep = 3 // Al haberlo agregado...
       } catch (e) {
+        console.log('error' + this.e)
         this.setResult(e)
       }
     }

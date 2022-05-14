@@ -61,9 +61,6 @@ export default {
   computed: {
     ...mapState('devices', {
       devices: (state) => state.devices
-    }),
-    ...mapState('deviceTypes', {
-      devicesTypes: (state) => state.deviceTypes
     })
   },
   methods: {
