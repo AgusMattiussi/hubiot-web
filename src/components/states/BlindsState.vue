@@ -4,7 +4,7 @@
       <li v-if="blinds.status === 'opened'">Abierta</li>
       <li v-else>Cerrada</li>
 
-      <li>Posición: {{ blinds.currentLevel }}</li>
+      <li>Nivel: {{ blinds.level }}</li>
     </ul>
   </v-container>
 </template>

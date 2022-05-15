@@ -39,6 +39,18 @@ export default {
       const result = await DevicesApi.getState(deviceID)
       context.dispatch('getAll')
       return result
+    },
+    async execute (context, deviceID, action) {
+      // if (action == null) {
+      //   console.log('actionNull')
+      // }
+      const action2 = {
+        name: 'setLevel',
+        data: [5]
+      }
+      const result = await DevicesApi.executeAction(deviceID, action2)
+      context.dispatch('getAll')
+      return result
     }
   },
   mutations: {

@@ -36,7 +36,7 @@ class DevicesApi {
   // }
 
   static async executeAction (deviceID, action) {
-    return await Api.put(DevicesApi.getUrl(`${deviceID}/${action.name}`), action)
+    return await Api.put(DevicesApi.getUrl(`${deviceID}/${action.name}`), action.data)
   }
 }
 
