@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'BlindsActions',
@@ -54,11 +54,6 @@ export default {
       level: null,
       loading: false
     }
-  },
-  computed: {
-    ...mapState('devices', {
-      devices: (state) => state.devices
-    })
   },
   methods: {
     ...mapActions('devices', {

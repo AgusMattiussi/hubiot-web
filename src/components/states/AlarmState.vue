@@ -5,8 +5,9 @@
          alt="loading">
     <div v-else>
       <ul class="list">
-        <li v-if="alarm.status === 'disarmed'">Apagada</li>
-        <li v-else>Encendida</li>
+        <li v-if="alarm.status === 'disarmed'">Deshabilitada</li>
+        <li v-else-if="alarm.status === 'armedStay'">Zona de monitoreo pasiva</li>
+        <li v-else>Habilitada</li>
       </ul>
     </div>
   </v-container>
@@ -33,6 +34,11 @@ export default {
   computed: {
     ...mapState('devices', {
       devices: (state) => state.devices
+    })
+  },
+  mounted () {
+    this.$root.$on('alarmStateUpdated', (msg) => {
+      this.getAlarmState()
     })
   },
   methods: {
