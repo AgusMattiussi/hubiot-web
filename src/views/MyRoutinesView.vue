@@ -110,7 +110,7 @@ export default {
   border-radius: 20px;
   min-width: 100px;
   min-height: 100px;
-  max-width: 150px;
+  max-width: 160px;
   padding-top: 20px;
 }
 .routineName{

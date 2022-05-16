@@ -59,7 +59,6 @@
         </div>
       </div>
     </div>
-    <v-divider inset></v-divider>
     <v-main>
       <v-slider v-model="sliderOpt.val" :color="sliderOpt.color" :label="sliderOpt.label" max="10" min="0" @end="volumeChanged"></v-slider>
       <v-autocomplete
