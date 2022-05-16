@@ -1,39 +1,44 @@
 <template>
   <v-container @click="getDoorState" class="fill-height pa-0 ma-0">
-    <div class="actions">
-      <div v-if="door.lock === 'unlocked'" class="action">
-        <button class="btn" @click="lock">
-          <v-icon class="mx-auto" color="black">
-            mdi-lock-outline
-          </v-icon>
-        </button>
-        <p>Bloquear</p>
+    <img v-if="loading"
+         :src="require('@/assets/ajax-loader.gif')"
+         alt="loading">
+    <div v-else class="actions">
+      <div class="actions">
+        <div v-if="door.lock === 'unlocked'" class="action">
+          <button class="btn" @click="lock">
+            <v-icon class="mx-auto" color="black">
+              mdi-lock-outline
+            </v-icon>
+          </button>
+          <p>Bloquear</p>
+        </div>
+        <div v-else class="action" @click="unlock">
+          <button class="btn">
+            <v-icon class="mx-auto" color="black">
+              mdi-lock-open-outline
+            </v-icon>
+          </button>
+          <p>Desbloquear</p>
+        </div>
       </div>
-      <div v-else class="action" @click="unlock">
-        <button class="btn">
-          <v-icon class="mx-auto" color="black">
-            mdi-lock-open-outline
-          </v-icon>
-        </button>
-        <p>Desbloquear</p>
-      </div>
-    </div>
-    <div class="actions">
-      <div v-if="door.status === 'closed'" class="action" @click="open">
-        <button class="btn">
-          <v-icon class="mx-auto" color="black">
-            mdi-key
-          </v-icon>
-        </button>
-        <p>Abrir</p>
-      </div>
-      <div v-else class="action">
-        <button class="btn" @click="close">
-          <v-icon class="mx-auto" color="black">
-            mdi-door-closed-lock
-          </v-icon>
-        </button>
-        <p>Cerrar</p>
+      <div class="actions">
+        <div v-if="door.status === 'closed'" class="action" @click="open">
+          <button class="btn">
+            <v-icon class="mx-auto" color="black">
+              mdi-key
+            </v-icon>
+          </button>
+          <p>Abrir</p>
+        </div>
+        <div v-else class="action">
+          <button class="btn" @click="close">
+            <v-icon class="mx-auto" color="black">
+              mdi-door-closed-lock
+            </v-icon>
+          </button>
+          <p>Cerrar</p>
+        </div>
       </div>
     </div>
   </v-container>
@@ -52,7 +57,8 @@ export default {
   },
   data () {
     return {
-      door: null
+      door: null,
+      loading: false
     }
   },
   computed: {
@@ -127,7 +133,10 @@ export default {
     }
   },
   async created () {
+    this.loading = true
     await this.getDoorState()
+      // eslint-disable-next-line no-return-assign
+      .then(() => this.loading = false)
   }
 }
 </script>

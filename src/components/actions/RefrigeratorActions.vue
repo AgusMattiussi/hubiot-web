@@ -1,34 +1,39 @@
 <template>
   <v-container @click="getRefrigeratorState" class="fill-height pa-0 ma-0">
-    <div class="inputAction">
-      <input type="text"
-             class="textBox rounded"
-             placeholder="Temperatura freezer"
-             v-model="freezerTemp"
-      />
-      <button class="btn" @click="setFreezerTemperature">
-        Modificar temperatura freezer
-      </button>
-    </div>
-    <div class="inputAction">
-      <input type="text"
-             class="textBox rounded"
-             placeholder="Temperatura heladera"
-             v-model="temperature"
-      />
-      <button class="btn" @click="setTemperature">
-        Modificar temperatura
-      </button>
-    </div>
-    <div class="inputAction">
-      <input type="text"
-             class="textBox rounded"
-             placeholder="Modo"
-             v-model="mode"
-      />
-      <button class="btn" @click="setMode">
-        Modificar modo
-      </button>
+    <img v-if="loading"
+         :src="require('@/assets/ajax-loader.gif')"
+         alt="loading">
+    <div v-else>
+      <div class="inputAction">
+        <input type="text"
+               class="textBox rounded"
+               placeholder="Temperatura freezer"
+               v-model="freezerTemp"
+        />
+        <button class="btn" @click="setFreezerTemperature">
+          Modificar temperatura freezer
+        </button>
+      </div>
+      <div class="inputAction">
+        <input type="text"
+               class="textBox rounded"
+               placeholder="Temperatura heladera"
+               v-model="temperature"
+        />
+        <button class="btn" @click="setTemperature">
+          Modificar temperatura
+        </button>
+      </div>
+      <div class="inputAction">
+        <input type="text"
+               class="textBox rounded"
+               placeholder="Modo"
+               v-model="mode"
+        />
+        <button class="btn" @click="setMode">
+          Modificar modo
+        </button>
+      </div>
     </div>
   </v-container>
 </template>
@@ -48,7 +53,8 @@ export default {
       refrigerator: null,
       freezerTemp: null,
       temperature: null,
-      mode: null
+      mode: null,
+      loading: false
     }
   },
   computed: {
@@ -110,7 +116,10 @@ export default {
     }
   },
   async created () {
+    this.loading = true
     await this.getRefrigeratorState()
+      // eslint-disable-next-line no-return-assign
+      .then(() => this.loading = false)
   }
 }
 </script>

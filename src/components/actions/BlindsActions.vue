@@ -1,33 +1,38 @@
 <template>
   <v-container @click="getBlindsState" class="fill-height pa-0 ma-0">
-    <div class="actions">
-      <div v-if="blinds.status === 'closed'" class="action" @click="open">
-        <button class="btn">
-          <v-icon class="mx-auto" color="black">
-            mdi-window-open-variant
-          </v-icon>
-        </button>
-        <p>Abrir</p>
+    <img v-if="loading"
+         :src="require('@/assets/ajax-loader.gif')"
+         alt="loading">
+    <div v-else class="actions">
+      <div class="actions">
+        <div v-if="blinds.status === 'closed'" class="action" @click="open">
+          <button class="btn">
+            <v-icon class="mx-auto" color="black">
+              mdi-window-open-variant
+            </v-icon>
+          </button>
+          <p>Abrir</p>
+        </div>
+        <div v-else class="action">
+          <button class="btn" @click="close">
+            <v-icon class="mx-auto" color="black">
+              mdi-blinds
+            </v-icon>
+          </button>
+          <p>Cerrar</p>
+        </div>
       </div>
-      <div v-else class="action">
-        <button class="btn" @click="close">
-          <v-icon class="mx-auto" color="black">
-            mdi-blinds
-          </v-icon>
+      <v-spacer/>
+      <div class="inputAction">
+        <input type="text"
+               class="textBox rounded"
+               placeholder="Nivel"
+               v-model="level"
+        />
+        <button class="btn2" @click="setLevel">
+          Cambiar nivel
         </button>
-        <p>Cerrar</p>
       </div>
-    </div>
-    <v-spacer/>
-    <div class="inputAction">
-      <input type="text"
-             class="textBox rounded"
-             placeholder="Nivel"
-             v-model="level"
-      />
-      <button class="btn2" @click="setLevel">
-        Cambiar nivel
-      </button>
     </div>
   </v-container>
 </template>
@@ -46,7 +51,8 @@ export default {
   data () {
     return {
       blinds: null,
-      level: null
+      level: null,
+      loading: false
     }
   },
   computed: {
@@ -108,7 +114,10 @@ export default {
     }
   },
   async created () {
+    this.loading = true
     await this.getBlindsState()
+      // eslint-disable-next-line no-return-assign
+      .then(() => this.loading = false)
   }
 }
 </script>

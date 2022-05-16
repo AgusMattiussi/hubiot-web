@@ -1,12 +1,17 @@
 <template>
   <v-container @click="getRefrigeratorState" class="fill-height pa-0 ma-0">
-    <ul class="list">
-      <li>Modo: {{refrigerator.mode}}</li>
+    <img v-if="loading"
+         :src="require('@/assets/ajax-loader.gif')"
+         alt="loading">
+    <div v-else>
+      <ul class="list">
+        <li>Modo: {{refrigerator.mode}}</li>
 
-      <li>Temperatura: {{ refrigerator.temperature }}</li>
+        <li>Temperatura: {{ refrigerator.temperature }}</li>
 
-      <li>Temperatura Freezer: {{ refrigerator.freezerTemperature }}</li>
-    </ul>
+        <li>Temperatura Freezer: {{ refrigerator.freezerTemperature }}</li>
+      </ul>
+    </div>
   </v-container>
 </template>
 
@@ -24,7 +29,8 @@ export default {
   data () {
     return {
       result: null,
-      refrigerator: null
+      refrigerator: null,
+      loading: false
     }
   },
   computed: {
@@ -49,7 +55,10 @@ export default {
     }
   },
   async created () {
+    this.loading = true
     await this.getRefrigeratorState()
+      // eslint-disable-next-line no-return-assign
+      .then(() => this.loading = false)
   }
 }
 </script>

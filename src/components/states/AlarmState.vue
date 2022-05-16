@@ -1,9 +1,14 @@
 <template>
   <v-container @click="getAlarmState" class="fill-height pa-0 ma-0">
-    <ul class="list">
-      <li v-if="alarm.status === 'disarmed'">Apagada</li>
-      <li v-else>Encendida</li>
-    </ul>
+    <img v-if="loading"
+         :src="require('@/assets/ajax-loader.gif')"
+         alt="loading">
+    <div v-else>
+      <ul class="list">
+        <li v-if="alarm.status === 'disarmed'">Apagada</li>
+        <li v-else>Encendida</li>
+      </ul>
+    </div>
   </v-container>
 </template>
 
@@ -21,7 +26,8 @@ export default {
   data () {
     return {
       result: null,
-      alarm: null
+      alarm: null,
+      loading: false
     }
   },
   computed: {
@@ -46,7 +52,10 @@ export default {
     }
   },
   async created () {
+    this.loading = true
     await this.getAlarmState()
+      // eslint-disable-next-line no-return-assign
+      .then(() => this.loading = false)
   }
 }
 </script>

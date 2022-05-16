@@ -1,12 +1,16 @@
 <template>
 <v-container @click="getDoorState" class="fill-height pa-0 ma-0">
-  <ul class="list">
-    <li v-if="door.status === 'closed'">Cerrada</li>
-    <li v-else>Abierta</li>
-
-    <li v-if="door.lock === 'unlocked'">Desbloqueada</li>
-    <li v-else>Bloqueada</li>
-  </ul>
+  <img v-if="loading"
+       :src="require('@/assets/ajax-loader.gif')"
+       alt="loading">
+  <div  >
+    <ul class="list">
+      <li v-if="door.status === 'closed'">Cerrada</li>
+      <li v-else>Abierta</li>
+      <li v-if="door.lock === 'unlocked'">Desbloqueada</li>
+      <li v-else>Bloqueada</li>
+    </ul>
+  </div>
 </v-container>
 </template>
 
@@ -25,7 +29,8 @@ export default {
   data () {
     return {
       result: null,
-      door: null
+      door: null,
+      loading: false
     }
   },
   computed: {
@@ -50,7 +55,10 @@ export default {
     }
   },
   async created () {
+    this.loading = true
     await this.getDoorState()
+      // eslint-disable-next-line no-return-assign
+      .then(() => this.loading = false)
   }
 }
 </script>

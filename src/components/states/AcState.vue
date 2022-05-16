@@ -1,19 +1,24 @@
 <template>
-  <v-container @click="getACState" class="fill-height pa-0 ma-0">
-    <ul class="list">
-      <li v-if="ac.status === 'off'">Apagado</li>
-      <li v-else>Encendido</li>
+  <v-container @click="getAcState" class="fill-height pa-0 ma-0">
+    <img v-if="loading"
+         :src="require('@/assets/ajax-loader.gif')"
+         alt="loading">
+    <div v-else>
+      <ul class="list">
+        <li v-if="ac.status === 'off'">Apagado</li>
+        <li v-else>Encendido</li>
 
-      <li>Temperatura: {{ac.temperature}}°C</li>
+        <li>Temperatura: {{ac.temperature}}°C</li>
 
-      <li>Modo: {{ ac.mode }}</li>
+        <li>Modo: {{ ac.mode }}</li>
 
-      <li>Aspas verticales: {{ ac.verticalSwing }}</li>
+        <li>Aspas verticales: {{ ac.verticalSwing }}</li>
 
-      <li>Aspas horizontales: {{ ac.horizontalSwing }}</li>
+        <li>Aspas horizontales: {{ ac.horizontalSwing }}</li>
 
-      <li>Velocidad: {{ ac.fanSpeed }}</li>
-    </ul>
+        <li>Velocidad: {{ ac.fanSpeed }}</li>
+      </ul>
+    </div>
   </v-container>
 </template>
 
@@ -30,7 +35,8 @@ export default {
   data () {
     return {
       result: null,
-      ac: null
+      ac: null,
+      loading: false
     }
   },
   computed: {
@@ -55,7 +61,10 @@ export default {
     }
   },
   async created () {
+    this.loading = true
     await this.getAcState()
+      // eslint-disable-next-line no-return-assign
+      .then(() => this.loading = false)
   }
 }
 </script>

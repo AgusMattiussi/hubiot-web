@@ -1,11 +1,16 @@
 <template>
   <v-container @click="getBlindsState" class="fill-height pa-0 ma-0">
-    <ul class="list">
-      <li v-if="blinds.status === 'opened'">Abierta</li>
-      <li v-else>Cerrada</li>
+    <img v-if="loading"
+         :src="require('@/assets/ajax-loader.gif')"
+         alt="loading">
+    <div v-else class="actions">
+      <ul class="list">
+        <li v-if="blinds.status === 'opened'">Abierta</li>
+        <li v-else>Cerrada</li>
 
-      <li>Nivel: {{ blinds.level }}</li>
-    </ul>
+        <li>Nivel: {{ blinds.level }}</li>
+      </ul>
+    </div>
   </v-container>
 </template>
 
@@ -23,7 +28,8 @@ export default {
   data () {
     return {
       result: null,
-      blinds: null
+      blinds: null,
+      loading: false
     }
   },
   computed: {
@@ -48,12 +54,19 @@ export default {
     }
   },
   async created () {
+    this.loading = true
     await this.getBlindsState()
+      // eslint-disable-next-line no-return-assign
+      .then(() => this.loading = false)
   }
 }
 </script>
 
 <style scoped>
+.actions{
+  display: flex;
+  justify-content: space-between;
+}
 .list {
   list-style: none;
   color: black;
