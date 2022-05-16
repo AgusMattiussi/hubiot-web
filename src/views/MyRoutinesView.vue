@@ -28,7 +28,7 @@
                   <div class="devicesParent">
                     <v-sheet class="deviceCard" v-for="routine in routines" :key="routine.id">
                       <router-link :to="{ name: 'routineDetails', params: {id: routine.id}}" class="routineName">
-                        <v-icon class="mb-2">{{ routine.iconName }}</v-icon>
+                        <v-icon class="mb-2">{{ routine.meta.iconName }}</v-icon>
                         <h4>{{ routine.name }}</h4>
                       </router-link>
                     </v-sheet>
@@ -110,8 +110,7 @@ export default {
   border-radius: 20px;
   min-width: 100px;
   min-height: 100px;
-  max-width: 100px;
-  max-height: 140px;
+  max-width: 150px;
   padding-top: 20px;
 }
 .routineName{

@@ -13,17 +13,14 @@
               <div class="d-flex flex-no-wrap justify-space-between">
                 <div>
                   <v-card-title class="text-h5 font-weight-bold">
-                    {{ device(action.deviceID).name }}
+                    {{ action.device.name }}
                   </v-card-title>
                   <v-card-subtitle class="text-left">
-                    {{ actionForDevice(action.deviceID, action.actionID).name }}
+                    {{ action.actionName }}
                   </v-card-subtitle>
-                  <v-card-actions>
-                    <DeleteButton/>
-                  </v-card-actions>
                 </div>
                 <v-avatar class="ma-3" size="125">
-                  <v-img :src="require(`@/assets/${device(action.deviceID).image}`)"></v-img>
+                  <v-img :src="require(`@/assets/${action.device.meta.image}`)"></v-img>
                 </v-avatar>
               </div>
             </v-card>
@@ -38,34 +35,38 @@
 </template>
 
 <script>
-import store from '@/store/store'
-import DeleteButton from '@/components/DeleteButton'
+import { mapGetters, mapState, mapActions } from 'vuex'
 
 export default {
   name: 'RoutineDetail.vue',
   components: {
-    DeleteButton
   },
   data () {
     return {
+      routine: {},
       routineID: this.$route.params.id
     }
   },
   computed: {
-    routine () {
-      console.log(store.routines.find(routine => routine.id === parseInt(this.routineID)))
-      // Parseo así matchea con el ===
-      return store.routines.find(routine => routine.id === parseInt(this.routineID))
-    }
+    ...mapState('routines', {
+      routines: (state) => state.routines
+    }),
+    ...mapState('devices', {
+      devices: (state) => state.devices
+    })
   },
   methods: {
-    device (id) {
-      return store.devices.find(device => device.id === parseInt(id))
-    },
-    actionForDevice (deviceID, actionID) {
-      const device = store.devices.find(device => device.id === parseInt(deviceID))
-      return device.actions.find(action => action.id === parseInt(actionID))
-    }
+    ...mapGetters('devices', {
+      $getDevices: 'get'
+    }),
+    ...mapActions('routines', {
+      $getRoutine: 'get',
+      $getAllRoutines: 'getAll'
+    })
+  },
+  async created () {
+    await this.$getAllRoutines()
+    this.routine = await this.$getRoutine(this.routineID)
   }
 }
 </script>
