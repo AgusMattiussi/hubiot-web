@@ -30,10 +30,8 @@
           <v-row>
             <v-col></v-col>
             <v-col>
-              <v-btn fab medium color="primary" @click="execute">
-                <v-icon light>
-                  mdi-cat
-                </v-icon>
+              <v-btn medium rounded color="primary" @click="execute">
+                Ejecutar rutina
               </v-btn>
             </v-col>
             <v-col></v-col>
@@ -68,6 +66,7 @@ export default {
   methods: {
     async execute () {
       await this.$execute(this.routineID)
+      this.$router.go(-1)
     },
     ...mapGetters('devices', {
       $getDevices: 'get'

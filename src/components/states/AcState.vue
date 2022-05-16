@@ -4,20 +4,54 @@
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
     <div v-else>
-      <ul class="list">
-        <li v-if="ac.status === 'off'">Apagado</li>
-        <li v-else>Encendido</li>
-
-        <li>Temperatura: {{ac.temperature}}°C</li>
-
-        <li>Modo: {{translateMode(ac.mode)}}</li>
-
-        <li>Aspas verticales: {{ ac.verticalSwing }}{{ac.verticalSwing !== 'auto' ? '°' : ''}}</li>
-
-        <li>Aspas horizontales: {{ ac.horizontalSwing }}{{ac.horizontalSwing !== 'auto' ? '°' : ''}}</li>
-
-        <li>Velocidad: {{ ac.fanSpeed }}</li>
-      </ul>
+      <v-card min-height="10vh" width="78vh" class="secondary">
+        <v-card-text>
+          <ul class="list">
+            <li v-if="ac.status === 'off'">
+              <v-icon>
+                mdi-close-circle-outline
+              </v-icon>
+              Apagado
+            </li>
+            <li v-else>
+              <v-icon>
+                mdi-circle-outline
+              </v-icon>
+              Encendido
+            </li>
+            <li>
+              <v-icon>
+                mdi-thermometer
+              </v-icon>
+              Temperatura: {{ac.temperature}}°C
+            </li>
+            <li>
+              <v-icon>
+                mdi-circle
+              </v-icon>
+              Modo: {{translateMode(ac.mode)}}
+            </li>
+            <li>
+              <v-icon>
+                mdi-arrow-split-vertical
+              </v-icon>
+              Aspas verticales: {{ ac.verticalSwing }}{{ac.verticalSwing !== 'auto' ? '°' : ''}}
+            </li>
+            <li>
+              <v-icon>
+                mdi-arrow-split-horizontal
+              </v-icon>
+              Aspas horizontales: {{ ac.horizontalSwing }}{{ac.horizontalSwing !== 'auto' ? '°' : ''}}
+            </li>
+            <li>
+              <v-icon>
+                mdi-weather-windy
+              </v-icon>
+              Velocidad: {{ ac.fanSpeed }}
+            </li>
+          </ul>
+        </v-card-text>
+      </v-card>
     </div>
   </v-container>
 </template>

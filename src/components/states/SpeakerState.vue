@@ -4,14 +4,50 @@
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
     <div v-else>
-      <ul class="list">
-        <li v-if="speaker.status === 'stopped'">Parado</li>
-        <li v-else>Reproduciendo</li>
+      <v-card min-height="10vh" width="78vh" class="secondary">
+        <v-card-text>
+          <ul class="list">
+            <li v-if="speaker.status === 'stopped'">
+              <v-icon>
+                mdi-stop
+              </v-icon>
+              Detenido
+            </li>
+            <li v-else-if="speaker.status === 'playing'">
+              <v-icon>
+                mdi-play
+              </v-icon>
+              Reproduciendo
+            </li>
+            <li v-else-if="speaker.status === 'paused'">
+              <v-icon>
+                mdi-stop
+              </v-icon>
+              Detenido
+            </li>
 
-        <li>Volumen: {{speaker.volume}}</li>
-
-        <li>Género: {{ speaker.genre }}</li>
-      </ul>
+            <li>
+              <v-icon>
+                mdi-volume-high
+              </v-icon>
+              Volumen: {{speaker.volume}}
+            </li>
+            <li v-if="speaker.status === 'stopped'" ></li>
+            <li v-else>
+              <v-icon>
+                mdi-music-note
+              </v-icon>
+              Género: {{ speaker.genre }}
+            </li>
+            <li v-if="speaker.status === 'playing' || speaker.status === 'paused'">
+              <v-icon>
+                mdi-details
+              </v-icon>
+              {{ speaker.song.title }} | {{ speaker.song.artist }}
+            </li>
+          </ul>
+        </v-card-text>
+      </v-card>
     </div>
   </v-container>
 </template>
@@ -32,6 +68,11 @@ export default {
       speaker: null,
       loading: false
     }
+  },
+  mounted () {
+    this.$root.$on('speakerStateUpdated', (msg) => {
+      this.getSpeakerState()
+    })
   },
   computed: {
     ...mapState('devices', {

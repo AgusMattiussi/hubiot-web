@@ -4,15 +4,48 @@
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
     <div v-else class="actions">
-      <ul class="list">
-        <li v-if="blinds.status === 'opened'">Abierta</li>
-        <li v-else-if="blinds.status === 'opening'">Abriendo</li>
-        <li v-else-if="blinds.status === 'closing'">Cerrando</li>
-        <li v-else>Cerrada</li>
-
-        <li>Nivel actual: {{ blinds.currentLevel }}</li>
-        <li>Nivel: {{ blinds.level }}</li>
-      </ul>
+      <v-card min-height="10vh" width="78vh" class="secondary">
+        <v-card-text>
+          <ul class="list">
+            <li v-if="blinds.status === 'opened'">
+              <v-icon>
+                mdi-window-open-variant
+              </v-icon>
+              Abierta
+            </li>
+            <li v-else-if="blinds.status === 'opening'">
+              <v-icon>
+                mdi-reload
+              </v-icon>
+              Abriendo
+            </li>
+            <li v-else-if="blinds.status === 'closing'">
+              <v-icon>
+                mdi-reload
+              </v-icon>
+              Cerrando
+            </li>
+            <li v-else>
+              <v-icon>
+                mdi-blinds
+              </v-icon>
+              Cerrada
+            </li>
+            <li>
+              <v-icon>
+                mdi-arrow-right-drop-circle-outline
+              </v-icon>
+              Nivel actual: {{ blinds.currentLevel }}
+            </li>
+            <li>
+              <v-icon>
+                mdi-arrow-right-drop-circle-outline
+              </v-icon>
+              Nivel: {{ blinds.level }}
+            </li>
+          </ul>
+        </v-card-text>
+      </v-card>
     </div>
   </v-container>
 </template>

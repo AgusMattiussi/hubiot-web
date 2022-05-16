@@ -4,12 +4,36 @@
        :src="require('@/assets/ajax-loader.gif')"
        alt="loading">
   <div v-else>
-    <ul class="list">
-      <li v-if="door.status === 'closed'">Cerrada</li>
-      <li v-else>Abierta</li>
-      <li v-if="door.lock === 'unlocked'">Desbloqueada</li>
-      <li v-else>Bloqueada</li>
-    </ul>
+    <v-card min-height="10vh" width="78vh" class="secondary">
+      <v-card-text>
+        <ul class="list">
+          <li v-if="door.status === 'closed'">
+            <v-icon>
+              mdi-door
+            </v-icon>
+            Cerrada
+          </li>
+          <li v-else>
+            <v-icon>
+              mdi-door-open
+            </v-icon>
+            Abierta
+          </li>
+          <li v-if="door.lock === 'unlocked'">
+            <v-icon>
+              mdi-door-closed
+            </v-icon>
+            Desbloqueada
+          </li>
+          <li v-else>
+            <v-icon>
+              mdi-door-closed-lock
+            </v-icon>
+            Bloqueada
+          </li>
+        </ul>
+      </v-card-text>
+    </v-card>
   </div>
 </v-container>
 </template>

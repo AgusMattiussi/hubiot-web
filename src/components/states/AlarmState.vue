@@ -4,10 +4,30 @@
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
     <div v-else>
-      <ul class="list">
-        <li v-if="alarm.status === 'disarmed'">Apagada</li>
-        <li v-else>Encendida</li>
-      </ul>
+      <v-card min-height="10vh" width="78vh" class="secondary">
+        <v-card-text>
+          <ul class="list">
+            <li v-if="alarm.status === 'disarmed'">
+              <v-icon>
+                mdi-lock-open
+              </v-icon>
+              Deshabilitada
+            </li>
+            <li v-else-if="alarm.status === 'armedStay'">
+              <v-icon>
+                mdi-circle
+              </v-icon>
+              Zona de monitoreo pasiva
+            </li>
+            <li v-else>
+              <v-icon>
+                mdi-lock
+              </v-icon>
+              Habilitada
+            </li>
+          </ul>
+        </v-card-text>
+      </v-card>
     </div>
   </v-container>
 </template>
@@ -33,6 +53,11 @@ export default {
   computed: {
     ...mapState('devices', {
       devices: (state) => state.devices
+    })
+  },
+  mounted () {
+    this.$root.$on('alarmStateUpdated', (msg) => {
+      this.getAlarmState()
     })
   },
   methods: {

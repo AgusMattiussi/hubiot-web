@@ -26,7 +26,7 @@
         <div v-if="door.status === 'closed'" class="action">
           <button class="btn" @click="open">
             <v-icon class="mx-auto" color="black">
-              mdi-key
+              mdi-door-open
             </v-icon>
           </button>
           <p>Abrir</p>
@@ -34,7 +34,7 @@
         <div v-else class="action">
           <button class="btn" @click="close">
             <v-icon class="mx-auto" color="black">
-              mdi-door-closed-lock
+              mdi-door
             </v-icon>
           </button>
           <p>Cerrar</p>

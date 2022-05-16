@@ -118,7 +118,8 @@ export default {
 .deviceCard {
   margin: 10px;
   border-radius: 20px;
-  max-width: 100px;
+  max-width: 120px;
+  padding: 10px;
 }
 .deviceName{
   text-decoration: none;

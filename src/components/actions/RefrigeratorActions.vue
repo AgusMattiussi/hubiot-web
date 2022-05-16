@@ -6,30 +6,26 @@
     <div v-else class="actions">
       <div class="inputAction">
         <v-text-field type="text"
-               background-color="#FFFFFF"
-               outlined
                clearable
-               class="rounded px-0"
+               class="textBox rounded"
                placeholder="Temperatura Freezer"
                v-model="freezerTemp"
                :rules="[isFreezerTempValid(freezerTemp, true)]"
         />
-        <v-btn class="btn contras" @click="setFreezerTemperature"
+        <v-btn class="btn2" @click="setFreezerTemperature"
         :disabled="!isFreezerTempValid(freezerTemp)">
           Modificar
         </v-btn>
       </div>
       <div class="inputAction">
         <v-text-field type="text"
-                      background-color="#FFFFFF"
-                      outlined
                       clearable
-                      class="rounded px-0"
+                      class=" textBox rounded"
                       placeholder="Temperatura Heladera"
                       v-model="temperature"
                       :rules="[isRefrigeratorTempValid(temperature, true)]"
         />
-        <v-btn class="btn contras" @click="setTemperature"
+        <v-btn class="btn2 " @click="setTemperature"
                :disabled="!isRefrigeratorTempValid(temperature)">
           Modificar
         </v-btn>
@@ -162,21 +158,19 @@ export default {
   justify-content: space-between;
   max-width: 400px;
 }
-.btn{
+
+.textBox{
+  outline-color: #5C6BC0;
+  padding: 8px;
+  width: 180px !important;
+  display: block;
+}
+.btn2{
   background-color: #FF8A65 !important;
   border-radius: 100px;
-  border: 2px solid black !important;
+  border: 2px solid black;
   margin-left: 10px;
   height: 40px;
-  width: fit-content;
-}
-.textBox{
-  background-color: #FFFFFF;
-  outline-color: #5C6BC0;
-  border: 2px solid black;
-  margin: 0 0 20px 0;
-  padding: 8px;
-  max-width: 400px;
-  display: block;
+  width: 140px;
 }
 </style>
