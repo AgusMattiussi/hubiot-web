@@ -7,9 +7,9 @@
       <ul class="list">
         <li>Modo: {{refrigerator.mode}}</li>
 
-        <li>Temperatura: {{ refrigerator.temperature }}</li>
+        <li>Temperatura: {{ refrigerator.temperature }} °C</li>
 
-        <li>Temperatura Freezer: {{ refrigerator.freezerTemperature }}</li>
+        <li>Temperatura Freezer: {{ refrigerator.freezerTemperature }} °C</li>
       </ul>
     </div>
   </v-container>
@@ -50,7 +50,7 @@ export default {
         this.refrigerator = await this.$getRefrigeratorState(this.deviceId)
       } catch (e) {
         // this.setResult(e)
-        console.log('xd')
+        console.log('StateError')
       }
     }
   },

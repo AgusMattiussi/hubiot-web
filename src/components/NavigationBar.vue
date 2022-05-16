@@ -2,7 +2,7 @@
   <v-toolbar class="primary" dense elevation="2">
     <router-link to="/">
       <v-container>
-        <v-img class="img" :src="require('../assets/logo.png')" :alt="logo"/>
+        <v-img class="img" :src="require('../assets/logo.png')" alt="logo"/>
       </v-container>
     </router-link>
     <router-link to="/">

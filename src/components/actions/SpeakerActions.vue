@@ -3,15 +3,23 @@
     <img v-if="loading"
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
-    <div v-else>
-      <ul class="list">
-        <li v-if="speaker.status === 'stopped'">Parado</li>
-        <li v-else>Reproduciendo</li>
-
-        <li>Volumen: {{speaker.volume}}</li>
-
-        <li>Género: {{ speaker.genre }}</li>
-      </ul>
+    <div v-else class="actions">
+      <div class="action">
+        <div class="action" @click="volumeUp">
+          <button class="btn">
+            <v-icon class="mx-auto" color="black">
+              mdi-plus
+            </v-icon>
+          </button>
+        </div>
+        <div class="action" @click="volumeDown">
+          <button class="btn" @click="close">
+            <v-icon class="mx-auto" color="black">
+              mdi-minus
+            </v-icon>
+          </button>
+        </div>
+      </div>
     </div>
   </v-container>
 </template>
@@ -19,7 +27,7 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 export default {
-  name: 'SpeakerState',
+  name: 'SpeakerActions',
   props: {
     deviceId: {
       type: String,
@@ -28,7 +36,6 @@ export default {
   },
   data () {
     return {
-      result: null,
       speaker: null,
       loading: false
     }
@@ -40,17 +47,15 @@ export default {
   },
   methods: {
     ...mapActions('devices', {
-      $getSpeakerState: 'getState'
+      $getSpeakerState: 'getState',
+      $executeAction: 'execute'
     }),
-    setResult (result) {
-      this.result = JSON.stringify(result, null, 2)
-    },
     async getSpeakerState () {
       try {
         this.speaker = await this.$getSpeakerState(this.deviceId)
       } catch (e) {
         // this.setResult(e)
-        console.log('StateError')
+        console.log('getSpeakerStateError')
       }
     }
   },
@@ -64,9 +69,19 @@ export default {
 </script>
 
 <style scoped>
-.list {
-  list-style: none;
-  color: black;
-  font-size: 16px;
+.actions{
+  display: flex;
+  justify-content: space-between;
+}
+.action{
+  margin-right: 100px;
+}
+.btn{
+  background-color: #FF8A65;
+  border-radius: 100px;
+  border: 2px solid black;
+  margin-bottom: 5px;
+  height: 40px;
+  width: 40px;
 }
 </style>

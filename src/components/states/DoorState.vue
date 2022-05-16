@@ -50,7 +50,7 @@ export default {
         this.door = await this.$getDoorState(this.deviceId)
       } catch (e) {
         // this.setResult(e)
-        console.log('xd')
+        console.log('StateError')
       }
     }
   },

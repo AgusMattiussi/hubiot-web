@@ -3,7 +3,7 @@
     <img v-if="loading"
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
-    <div v-else>
+    <div v-else class="actions">
       <div class="inputAction">
         <input type="text"
                class="textBox rounded"
@@ -125,6 +125,9 @@ export default {
 </script>
 
 <style scoped>
+.actions{
+  display: inline-block;
+}
 .inputAction{
   display: flex;
   justify-content: space-between;
@@ -142,7 +145,7 @@ export default {
   background-color: #FFFFFF;
   outline-color: #5C6BC0;
   border: 2px solid black;
-  margin: 0 auto 40px;
+  margin: 0 0 20px 0;
   padding: 8px;
   width: fit-content;
   display: block;

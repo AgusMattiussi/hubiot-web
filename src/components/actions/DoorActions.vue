@@ -23,8 +23,8 @@
         </div>
       </div>
       <div class="actions">
-        <div v-if="door.status === 'closed'" class="action" @click="open">
-          <button class="btn">
+        <div v-if="door.status === 'closed'" class="action">
+          <button class="btn" @click="open">
             <v-icon class="mx-auto" color="black">
               mdi-key
             </v-icon>
@@ -46,6 +46,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+// import { Action } from '@/api/devicesApi'
 
 export default {
   name: 'DoorActions',
@@ -80,10 +81,11 @@ export default {
       }
     },
     async lock () {
-      const action = {
+      var action = {
         name: 'lock',
         data: []
       }
+      // const action = new Action('lock', [])
       try {
         await this.$executeAction(this.deviceId, action)
         await this.getDoorState()

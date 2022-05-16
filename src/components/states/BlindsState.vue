@@ -49,7 +49,7 @@ export default {
         this.blinds = await this.$getBlindsState(this.deviceId)
       } catch (e) {
         // this.setResult(e)
-        console.log('xd')
+        console.log('StateError')
       }
     }
   },

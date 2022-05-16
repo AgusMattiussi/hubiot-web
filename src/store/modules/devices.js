@@ -41,12 +41,12 @@ export default {
       return result
     },
     async execute (context, deviceID, action) {
-      // if (action == null) {
-      //   console.log('actionNull')
-      // }
+      if (action == null) {
+        console.log('actionNull')
+      }
       const action2 = {
-        name: 'setLevel',
-        data: [5]
+        name: 'lock',
+        data: []
       }
       const result = await DevicesApi.executeAction(deviceID, action2)
       context.dispatch('getAll')

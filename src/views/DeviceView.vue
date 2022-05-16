@@ -3,7 +3,7 @@
     <v-card class="card">
       <div class="cardTitle">
         <GoBackButton/>
-        <h1 class="mx-auto">{{ device.name }}</h1>
+        <h1 class="mx-auto">{{ deviceName }}</h1>
         <button @click="deleteDevice">
           <DeleteButton class="deleteBtn"/>
         </button>
@@ -48,6 +48,7 @@ export default {
     return {
       deviceSlug: this.$route.params.slug,
       deviceId: this.$route.params.deviceId,
+      deviceName: this.$route.params.deviceName,
       deviceTypeId: this.$route.params.deviceTypeId,
       deviceTypeName: this.$route.params.deviceTypeName
     }

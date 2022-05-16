@@ -32,6 +32,7 @@
                     <router-link :to="{ name: 'deviceDetails',
                                         params: {slug: device.name,
                                                  deviceId: device.id,
+                                                 deviceName: device.name,
                                                  deviceTypeId: device.type.id,
                                                  deviceTypeName: device.type.name}}"
                                  class="deviceName">

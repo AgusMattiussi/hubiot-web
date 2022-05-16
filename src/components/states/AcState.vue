@@ -56,7 +56,7 @@ export default {
         this.ac = await this.$getAcState(this.deviceId)
       } catch (e) {
         // this.setResult(e)
-        console.log('xd')
+        console.log('StateError')
       }
     }
   },

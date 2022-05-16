@@ -4,7 +4,7 @@
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
     <div v-else class="actions">
-      <div class="actions">
+      <div class="action">
         <div v-if="blinds.status === 'closed'" class="action" @click="open">
           <button class="btn">
             <v-icon class="mx-auto" color="black">
@@ -22,11 +22,10 @@
           <p>Cerrar</p>
         </div>
       </div>
-      <v-spacer/>
       <div class="inputAction">
         <input type="text"
                class="textBox rounded"
-               placeholder="Nivel"
+               :placeholder="blinds.level"
                v-model="level"
         />
         <button class="btn2" @click="setLevel">
@@ -128,7 +127,7 @@ export default {
   justify-content: space-between;
 }
 .action{
-  margin-right: 20px;
+  margin-right: 100px;
 }
 .btn{
   background-color: #FF8A65;
@@ -155,7 +154,7 @@ export default {
   border: 2px solid black;
   margin: 0 auto 40px;
   padding: 8px;
-  width: 80px;
+  width: 58px;
   display: block;
 }
 </style>

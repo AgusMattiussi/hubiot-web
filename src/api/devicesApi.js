@@ -61,4 +61,11 @@ class DeviceMeta {
   }
 }
 
-export { DevicesApi, Device, DeviceMeta }
+class Action {
+  constructor (name, data) {
+    this.name = name
+    this.data = data
+  }
+}
+
+export { DevicesApi, Device, DeviceMeta, Action }
