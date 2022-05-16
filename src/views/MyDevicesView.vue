@@ -121,8 +121,7 @@ export default {
 .deviceCard {
   margin: 10px;
   border-radius: 20px;
-  max-width: 100px;
-  max-height: 140px;
+  max-width: 150px;
 }
 .deviceName{
   text-decoration: none;
