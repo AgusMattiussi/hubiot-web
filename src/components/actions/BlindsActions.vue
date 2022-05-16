@@ -5,8 +5,8 @@
          alt="loading">
     <div v-else class="actions">
       <div class="action">
-        <div v-if="blinds.status === 'closed'" class="action" @click="open">
-          <button class="btn">
+        <div v-if="blinds.status === 'closed'" class="action">
+          <button class="btn" @click="open">
             <v-icon class="mx-auto" color="black">
               mdi-window-open-variant
             </v-icon>
@@ -23,14 +23,15 @@
         </div>
       </div>
       <div class="inputAction">
-        <input type="text"
+        <v-text-field type="text"
                class="textBox rounded"
+               :rules="[isLevelValid(level, 'Debe ser un número entre 0 y 100')]"
                :placeholder="blinds.level"
                v-model="level"
         />
-        <button class="btn2" @click="setLevel">
+        <v-btn class="btn2" @click="setLevel" :disabled="!isLevelValid(level, null)">
           Cambiar nivel
-        </button>
+        </v-btn>
       </div>
     </div>
   </v-container>
@@ -64,6 +65,9 @@ export default {
       $getBlindsState: 'getState',
       $executeAction: 'execute'
     }),
+    stateUpdated () {
+      this.$root.$emit('blindsStateUpdated')
+    },
     async getBlindsState () {
       try {
         this.blinds = await this.$getBlindsState(this.deviceId)
@@ -72,44 +76,41 @@ export default {
         console.log('getBlindStateError')
       }
     },
+    async executeAction (action) {
+      try {
+        await this.$executeAction({ deviceId: this.deviceId, action })
+        await this.getBlindsState()
+        this.stateUpdated()
+      } catch (e) {
+        console.log('Error en ' + action.name)
+      }
+    },
     async open () {
       const action = {
         name: 'open',
         data: []
       }
-      try {
-        await this.$executeAction(this.deviceId, action)
-        await this.getBlindsState()
-      } catch (e) {
-        // this.setResult(e)
-        console.log('openError')
-      }
+      await this.executeAction(action)
     },
     async close () {
       const action = {
         name: 'close',
         data: []
       }
-      try {
-        await this.$executeAction(this.deviceId, action)
-        await this.getBlindsState()
-      } catch (e) {
-        // this.setResult(e)
-        console.log('closeError')
+      await this.executeAction(action)
+    },
+    isLevelValid (level, msg) {
+      if (level >= 0 && level <= 100) {
+        return true
       }
+      return msg == null ? false : msg
     },
     async setLevel () {
       const action = {
         name: 'setLevel',
         data: [this.level]
       }
-      try {
-        await this.$executeAction(this.deviceId, action)
-        await this.getBlindsState()
-      } catch (e) {
-        // this.setResult(e)
-        console.log('closeError')
-      }
+      await this.executeAction(action)
     }
   },
   async created () {
@@ -141,18 +142,15 @@ export default {
   justify-content: space-between;
 }
 .btn2{
-  background-color: #FF8A65;
+  background-color: #FF8A65 !important;
   border-radius: 100px;
-  border: 2px solid black;
+  border: 2px solid black !important;
   margin-left: 10px;
   height: 40px;
   width: 150px;
 }
 .textBox{
-  background-color: #FFFFFF;
   outline-color: #5C6BC0;
-  border: 2px solid black;
-  margin: 0 auto 40px;
   padding: 8px;
   width: 58px;
   display: block;

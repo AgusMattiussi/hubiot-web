@@ -6,8 +6,11 @@
     <div v-else class="actions">
       <ul class="list">
         <li v-if="blinds.status === 'opened'">Abierta</li>
+        <li v-else-if="blinds.status === 'opening'">Abriendo</li>
+        <li v-else-if="blinds.status === 'closing'">Cerrando</li>
         <li v-else>Cerrada</li>
 
+        <li>Nivel actual: {{ blinds.currentLevel }}</li>
         <li>Nivel: {{ blinds.level }}</li>
       </ul>
     </div>
@@ -35,6 +38,11 @@ export default {
   computed: {
     ...mapState('devices', {
       devices: (state) => state.devices
+    })
+  },
+  mounted () {
+    this.$root.$on('blindsStateUpdated', (msg) => {
+      this.getBlindsState()
     })
   },
   methods: {

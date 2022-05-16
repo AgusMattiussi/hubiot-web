@@ -46,7 +46,6 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-// import { Action } from '@/api/devicesApi'
 
 export default {
   name: 'DoorActions',
