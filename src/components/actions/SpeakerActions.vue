@@ -6,23 +6,23 @@
     <div v-else>
       <div class="actions">
         <div class="action">
-        <div v-if="speaker.status === 'playing'" @click="pause">
-          <button class="btn">
-            <v-icon class="mx-auto" color="black">
-              mdi-pause
-            </v-icon>
-          </button>
-          <p>Pausar</p>
+          <div v-if="speaker.status === 'playing'" @click="pause">
+            <button class="btn">
+              <v-icon class="mx-auto" color="black">
+                mdi-pause
+              </v-icon>
+            </button>
+            <p>Pausar</p>
+          </div>
+          <div v-else>
+            <button class="btn" @click="resume">
+              <v-icon class="mx-auto" color="black">
+                mdi-play
+              </v-icon>
+            </button>
+            <p>Resume</p>
+          </div>
         </div>
-        <div v-else>
-          <button class="btn" @click="resume">
-            <v-icon class="mx-auto" color="black">
-              mdi-cat
-            </v-icon>
-          </button>
-          <p>Resume</p>
-        </div>
-      </div>
         <div class="action">
         <div v-if="speaker.status === 'stopped' ">
           <button class="btn" @click="play">
@@ -41,11 +41,27 @@
           <p>Stop</p>
         </div>
       </div>
+        <div class="action">
+          <button class="btn" @click="previousSong">
+            <v-icon class="mx-auto" color="black">
+              mdi-skip-previous
+            </v-icon>
+          </button>
+          <p>Previous</p>
+        </div>
+        <div class="action">
+          <button class="btn" @click="nextSong">
+            <v-icon class="mx-auto" color="black">
+              mdi-skip-next
+            </v-icon>
+          </button>
+          <p>Next</p>
+        </div>
       </div>
     </div>
     <v-divider inset></v-divider>
     <v-main>
-      <v-slider v-model="sliderOpt.val" :color="sliderOpt.color" :label="sliderOpt.label" max="6" min="0" @end="volumeChanged"></v-slider>
+      <v-slider v-model="sliderOpt.val" :color="sliderOpt.color" :label="sliderOpt.label" max="10" min="0" @end="volumeChanged"></v-slider>
       <v-autocomplete
         height="10px"
         class="autocomplete ps-2"
@@ -155,6 +171,32 @@ export default {
         this.stateUpdated()
       } catch (e) {
         console.log('Error en ' + 'stop')
+      }
+    },
+    async previousSong () {
+      try {
+        const action = {
+          name: 'previousSong',
+          data: []
+        }
+        await this.$executeAction({ deviceId: this.deviceId, action })
+        await this.getSpeakerState()
+        this.stateUpdated()
+      } catch (e) {
+        console.log('Error en ' + 'previousSong')
+      }
+    },
+    async nextSong () {
+      try {
+        const action = {
+          name: 'nextSong',
+          data: []
+        }
+        await this.$executeAction({ deviceId: this.deviceId, action })
+        await this.getSpeakerState()
+        this.stateUpdated()
+      } catch (e) {
+        console.log('Error en ' + 'nextSong')
       }
     },
     async volumeChanged (value) {

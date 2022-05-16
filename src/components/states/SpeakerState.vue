@@ -13,6 +13,10 @@
 
         <li v-if="speaker.status === 'stopped'" ></li>
         <li v-else>Género: {{ speaker.genre }}  </li>
+
+        <li v-if="speaker.status === 'playing' || speaker.status === 'paused'">
+          {{ speaker.song.title }} | {{ speaker.song.artist }}
+        </li>
       </ul>
     </div>
   </v-container>
