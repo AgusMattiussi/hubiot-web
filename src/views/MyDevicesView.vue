@@ -26,7 +26,7 @@
                   </div>
                 </form>
               </v-main>
-              <v-content mt="10">
+              <v-main mt="10">
                 <div class="devicesParent">
                   <v-sheet class="deviceCard" v-for="device in devices" :key="device.id">
                     <router-link :to="{ name: 'deviceDetails',
@@ -40,7 +40,7 @@
                     </router-link>
                   </v-sheet>
                 </div>
-              </v-content>
+              </v-main>
             </v-container>
           </v-col>
           <v-col md="2"></v-col>
@@ -72,10 +72,6 @@ export default {
   },
   methods: {
     ...mapActions('devices', {
-      // $createDevice: 'create',
-      // $modifyDevice: 'modify',
-      // $deleteDevice: 'delete',
-      // $getDevice: 'get',
       $getAllDevices: 'getAll'
     }),
     validate () {
@@ -121,7 +117,7 @@ export default {
 .deviceCard {
   margin: 10px;
   border-radius: 20px;
-  max-width: 150px;
+  max-width: 100px;
 }
 .deviceName{
   text-decoration: none;
