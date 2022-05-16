@@ -6,6 +6,14 @@
     <div v-else>
       <div class="actions">
         <div class="action">
+          <button class="btn" @click="previousSong">
+            <v-icon class="mx-auto" color="black">
+              mdi-skip-previous
+            </v-icon>
+          </button>
+          <p>Previous</p>
+        </div>
+        <div class="action">
           <div v-if="speaker.status === 'playing'" @click="pause">
             <button class="btn">
               <v-icon class="mx-auto" color="black">
@@ -41,14 +49,6 @@
           <p>Stop</p>
         </div>
       </div>
-        <div class="action">
-          <button class="btn" @click="previousSong">
-            <v-icon class="mx-auto" color="black">
-              mdi-skip-previous
-            </v-icon>
-          </button>
-          <p>Previous</p>
-        </div>
         <div class="action">
           <button class="btn" @click="nextSong">
             <v-icon class="mx-auto" color="black">
@@ -258,7 +258,6 @@ export default {
   background-color: #FF8A65;
   border-radius: 100px;
   border: 2px solid black;
-  margin-bottom: 5px;
   height: 40px;
   width: 40px;
 }

@@ -4,20 +4,50 @@
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
     <div v-else>
-      <ul class="list">
-        <li v-if="speaker.status === 'stopped'">Detenido</li>
-        <li v-else-if="speaker.status === 'playing'">Reproduciendo</li>
-        <li v-else-if="speaker.status === 'paused'">Pausado</li>
+      <v-card min-height="10vh" width="60vh" class="secondary">
+        <v-card-text>
+          <ul class="list">
+            <li v-if="speaker.status === 'stopped'">
+              <v-icon>
+                mdi-stop
+              </v-icon>
+              Detenido
+            </li>
+            <li v-else-if="speaker.status === 'playing'">
+              <v-icon>
+                mdi-play
+              </v-icon>
+              Reproduciendo
+            </li>
+            <li v-else-if="speaker.status === 'paused'">
+              <v-icon>
+                mdi-stop
+              </v-icon>
+              Detenido
+            </li>
 
-        <li>Volumen: {{speaker.volume}}</li>
-
-        <li v-if="speaker.status === 'stopped'" ></li>
-        <li v-else>Género: {{ speaker.genre }}  </li>
-
-        <li v-if="speaker.status === 'playing' || speaker.status === 'paused'">
-          {{ speaker.song.title }} | {{ speaker.song.artist }}
-        </li>
-      </ul>
+            <li>
+              <v-icon>
+                mdi-volume-high
+              </v-icon>
+              Volumen: {{speaker.volume}}
+            </li>
+            <li v-if="speaker.status === 'stopped'" ></li>
+            <li v-else>
+              <v-icon>
+                mdi-music-note
+              </v-icon>
+              Género: {{ speaker.genre }}
+            </li>
+            <li v-if="speaker.status === 'playing' || speaker.status === 'paused'">
+              <v-icon>
+                mdi-details
+              </v-icon>
+              {{ speaker.song.title }} | {{ speaker.song.artist }}
+            </li>
+          </ul>
+        </v-card-text>
+      </v-card>
     </div>
   </v-container>
 </template>

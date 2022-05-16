@@ -4,13 +4,30 @@
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
     <div v-else>
-      <ul class="list">
-        <li>Modo: {{translateMode(refrigerator.mode)}}</li>
-
-        <li>Temperatura: {{ refrigerator.temperature }} °C</li>
-
-        <li>Temperatura Freezer: {{ refrigerator.freezerTemperature }} °C</li>
-      </ul>
+      <v-card min-height="10vh" width="60vh" class="secondary">
+        <v-card-text>
+          <ul class="list">
+            <li>
+              <v-icon>
+                mdi-fridge
+              </v-icon>
+              Modo: {{translateMode(refrigerator.mode)}}
+            </li>
+            <li>
+              <v-icon>
+                mdi-temperature-celsius
+              </v-icon>
+              Temperatura: {{ refrigerator.temperature }} °C
+            </li>
+            <li>
+              <v-icon>
+                mdi-thermometer-lines
+              </v-icon>
+              Temperatura Freezer: {{ refrigerator.freezerTemperature }} °C
+            </li>
+          </ul>
+        </v-card-text>
+      </v-card>
     </div>
   </v-container>
 </template>
