@@ -27,7 +27,7 @@
             </li>
             <li v-else>
               <v-icon>
-                mdi-blinds-horizontal
+                mdi-blinds
               </v-icon>
               Cerrada
             </li>
