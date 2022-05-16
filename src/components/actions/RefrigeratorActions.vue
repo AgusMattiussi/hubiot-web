@@ -5,41 +5,55 @@
          alt="loading">
     <div v-else class="actions">
       <div class="inputAction">
-        <input type="text"
-               class="textBox rounded"
-               placeholder="Temperatura freezer"
+        <v-text-field type="text"
+               background-color="#FFFFFF"
+               outlined
+               clearable
+               class="rounded px-0"
+               placeholder="Temperatura Freezer"
                v-model="freezerTemp"
+               :rules="[isFreezerTempValid(freezerTemp, true)]"
         />
-        <button class="btn" @click="setFreezerTemperature">
-          Modificar temperatura freezer
-        </button>
+        <v-btn class="btn contras" @click="setFreezerTemperature"
+        :disabled="!isFreezerTempValid(freezerTemp)">
+          Modificar
+        </v-btn>
       </div>
       <div class="inputAction">
-        <input type="text"
-               class="textBox rounded"
-               placeholder="Temperatura heladera"
-               v-model="temperature"
+        <v-text-field type="text"
+                      background-color="#FFFFFF"
+                      outlined
+                      clearable
+                      class="rounded px-0"
+                      placeholder="Temperatura Heladera"
+                      v-model="temperature"
+                      :rules="[isRefrigeratorTempValid(temperature, true)]"
         />
-        <button class="btn" @click="setTemperature">
-          Modificar temperatura
-        </button>
+        <v-btn class="btn contras" @click="setTemperature"
+               :disabled="!isRefrigeratorTempValid(temperature)">
+          Modificar
+        </v-btn>
       </div>
-      <div class="inputAction">
-        <input type="text"
-               class="textBox rounded"
-               placeholder="Modo"
-               v-model="mode"
-        />
-        <button class="btn" @click="setMode">
-          Modificar modo
-        </button>
+      <div>
+        <v-autocomplete
+          class="autocomplete"
+          :items="modes"
+          placeholder="Modo"
+          rounded
+          solo
+          return-object
+          hide-no-data
+          v-model="mode"
+          @change="setMode(translateMode(mode))"
+        >
+        </v-autocomplete>
       </div>
     </div>
   </v-container>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   name: 'RefrigeratorActions',
   props: {
@@ -54,19 +68,43 @@ export default {
       freezerTemp: null,
       temperature: null,
       mode: null,
-      loading: false
+      loading: false,
+      modes: ['Predeterminado', 'Vacaciones', 'Fiesta']
     }
-  },
-  computed: {
-    ...mapState('devices', {
-      devices: (state) => state.devices
-    })
   },
   methods: {
     ...mapActions('devices', {
       $getRefrigeratorState: 'getState',
       $executeAction: 'execute'
     }),
+    stateUpdated () {
+      this.$root.$emit('refrigeratorStateUpdated')
+    },
+    isFreezerTempValid (temp, withMsg) {
+      const msg = 'La temperatura del freezer debe estar entre -20°C y -8°C'
+      if (temp >= -20 && temp <= -8) {
+        return true
+      } else {
+        return withMsg != null ? msg : false
+      }
+    },
+    isRefrigeratorTempValid (temp, withMsg) {
+      const msg = 'La temperatura de la heladera debe estar entre 2°C y 8°C'
+      if (temp >= 2 && temp <= 8) {
+        return true
+      } else {
+        return withMsg != null ? msg : false
+      }
+    },
+    translateMode (mode) {
+      if (mode === 'Predeterminado') {
+        this.mode = 'default'
+      } else if (mode === 'Vacaciones') {
+        this.mode = 'vacation'
+      } else {
+        this.mode = 'party'
+      }
+    },
     async getRefrigeratorState () {
       try {
         this.refrigerator = await this.$getRefrigeratorState(this.deviceId)
@@ -75,44 +113,35 @@ export default {
         console.log('getRefrigeratorStateError')
       }
     },
+    async executeAction (action) {
+      try {
+        await this.$executeAction({ deviceId: this.deviceId, action })
+        await this.getRefrigeratorState()
+        this.stateUpdated()
+      } catch (e) {
+        console.log('Error en ' + action.name)
+      }
+    },
     async setFreezerTemperature () {
       const action = {
         name: 'setFreezerTemperature',
         data: [this.freezerTemp]
       }
-      try {
-        await this.$executeAction(this.deviceId, action)
-        await this.getRefrigeratorState()
-      } catch (e) {
-        // this.setResult(e)
-        console.log('closeError')
-      }
+      await this.executeAction(action)
     },
     async setTemperature () {
       const action = {
         name: 'setTemperature',
         data: [this.temperature]
       }
-      try {
-        await this.$executeAction(this.deviceId, action)
-        await this.getRefrigeratorState()
-      } catch (e) {
-        // this.setResult(e)
-        console.log('closeError')
-      }
+      await this.executeAction(action)
     },
     async setMode () {
       const action = {
         name: 'setMode',
         data: [this.mode]
       }
-      try {
-        await this.$executeAction(this.deviceId, action)
-        await this.getRefrigeratorState()
-      } catch (e) {
-        // this.setResult(e)
-        console.log('closeError')
-      }
+      await this.executeAction(action)
     }
   },
   async created () {
@@ -131,12 +160,12 @@ export default {
 .inputAction{
   display: flex;
   justify-content: space-between;
+  max-width: 400px;
 }
 .btn{
-  background-color: #FF8A65;
+  background-color: #FF8A65 !important;
   border-radius: 100px;
-  border: 2px solid black;
-  padding: 5px;
+  border: 2px solid black !important;
   margin-left: 10px;
   height: 40px;
   width: fit-content;
@@ -147,7 +176,7 @@ export default {
   border: 2px solid black;
   margin: 0 0 20px 0;
   padding: 8px;
-  width: fit-content;
+  max-width: 400px;
   display: block;
 }
 </style>
