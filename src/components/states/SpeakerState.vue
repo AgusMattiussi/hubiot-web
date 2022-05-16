@@ -5,12 +5,14 @@
          alt="loading">
     <div v-else>
       <ul class="list">
-        <li v-if="speaker.status === 'stopped'">Parado</li>
-        <li v-else>Reproduciendo</li>
+        <li v-if="speaker.status === 'stopped'">Detenido</li>
+        <li v-else-if="speaker.status === 'playing'">Reproduciendo</li>
+        <li v-else-if="speaker.status === 'paused'">Pausado</li>
 
         <li>Volumen: {{speaker.volume}}</li>
 
-        <li>Género: {{ speaker.genre }}</li>
+        <li v-if="speaker.status === 'stopped'" ></li>
+        <li v-else>Género: {{ speaker.genre }}  </li>
       </ul>
     </div>
   </v-container>
@@ -32,6 +34,11 @@ export default {
       speaker: null,
       loading: false
     }
+  },
+  mounted () {
+    this.$root.$on('speakerStateUpdated', (msg) => {
+      this.getSpeakerState()
+    })
   },
   computed: {
     ...mapState('devices', {
