@@ -66,11 +66,21 @@ export default {
       devices: (state) => state.devices
     })
   },
+  /*
+  mounted: {
+    async updateButtons () {
+      await this.getDoorState()
+    }
+  },
+  */
   methods: {
     ...mapActions('devices', {
       $getDoorState: 'getState',
       $executeAction: 'execute'
     }),
+    stateUpdated () {
+      this.$root.$emit('doorStateUpdated')
+    },
     async getDoorState () {
       try {
         this.door = await this.$getDoorState(this.deviceId)
@@ -87,6 +97,7 @@ export default {
       try {
         await this.$executeAction(this.deviceId, action)
         await this.getDoorState()
+        this.stateUpdated()
       } catch (e) {
         // this.setResult(e)
         console.log('lockError')
@@ -100,6 +111,7 @@ export default {
       try {
         await this.$executeAction(this.deviceId, action)
         await this.getDoorState()
+        this.stateUpdated()
       } catch (e) {
         // this.setResult(e)
         console.log('unlockError')
@@ -113,6 +125,7 @@ export default {
       try {
         await this.$executeAction(this.deviceId, action)
         await this.getDoorState()
+        this.stateUpdated()
       } catch (e) {
         // this.setResult(e)
         console.log('openError')
@@ -126,6 +139,7 @@ export default {
       try {
         await this.$executeAction(this.deviceId, action)
         await this.getDoorState()
+        this.stateUpdated()
       } catch (e) {
         // this.setResult(e)
         console.log('closeError')

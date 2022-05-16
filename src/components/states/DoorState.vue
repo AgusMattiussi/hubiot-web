@@ -38,6 +38,11 @@ export default {
       devices: (state) => state.devices
     })
   },
+  mounted () {
+    this.$root.$on('doorStateUpdated', (msg) => {
+      this.getDoorState()
+    })
+  },
   methods: {
     ...mapActions('devices', {
       $getDoorState: 'getState'
