@@ -4,7 +4,7 @@
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
     <div v-else>
-      <v-card min-height="10vh" width="78vh" class="secondary">
+      <v-card min-height="10vh" width="auto" class="secondary">
         <v-card-text>
           <ul class="list">
             <li v-if="speaker.status === 'stopped'">

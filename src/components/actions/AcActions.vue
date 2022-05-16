@@ -5,31 +5,31 @@
          alt="loading">
     <div v-else class="actions">
       <div class="actions">
-        <div v-if="ac.status === 'off'" class="action">
+        <div v-if="ac.status === 'off'">
           <button class="btn" @click="turnOn">
             <v-icon class="mx-auto" color="black">
               mdi-lightning-bolt-circle
             </v-icon>
           </button>
+          <p>Encender</p>
         </div>
-        <div v-else class="action">
+        <div v-else>
           <button class="btn" @click="turnOff">
             <v-icon class="mx-auto" color="black">
               mdi-minus-circle-off-outline
             </v-icon>
           </button>
+          <p>Apagar</p>
         </div>
         <div class="inputAction">
           <v-text-field type="text"
-                        background-color="#FFFFFF"
-                        outlined
                         clearable
-                        class="rounded px-0"
+                        class="textBox rounded"
                         placeholder="Temperatura"
                         v-model="temperature"
                         :rules="[isTemperatureValid(temperature, true)]"
           />
-          <v-btn :disabled="!isTemperatureValid(temperature)" class="btn2 contras" @click="setTemperature">
+          <v-btn :disabled="!isTemperatureValid(temperature)" class="btn2" @click="setTemperature">
             Modificar
           </v-btn>
         </div>
@@ -200,9 +200,6 @@ export default {
 .actions{
   justify-content: space-between;
 }
-.action{
-  margin-right: 100px;
-}
 .btn{
   background-color: #FF8A65;
   border-radius: 100px;
@@ -216,25 +213,13 @@ export default {
   justify-content: space-between;
 }
 .textBox{
-  background-color: #FFFFFF;
   outline-color: #5C6BC0;
-  border: 2px solid black;
-  margin: 0 0 20px 0;
   padding: 8px;
-  width: 50px;
-  display: block;
-}
-.textBox2{
-  background-color: #FFFFFF;
-  outline-color: #5C6BC0;
-  border: 2px solid black;
-  margin: 0 0 20px 0;
-  padding: 8px;
-  width: 100px;
+  width: 65px;
   display: block;
 }
 .btn2{
-  background-color: #FF8A65;
+  background-color: #FF8A65 !important;
   border-radius: 100px;
   border: 2px solid black;
   margin-left: 10px;
