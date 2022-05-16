@@ -1,5 +1,5 @@
 <template>
-  <v-container @click="getDoorState" class="fill-height pa-0 ma-0">
+  <v-container class="fill-height pa-0 ma-0">
     <img v-if="loading"
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
@@ -66,13 +66,6 @@ export default {
       devices: (state) => state.devices
     })
   },
-  /*
-  mounted: {
-    async updateButtons () {
-      await this.getDoorState()
-    }
-  },
-  */
   methods: {
     ...mapActions('devices', {
       $getDoorState: 'getState',
@@ -89,61 +82,30 @@ export default {
         console.log('getDoorStateError')
       }
     },
-    async lock () {
-      const action = {
-        name: 'lock',
-        data: []
-      }
+    async executeAction (actionName) {
       try {
-        await this.$executeAction(this.deviceId, action)
+        const action = {
+          name: actionName,
+          data: []
+        }
+        await this.$executeAction({ deviceId: this.deviceId, action })
         await this.getDoorState()
         this.stateUpdated()
       } catch (e) {
-        // this.setResult(e)
-        console.log('lockError')
+        console.log('Error en ' + actionName)
       }
+    },
+    async lock () {
+      await this.executeAction('lock')
     },
     async unlock () {
-      const action = {
-        name: 'unlock',
-        data: []
-      }
-      try {
-        await this.$executeAction(this.deviceId, action)
-        await this.getDoorState()
-        this.stateUpdated()
-      } catch (e) {
-        // this.setResult(e)
-        console.log('unlockError')
-      }
+      await this.executeAction('unlock')
     },
     async open () {
-      const action = {
-        name: 'open',
-        data: []
-      }
-      try {
-        await this.$executeAction(this.deviceId, action)
-        await this.getDoorState()
-        this.stateUpdated()
-      } catch (e) {
-        // this.setResult(e)
-        console.log('openError')
-      }
+      await this.executeAction('open')
     },
     async close () {
-      const action = {
-        name: 'close',
-        data: []
-      }
-      try {
-        await this.$executeAction(this.deviceId, action)
-        await this.getDoorState()
-        this.stateUpdated()
-      } catch (e) {
-        // this.setResult(e)
-        console.log('closeError')
-      }
+      await this.executeAction('close')
     }
   },
   async created () {
