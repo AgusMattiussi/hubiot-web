@@ -4,46 +4,81 @@
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
     <div v-else class="actions">
+      <div  v-if="alarm.status === 'disarmed'" class="action">
+          <div class="inputAction">
+            <v-text-field type="text"
+                   :rules="[isCodeValid(stayCode, 'Debe ser un número entre 0000 y 9999')]"
+                   class="textBox rounded"
+                   placeholder="Código"
+                   v-model="stayCode"
+            />
+            <v-btn class="btn2" @click="armStay" :disabled="!isCodeValid(stayCode, null)" >
+              Monitoreo pasivo
+            </v-btn>
+          </div>
+          <div class="inputAction">
+            <v-text-field type="text"
+                   class="textBox rounded"
+                   placeholder="Código"
+                   v-model="awayCode"
+            />
+            <v-btn class="btn2" @click="armAway" :disabled="!isCodeValid(awayCode, null)">
+              Habilitar
+            </v-btn>
+          </div>
+      </div>
+      <div v-else class="action">
+        <div v-if="alarm.status === 'armedAway'" class="inputAction">
+          <v-text-field type="text"
+                        :rules="[isCodeValid(stayCode, 'Debe ser un número entre 0000 y 9999')]"
+                        class="textBox rounded"
+                        placeholder="Código"
+                        v-model="stayCode"
+          />
+          <v-btn class="btn2" @click="armStay" :disabled="!isCodeValid(stayCode, null)" >
+            Monitoreo pasivo
+          </v-btn>
+        </div>
+        <div v-if="alarm.status === 'armedStay'" class="inputAction">
+          <v-text-field type="text"
+                        :rules="[isCodeValid(awayCode, 'Debe ser un número entre 0000 y 9999')]"
+                        class="textBox rounded"
+                        placeholder="Código"
+                        v-model="awayCode"
+          />
+          <v-btn class="btn2" @click="armAway" :disabled="!isCodeValid(awayCode, null)">
+            Habilitar
+          </v-btn>
+        </div>
+        <div class="inputAction">
+          <v-text-field type="text"
+                        :rules="[isCodeValid(disableCode, 'Debe ser un número entre 0000 y 9999')]"
+                        class="textBox rounded"
+                        placeholder="Código"
+                        v-model="disableCode"
+          />
+          <v-btn class="btn2" @click="disarm" :disabled="!isCodeValid(disableCode, null)">
+            Deshabilitar
+          </v-btn>
+        </div>
+      </div>
       <div class="action">
         <div class="inputAction">
-          <input type="text"
-                 class="textBox rounded"
-                 placeholder="Código"
-                 v-model="code"
+          <v-text-field type="text"
+                        :rules="[isCodeValid(oldCode, 'Debe ser un número entre 0000 y 9999')]"
+                        class="textBox2 rounded"
+                        placeholder="Viejo"
+                        v-model="oldCode"
           />
-          <button class="btn2" @click="changeCode">
+          <v-text-field type="text"
+                        :rules="[isCodeValid(newCode, 'Debe ser un número entre 0000 y 9999')]"
+                        class="textBox2 rounded"
+                        placeholder="Nuevo"
+                        v-model="newCode"
+          />
+          <v-btn class="btn2" @click="changeCode" :disabled="!isCodeValid(oldCode, null) || !isCodeValid(newCode, null)">
             Cambiar código
-          </button>
-        </div>
-        <div class="inputAction">
-          <input type="text"
-                 class="textBox rounded"
-                 placeholder="Código"
-                 v-model="code"
-          />
-          <button class="btn2" @click="armStay">
-            ArmStay
-          </button>
-        </div>
-        <div class="inputAction">
-          <input type="text"
-                 class="textBox rounded"
-                 placeholder="Código"
-                 v-model="code"
-          />
-          <button class="btn2" @click="armAway">
-            ArmAway
-          </button>
-        </div>
-        <div class="inputAction">
-          <input type="text"
-                 class="textBox rounded"
-                 placeholder="Código"
-                 v-model="code"
-          />
-          <button class="btn2" @click="disarm">
-            Disarm
-          </button>
+          </v-btn>
         </div>
       </div>
     </div>
@@ -51,7 +86,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   name: 'AlarmActions',
   props: {
@@ -64,19 +99,21 @@ export default {
     return {
       alarm: null,
       loading: false,
-      code: null
+      stayCode: null,
+      awayCode: null,
+      disableCode: null,
+      oldCode: null,
+      newCode: null
     }
-  },
-  computed: {
-    ...mapState('devices', {
-      devices: (state) => state.devices
-    })
   },
   methods: {
     ...mapActions('devices', {
       $getAlarmState: 'getState',
       $executeAction: 'execute'
     }),
+    stateUpdated () {
+      this.$root.$emit('alarmStateUpdated')
+    },
     async getAlarmState () {
       try {
         this.alarm = await this.$getAlarmState(this.deviceId)
@@ -84,6 +121,49 @@ export default {
         // this.setResult(e)
         console.log('getAlarmStateError')
       }
+    },
+    async executeAction (action) {
+      try {
+        await this.$executeAction({ deviceId: this.deviceId, action })
+        await this.getAlarmState()
+        this.stateUpdated()
+      } catch (e) {
+        console.log('Error en ' + action.name)
+      }
+    },
+    isCodeValid (code, msg) {
+      if (code >= 0 && code < 10000) {
+        return true
+      }
+      return msg == null ? false : msg
+    },
+    async armStay () {
+      const action = {
+        name: 'armStay',
+        data: [this.stayCode]
+      }
+      await this.executeAction(action)
+    },
+    async armAway () {
+      const action = {
+        name: 'armAway',
+        data: [this.awayCode]
+      }
+      await this.executeAction(action)
+    },
+    async disarm () {
+      const action = {
+        name: 'disarm',
+        data: [this.disableCode]
+      }
+      await this.executeAction(action)
+    },
+    async changeCode () {
+      const action = {
+        name: 'changeSecurityCode',
+        data: [this.oldCode, this.newCode]
+      }
+      await this.executeAction(action)
     }
   },
   async created () {
@@ -97,39 +177,33 @@ export default {
 
 <style scoped>
 .actions{
-  display: flex;
   justify-content: space-between;
 }
 .action{
   margin-right: 100px;
-}
-.btn{
-  background-color: #FF8A65;
-  border-radius: 100px;
-  border: 2px solid black;
-  margin-bottom: 5px;
-  height: 40px;
-  width: 40px;
 }
 .inputAction{
   display: flex;
   justify-content: space-between;
 }
 .textBox{
-  background-color: #FFFFFF;
   outline-color: #5C6BC0;
-  border: 2px solid black;
-  margin: 0 auto 40px;
   padding: 8px;
-  width: 80px;
+  width: 50px !important;
+  display: block;
+}
+.textBox2{
+  outline-color: #5C6BC0;
+  padding: 8px;
+  width: 65px;
   display: block;
 }
 .btn2{
-  background-color: #FF8A65;
+  background-color: #FF8A65 !important;
   border-radius: 100px;
   border: 2px solid black;
   margin-left: 10px;
   height: 40px;
-  width: 150px;
+  width: 180px;
 }
 </style>
