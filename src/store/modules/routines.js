@@ -33,6 +33,10 @@ export default {
       let result = await RoutinesApi.getAll()
       result = result.map((routine) => Object.assign(new Routine(), routine))
       context.commit('setRoutine', result)
+    },
+    async executeRoutine (context, routineID) {
+      const result = await RoutinesApi.executeRoutine(routineID)
+      return result
     }
   },
   mutations: {
