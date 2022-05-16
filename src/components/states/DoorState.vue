@@ -3,7 +3,7 @@
   <img v-if="loading"
        :src="require('@/assets/ajax-loader.gif')"
        alt="loading">
-  <div  >
+  <div v-else>
     <ul class="list">
       <li v-if="door.status === 'closed'">Cerrada</li>
       <li v-else>Abierta</li>
