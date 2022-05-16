@@ -10,11 +10,11 @@
 
         <li>Temperatura: {{ac.temperature}}°C</li>
 
-        <li>Modo: {{ ac.mode }}</li>
+        <li>Modo: {{translateMode(ac.mode)}}</li>
 
-        <li>Aspas verticales: {{ ac.verticalSwing }}</li>
+        <li>Aspas verticales: {{ ac.verticalSwing }}{{ac.verticalSwing !== 'auto' ? '°' : ''}}</li>
 
-        <li>Aspas horizontales: {{ ac.horizontalSwing }}</li>
+        <li>Aspas horizontales: {{ ac.horizontalSwing }}{{ac.horizontalSwing !== 'auto' ? '°' : ''}}</li>
 
         <li>Velocidad: {{ ac.fanSpeed }}</li>
       </ul>
@@ -44,6 +44,11 @@ export default {
       devices: (state) => state.devices
     })
   },
+  mounted () {
+    this.$root.$on('acStateUpdated', (msg) => {
+      this.getAcState()
+    })
+  },
   methods: {
     ...mapActions('devices', {
       $getAcState: 'getState'
@@ -57,6 +62,17 @@ export default {
       } catch (e) {
         // this.setResult(e)
         console.log('StateError')
+      }
+    },
+    translateMode (mode) {
+      if (mode === 'cool') {
+        return 'Frío'
+      } else if (mode === 'heat') {
+        return 'Calor'
+      } else if (mode === 'fan') {
+        return 'Ventilador'
+      } else {
+        return ''
       }
     }
   },

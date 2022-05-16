@@ -1,5 +1,5 @@
 <template>
-  <v-container @click="getAcState" class="fill-height pa-0 ma-0">
+  <v-container class="fill-height pa-0 ma-0">
     <img v-if="loading"
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
@@ -20,62 +20,82 @@
           </button>
         </div>
         <div class="inputAction">
-          <input type="text"
-                 class="textBox rounded"
-                 placeholder="°C"
-                 v-model="temperature"
+          <v-text-field type="text"
+                        background-color="#FFFFFF"
+                        outlined
+                        clearable
+                        class="rounded px-0"
+                        placeholder="Temperatura"
+                        v-model="temperature"
+                        :rules="[isTemperatureValid(temperature, true)]"
           />
-          <button class="btn2" @click="setTemperature">
-            Modificar Temperatura
-          </button>
+          <v-btn :disabled="!isTemperatureValid(temperature)" class="btn2 contras" @click="setTemperature">
+            Modificar
+          </v-btn>
         </div>
         <div class="inputAction">
-          <input type="text"
-                 class="textBox2 rounded"
-                 placeholder="Modo"
-                 v-model="mode"
-          />
-          <button class="btn2" @click="setMode">
-            Modificar Modo
-          </button>
+          <v-autocomplete
+            class="autocomplete"
+            :items="supportedModes"
+            placeholder="Modo"
+            rounded
+            solo
+            return-object
+            hide-no-data
+            v-model="mode"
+            @change="setMode(translateMode(mode))"
+          >
+          </v-autocomplete>
         </div>
       </div>
       <div class="inputAction">
-        <input type="text"
-               class="textBox2 rounded"
-               placeholder="Modo"
-               v-model="verticalSwing"
-        />
-        <button class="btn2" @click="setVerticalSwing">
-          Modificar Vertical
-        </button>
+          <v-autocomplete
+            class="autocomplete"
+            :items="supportedVerticalSwings"
+            placeholder="Desplazamiento de Aspas Verticales"
+            rounded
+            solo
+            return-object
+            hide-no-data
+            v-model="verticalSwing"
+            @change="setVerticalSwing(verticalSwing)"
+          >
+          </v-autocomplete>
       </div>
       <div class="inputAction">
-        <input type="text"
-               class="textBox2 rounded"
-               placeholder="Modo"
-               v-model="horizontalSwing"
-        />
-        <button class="btn2" @click="setHorizontalSwing">
-          Modificar Horizontal
-        </button>
+        <v-autocomplete
+          class="autocomplete"
+          :items="supportedHorizontalSwings"
+          placeholder="Desplazamiento de Aspas Horizontales"
+          rounded
+          solo
+          return-object
+          hide-no-data
+          v-model="horizontalSwing"
+          @change="setHorizontalSwing(horizontalSwing)"
+        >
+        </v-autocomplete>
       </div>
       <div class="inputAction">
-        <input type="text"
-               class="textBox2 rounded"
-               placeholder="Modo"
-               v-model="fanSpeed"
-        />
-        <button class="btn2" @click="setFanSpeed">
-          Modificar velocidad
-        </button>
+        <v-autocomplete
+          class="autocomplete"
+          :items="supportedFanSpeeds"
+          placeholder="Velocidad del Ventilador"
+          rounded
+          solo
+          return-object
+          hide-no-data
+          v-model="fanSpeed"
+          @change="setFanSpeed(fanSpeed)"
+        >
+        </v-autocomplete>
       </div>
     </div>
   </v-container>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   name: 'AcActions',
   props: {
@@ -92,19 +112,21 @@ export default {
       mode: null,
       verticalSwing: null,
       horizontalSwing: null,
-      fanSpeed: null
+      fanSpeed: null,
+      supportedModes: ['Frío', 'Calor', 'Ventilador'],
+      supportedVerticalSwings: ['auto', '22', '45', '67', '90'],
+      supportedHorizontalSwings: ['auto', '-90', '-45', '0', '45', '90'],
+      supportedFanSpeeds: ['auto', '25', '50', '75', '100']
     }
-  },
-  computed: {
-    ...mapState('devices', {
-      devices: (state) => state.devices
-    })
   },
   methods: {
     ...mapActions('devices', {
       $getAcState: 'getState',
       $executeAction: 'execute'
     }),
+    stateUpdated () {
+      this.$root.$emit('acStateUpdated')
+    },
     async getAcState () {
       try {
         this.ac = await this.$getAcState(this.deviceId)
@@ -112,6 +134,57 @@ export default {
         // this.setResult(e)
         console.log('getAcStateError')
       }
+    },
+    isTemperatureValid (temp, withMsg) {
+      const msg = 'La temperatura debe estar entre 18°C y 24°C '
+      if (temp >= 18 && temp <= 24) {
+        return true
+      } else {
+        return withMsg ? msg : false
+      }
+    },
+    translateMode (mode) {
+      if (mode === 'Frío') {
+        this.mode = 'cool'
+      } else if (mode === 'Calor') {
+        this.mode = 'heat'
+      } else {
+        this.mode = 'fan'
+      }
+    },
+    async executeAction (actionName, paramsArray) {
+      const action = {
+        name: actionName,
+        data: paramsArray
+      }
+      try {
+        await this.$executeAction({ deviceId: this.deviceId, action })
+        await this.getAcState()
+        this.stateUpdated()
+      } catch (e) {
+        console.log('Error en ' + action.name)
+      }
+    },
+    async turnOn () {
+      await this.executeAction('turnOn')
+    },
+    async turnOff () {
+      await this.executeAction('turnOff')
+    },
+    async setTemperature () {
+      await this.executeAction('setTemperature', [Math.trunc(this.temperature)])
+    },
+    async setMode () {
+      await this.executeAction('setMode', [this.mode])
+    },
+    async setVerticalSwing () {
+      await this.executeAction('setVerticalSwing', [this.verticalSwing])
+    },
+    async setHorizontalSwing () {
+      await this.executeAction('setHorizontalSwing', [this.horizontalSwing])
+    },
+    async setFanSpeed () {
+      await this.executeAction('setFanSpeed', [this.fanSpeed])
     }
   },
   async created () {

@@ -125,14 +125,14 @@ export default {
     async setFreezerTemperature () {
       const action = {
         name: 'setFreezerTemperature',
-        data: [this.freezerTemp]
+        data: [Math.trunc(this.freezerTemp)]
       }
       await this.executeAction(action)
     },
     async setTemperature () {
       const action = {
         name: 'setTemperature',
-        data: [this.temperature]
+        data: [Math.trunc(this.temperature)]
       }
       await this.executeAction(action)
     },
