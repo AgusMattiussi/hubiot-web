@@ -5,7 +5,7 @@
          alt="loading">
     <div v-else>
       <ul class="list">
-        <li>Modo: {{refrigerator.mode}}</li>
+        <li>Modo: {{translateMode(refrigerator.mode)}}</li>
 
         <li>Temperatura: {{ refrigerator.temperature }} °C</li>
 
@@ -38,6 +38,11 @@ export default {
       devices: (state) => state.devices
     })
   },
+  mounted () {
+    this.$root.$on('refrigeratorStateUpdated', (msg) => {
+      this.getRefrigeratorState()
+    })
+  },
   methods: {
     ...mapActions('devices', {
       $getRefrigeratorState: 'getState'
@@ -51,6 +56,17 @@ export default {
       } catch (e) {
         // this.setResult(e)
         console.log('StateError')
+      }
+    },
+    translateMode (mode) {
+      if (mode === 'default') {
+        return 'Predeterminado'
+      } else if (mode === 'vacation') {
+        return 'Vacaciones'
+      } else if (mode === 'party') {
+        return 'Fiesta'
+      } else {
+        return ''
       }
     }
   },
