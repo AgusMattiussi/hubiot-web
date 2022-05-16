@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 // import { Action } from '@/api/devicesApi'
 
 export default {
@@ -61,11 +61,6 @@ export default {
       door: null,
       loading: false
     }
-  },
-  computed: {
-    ...mapState('devices', {
-      devices: (state) => state.devices
-    })
   },
   methods: {
     ...mapActions('devices', {
