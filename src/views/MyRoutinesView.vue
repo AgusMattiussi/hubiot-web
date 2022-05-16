@@ -14,7 +14,7 @@
                                   :counter="18"
                                   :append-icon="'mdi-magnify'"
                                   @click:append="searchedClicked"
-                                  placeholder="Buscar rutinas"
+                                  placeholder="Buscar rutina"
                                   solo
                                   required
                                   outlined
@@ -28,7 +28,7 @@
                   <div class="devicesParent">
                     <v-sheet class="deviceCard" v-for="routine in routines" :key="routine.id">
                       <router-link :to="{ name: 'routineDetails', params: {id: routine.id}}" class="routineName">
-                        <v-icon class="mb-2" x-large>mdi-timer-outline</v-icon>
+                        <v-icon class="mb-2" x-large color="black">mdi-timer-outline</v-icon>
                         <h4>{{ routine.name }}</h4>
                       </router-link>
                     </v-sheet>
@@ -56,10 +56,6 @@ export default {
       valid: true,
       routine: null,
       result: null
-      // routinesRules: [
-      //   v => !!v || 'Name is required',
-      //   v => v.length <= 10 || 'Name must be less than 10 characters'
-      // ]
     }
   },
   computed: {
@@ -108,10 +104,10 @@ export default {
 .deviceCard {
   margin: 10px;
   border-radius: 20px;
-  min-width: 10px;
+  min-width: 100px;
   min-height: 100px;
   max-width: 160px;
-  padding-top: 20px;
+  padding: 20px 10px 10px 10px;
 }
 .routineName{
   text-decoration: none;
