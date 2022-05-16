@@ -27,7 +27,17 @@
             </v-col>
             <v-col md="4"></v-col>
           </v-row>
-          <v-row></v-row>
+          <v-row>
+            <v-col></v-col>
+            <v-col>
+              <v-btn fab medium color="primary" @click="execute">
+                <v-icon light>
+                  mdi-cat
+                </v-icon>
+              </v-btn>
+            </v-col>
+            <v-col></v-col>
+          </v-row>
         </v-container>
       </v-sheet>
     </v-main>
@@ -56,12 +66,16 @@ export default {
     })
   },
   methods: {
+    async execute () {
+      await this.$execute(this.routineID)
+    },
     ...mapGetters('devices', {
       $getDevices: 'get'
     }),
     ...mapActions('routines', {
       $getRoutine: 'get',
-      $getAllRoutines: 'getAll'
+      $getAllRoutines: 'getAll',
+      $execute: 'executeRoutine'
     })
   },
   async created () {
