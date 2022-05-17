@@ -49,6 +49,10 @@ export default {
   mutations: {
     setDevices (state, devices) {
       state.devices = devices
+    },
+    updateName (state, device) {
+      const deviceFounded = state.devices.find(internalDevice => device.id === internalDevice.id)
+      deviceFounded.name = device.name
     }
   }
 }
