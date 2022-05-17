@@ -11,7 +11,7 @@ class DevicesApi {
   }
 
   static async modify (device) {
-    return await Api.put(DevicesApi.getUrl(device.id), device) // Verdadero si lo modificó. Caso contrario, falso.
+    return await Api.put(DevicesApi.getUrl(device.id), device)
   }
 
   static async delete (deviceID) {
@@ -31,10 +31,6 @@ class DevicesApi {
     return await Api.get(DevicesApi.getUrl(`${deviceID}/state`))
   }
 
-  // static async getType (deviceID) {
-  //   return await Api.get(DevicesApi.getUrl(`devicetypes/${deviceID}`))
-  // }
-
   static async executeAction (deviceID, action) {
     return await Api.put(DevicesApi.getUrl(`${deviceID}/${action.name}`), action.data)
   }
@@ -42,9 +38,6 @@ class DevicesApi {
 
 class Device {
   constructor (type, name, meta) {
-    // if (id) {
-    //   this.id = id
-    // }
     this.type = type
     this.name = name
     this.meta = meta

@@ -8,7 +8,17 @@
           <DeleteButton class="deleteBtn"/>
         </button>
       </div>
-      <v-img :src="require(`@/assets/${device.image}`)" alt="parlante" class="img"></v-img>
+      <v-row>
+        <v-col md="4"/>
+        <v-col md="4">
+          <v-img :src="require(`@/assets/${device.image}`)" alt="parlante" class="img"></v-img>
+        </v-col>
+        <v-col md="4">
+          <button @click="modifyDevice">
+            <ModifyButton class="modifyBtn"/>
+          </button>
+        </v-col>
+      </v-row>
       <v-divider class="mx-4"></v-divider>
       <v-card-title class="sectionTitle">Estado</v-card-title>
       <v-card-text class="text-left">
@@ -36,10 +46,12 @@ import DeleteButton from '@/components/DeleteButton'
 import StateContainer from '@/components/StateContainer'
 import ActionsContainer from '@/components/ActionsContainer'
 import { mapActions, mapState } from 'vuex'
+import ModifyButton from '@/components/ModifyButton'
 
 export default {
   name: 'DeviceView',
   components: {
+    ModifyButton,
     StateContainer,
     DeleteButton,
     GoBackButton,
@@ -51,7 +63,8 @@ export default {
       deviceId: this.$route.params.deviceId,
       deviceName: this.$route.params.deviceName,
       deviceTypeId: this.$route.params.deviceTypeId,
-      deviceTypeName: this.$route.params.deviceTypeName
+      deviceTypeName: this.$route.params.deviceTypeName,
+      newDeviceName: null
     }
   },
   computed: {
@@ -64,12 +77,26 @@ export default {
   },
   methods: {
     ...mapActions('devices', {
-      $deleteDevice: 'delete'
+      $deleteDevice: 'delete',
+      $modifyDevice: 'modify'
     }),
     async deleteDevice () {
       try {
         await this.$deleteDevice(this.deviceId)
         this.$router.go(-1)
+        this.device = null
+        this.clearResult()
+      } catch (e) {
+        this.setResult(e)
+      }
+    },
+    async modifyDevice () {
+      const device = {
+        id: this.deviceId,
+        name: this.newDeviceName
+      }
+      try {
+        await this.$modifyDevice(device)
         this.device = null
         this.clearResult()
       } catch (e) {
@@ -103,6 +130,10 @@ export default {
   margin: 5px;
   float: right;
 }
+.modifyBtn{
+  margin-top: 5px;
+  float: right;
+}
 .img{
   border-radius: 50%;
   padding-left: 10px;
@@ -117,22 +148,9 @@ export default {
   font-size: 20px;
   padding: 16px 0 0 16px;
 }
-.stateText{
-  color: black;
-  font-size: 16px;
-  font-weight: normal;
-}
 .actions{
   display: flex;
   overflow: hidden;
   justify-content: space-between;
-}
-.actionBtn{
-  background-color: #FF8A65;
-  text-align: center;
-  width: 100%;
-  margin-left: 5px;
-  color: black;
-  border-radius: 20px;
 }
 </style>

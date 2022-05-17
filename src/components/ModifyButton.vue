@@ -2,7 +2,7 @@
   <span>
     <button class="btn">
       <v-icon class="mx-auto" color="black">
-        mdi-trash-can-outline
+        mdi-pencil-minus-outline
       </v-icon>
     </button>
   </span>
@@ -10,15 +10,15 @@
 
 <script>
 export default {
-  name: 'DeleteButton'
+  name: 'ModifyButton'
 }
 </script>
 
 <style scoped>
 .btn{
-  background-color: #d14545;
+  background-color: #C5CAE9;
+  border: 2px solid black;
   border-radius: 100px;
-  border: 0;
   height: 40px;
   width: 40px;
 }
