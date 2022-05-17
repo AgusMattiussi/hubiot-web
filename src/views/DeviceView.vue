@@ -12,7 +12,7 @@
                         :append-icon="'mdi-check'"
                         @click:prepend-inner="cancelChange"
                         @click:append="checkChange"
-                        v-model="newName" placeholder="Ingrese el nuevo nombre" class="my-text-field centered-input text--black ml-10 mr-4">
+                        v-model="newName" :placeholder=deviceName class="my-text-field centered-input text--black ml-10 mr-4">
             </v-text-field>
         </v-main>
         <v-container v-if="!this.editingMode">
@@ -123,10 +123,8 @@ export default {
             }
           }
           await this.$modifyDevice(toUpdate)
-          this.$router.go(-1)
         } catch (e) {
           console.log('Error changing name: ')
-          console.log(e)
         }
       }
       this.editingMode = !this.editingMode
@@ -195,14 +193,5 @@ export default {
   display: flex;
   overflow: hidden;
   justify-content: space-between;
-}
-
-.actionBtn{
-  background-color: #FF8A65;
-  text-align: center;
-  width: 100%;
-  margin-left: 5px;
-  color: black;
-  border-radius: 20px;
 }
 </style>
