@@ -121,6 +121,7 @@ export default {
 .actions{
   display: flex;
   justify-content: space-between;
+  margin: auto;
 }
 .action{
   margin-right: 100px;

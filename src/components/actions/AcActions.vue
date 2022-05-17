@@ -199,6 +199,7 @@ export default {
 <style scoped>
 .actions{
   justify-content: space-between;
+  margin: auto;
 }
 .btn{
   background-color: #FF8A65;

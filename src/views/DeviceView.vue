@@ -25,6 +25,7 @@
         </button>
       </div>
       <v-img :src="require(`@/assets/${device.image}`)" alt="parlante" class="img"></v-img>
+      <v-divider class="mx-4"></v-divider>
       <v-card-title class="sectionTitle">Estado</v-card-title>
       <v-card-text class="text-left">
         <state-container :device-id="deviceId.toString()"

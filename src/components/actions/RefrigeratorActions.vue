@@ -152,6 +152,7 @@ export default {
 <style scoped>
 .actions{
   display: inline-block;
+  margin: auto;
 }
 .inputAction{
   display: flex;
