@@ -4,7 +4,7 @@
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
     <div v-else class="actions">
-      <v-card min-height="10vh" width="auto" class="secondary">
+      <v-card min-height="10vh" width="auto" class="secondary pr-6">
         <v-card-text>
           <ul class="list">
             <li v-if="blinds.status === 'opened'">

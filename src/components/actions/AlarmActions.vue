@@ -8,7 +8,7 @@
           <div class="inputAction">
             <v-text-field type="text"
                    :rules="[isCodeValid(stayCode, 'Debe ser un número entre 0000 y 9999')]"
-                   class="textBox rounded"
+                   class="textBox2 rounded"
                    placeholder="Código"
                    v-model="stayCode"
             />
@@ -18,7 +18,7 @@
           </div>
           <div class="inputAction">
             <v-text-field type="text"
-                   class="textBox rounded"
+                   class="textBox2 rounded"
                    placeholder="Código"
                    v-model="awayCode"
             />
@@ -31,7 +31,7 @@
         <div v-if="alarm.status === 'armedAway'" class="inputAction">
           <v-text-field type="text"
                         :rules="[isCodeValid(stayCode, 'Debe ser un número entre 0000 y 9999')]"
-                        class="textBox rounded"
+                        class="textBox2 rounded align-center"
                         placeholder="Código"
                         v-model="stayCode"
           />
@@ -42,7 +42,7 @@
         <div v-if="alarm.status === 'armedStay'" class="inputAction">
           <v-text-field type="text"
                         :rules="[isCodeValid(awayCode, 'Debe ser un número entre 0000 y 9999')]"
-                        class="textBox rounded"
+                        class="textBox2 rounded"
                         placeholder="Código"
                         v-model="awayCode"
           />
@@ -53,7 +53,7 @@
         <div class="inputAction">
           <v-text-field type="text"
                         :rules="[isCodeValid(disableCode, 'Debe ser un número entre 0000 y 9999')]"
-                        class="textBox rounded"
+                        class="textBox2 rounded"
                         placeholder="Código"
                         v-model="disableCode"
           />
@@ -178,6 +178,7 @@ export default {
 <style scoped>
 .actions{
   justify-content: space-between;
+  margin: auto;
 }
 .action{
   margin-right: 100px;

@@ -3,7 +3,7 @@
     <img v-if="loading"
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading" />
-    <div v-else>
+    <div v-else class="actions">
       <div class="actions">
         <div class="action">
           <button class="btn" @click="previousSong">
@@ -249,6 +249,7 @@ export default {
 .actions {
   display: flex;
   justify-content: space-between;
+  margin: auto;
 }
 .action{
   flex: auto;
