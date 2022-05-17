@@ -3,7 +3,23 @@
     <v-card class="card">
       <div class="cardTitle">
         <GoBackButton/>
-        <h1 class="mx-auto">{{ deviceName }}</h1>
+        <v-main>
+          <h1  v-if="!this.editingMode" class="mx-auto">{{ deviceName }}</h1>
+          <v-text-field
+                        color="white"
+                        v-if="this.editingMode"
+                        :prepend-inner-icon="'mdi-cancel'"
+                        :append-icon="'mdi-check'"
+                        @click:prepend-inner="cancelChange"
+                        @click:append="checkChange"
+                        v-model="newName" placeholder="Ingrese el nuevo nombre" class="my-text-field centered-input text--black ml-10 mr-4">
+            </v-text-field>
+        </v-main>
+        <v-container v-if="!this.editingMode">
+          <v-btn outlined x-small fab color="primary" @click="activateEditingMode">
+            <v-icon color="black">mdi-pencil</v-icon>
+          </v-btn>
+        </v-container>
         <button @click="deleteDevice">
           <DeleteButton class="deleteBtn"/>
         </button>
@@ -59,12 +75,13 @@ export default {
   },
   data () {
     return {
+      editingMode: true,
       deviceSlug: this.$route.params.slug,
       deviceId: this.$route.params.deviceId,
       deviceName: this.$route.params.deviceName,
       deviceTypeId: this.$route.params.deviceTypeId,
       deviceTypeName: this.$route.params.deviceTypeName,
-      newDeviceName: null
+      newName: ''
     }
   },
   computed: {
@@ -78,7 +95,8 @@ export default {
   methods: {
     ...mapActions('devices', {
       $deleteDevice: 'delete',
-      $modifyDevice: 'modify'
+      $modifyDevice: 'modify',
+      $getDevice: 'get'
     }),
     async deleteDevice () {
       try {
@@ -90,24 +108,49 @@ export default {
         this.setResult(e)
       }
     },
-    async modifyDevice () {
-      const device = {
-        id: this.deviceId,
-        name: this.newDeviceName
+    async cancelChange () {
+      this.newName = ''
+      this.editingMode = !this.editingMode
+    },
+    async checkChange () {
+      if (this.editingMode) {
+        try {
+          const toUpdate = {
+            name: this.newName,
+            id: this.deviceId,
+            meta: {
+              image: this.device.image
+            }
+          }
+          await this.$modifyDevice(toUpdate)
+          this.$router.go(-1)
+        } catch (e) {
+          console.log('Error changing name: ')
+          console.log(e)
+        }
       }
-      try {
-        await this.$modifyDevice(device)
-        this.device = null
-        this.clearResult()
-      } catch (e) {
-        this.setResult(e)
-      }
+      this.editingMode = !this.editingMode
+      console.log(this.editingMode)
+    },
+    activateEditingMode () {
+      this.editingMode = !this.editingMode
     }
   }
 }
 </script>
 
 <style scoped>
+
+.my-text-field .v-icon {
+  position: absolute;
+  top: 12px;
+  right: 8px;
+}
+
+.centered-input >>> input {
+  text-align: center
+}
+
 .bg {
   background-image: url("../assets/background_my_device.png");
   background-size: cover;
@@ -152,5 +195,14 @@ export default {
   display: flex;
   overflow: hidden;
   justify-content: space-between;
+}
+
+.actionBtn{
+  background-color: #FF8A65;
+  text-align: center;
+  width: 100%;
+  margin-left: 5px;
+  color: black;
+  border-radius: 20px;
 }
 </style>
