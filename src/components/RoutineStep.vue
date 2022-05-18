@@ -74,11 +74,9 @@ export default {
     }),
     updated () {
       this.typeSelectedDevice = this.$store.getters['deviceTypes/getTypeForDeviceID'](this.selectedDevice.type.id)
-      console.log(this.typeSelectedDevice)
       this.$emit('updatedStep', { id: this.id, device: this.selectedDevice, action: this.selectedAction })
     },
     translate (action) {
-      console.log(action)
       return translations[action.name]
     }
   },
