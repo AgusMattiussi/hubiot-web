@@ -4,31 +4,34 @@
       <div class="cardTitle">
         <GoBackButton/>
         <v-main>
-          <h1  v-if="!this.editingMode" class="mx-auto">{{ deviceName }}</h1>
-          <form ref="form" :v-model="validForm"></form>
-          <v-text-field
-                        color="white"
-                        v-if="this.editingMode"
-                        :prepend-inner-icon="'mdi-cancel'"
-                        :append-icon="'mdi-check'"
-                        @click:prepend-inner="cancelChange"
-                        @click:append="checkChange"
-                        v-model="newName"
-                        :counter="this.maxLength"
-                        :placeholder=deviceName
-                        :rules="rules"
-                        required
-                        class="my-text-field centered-input text--black ml-10 mr-4">
-            </v-text-field>
+          <form ref="form" :v-model="validForm">
+            <v-text-field
+                          color="white"
+                          v-if="this.editingMode"
+                          :prepend-inner-icon="'mdi-cancel'"
+                          :append-icon="'mdi-check'"
+                          @click:prepend-inner="cancelChange"
+                          @click:append="checkChange"
+                          v-model="newName"
+                          :counter="this.maxLength"
+                          :placeholder=deviceName
+                          :rules="rules"
+                          required
+                          class="my-text-field centered-input text--black ml-10 mr-4">
+              </v-text-field>
+          </form>
         </v-main>
-        <v-container v-if="!this.editingMode">
-          <v-btn outlined x-small fab color="primary" @click="activateEditingMode">
-            <v-icon color="black">mdi-pencil</v-icon>
-          </v-btn>
-        </v-container>
-        <button @click="deleteDevice">
-          <DeleteButton class="deleteBtn"/>
-        </button>
+        <v-main v-if="!this.editingMode" class="mt-1">
+          <v-card v-if="!this.editingMode" class="primary pa-0" elevation="0">
+            <v-card-title class="pa-0 white--text">
+              {{ deviceName }}
+              <v-btn class="ml-2" outlined small fab color="primary" @click="activateEditingMode">
+                <v-icon color="white">mdi-pencil</v-icon>
+              </v-btn>
+            </v-card-title>
+          </v-card>
+        </v-main>
+        <DeleteButton @deleteClicked="deleteDevice"/>
       </div>
       <v-row>
         <v-col md="4"/>
@@ -73,9 +76,15 @@ export default {
     GoBackButton,
     ActionsContainer
   },
+  props: {
+    toExecute: {
+      type: Object,
+      required: true
+    }
+  },
   data () {
     return {
-      editingMode: true,
+      editingMode: false,
       deviceSlug: this.$route.params.slug,
       deviceId: this.$route.params.deviceId,
       deviceName: this.$route.params.deviceName,
@@ -84,7 +93,7 @@ export default {
       newName: '',
       validForm: false,
       maxLength: 12,
-      rules: [v => v.length <= this.maxLength || 'Mínima cantidad necesaria es de 3 dígitos y la máxima cantidad de caracteres excedida']
+      rules: [v => v.length <= this.maxLength || 'Mínimo largo son 3 dígitos y la máxima de ' + this.maxLength]
     }
   },
   computed: {
@@ -147,6 +156,21 @@ export default {
 </script>
 
 <style scoped>
+
+.topBar h1 {
+  display: inline;
+  margin-top: 12px;
+}
+
+.topBar v-icon {
+
+}
+
+.one-line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .my-text-field .v-icon {
   position: absolute;
