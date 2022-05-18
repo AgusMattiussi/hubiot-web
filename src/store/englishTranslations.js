@@ -2,7 +2,7 @@ export default {
   open: 'Abrir',
   close: 'Cerrar',
   lock: 'Bloquear',
-  unlock: 'Desbloqueaar',
+  unlock: 'Desbloquear',
   setVolume: 'Cambiar volumen',
   play: 'Reproducir',
   stop: 'Parar',
@@ -23,5 +23,11 @@ export default {
   setMode: 'Cambiar modo',
   setHorizontalSwing: 'Cambiar desplazamiento de aspas horizontal',
   setVerticalSwing: 'Cambiar desplazamiento de aspas vertical',
-  setFreezerTemperature: 'Cambiar temperatura freezer'
+  setFreezerTemperature: 'Cambiar temperatura freezer',
+  party: 'Fiesta',
+  vacation: 'Vacaciones',
+  default: 'Predeterminado',
+  cool: 'Frío',
+  heat: 'Calor',
+  fan: 'Ventilador'
 }

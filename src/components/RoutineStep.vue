@@ -66,7 +66,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import translations from '@/store/translations'
+import translations from '@/store/englishTranslations'
 import routineStepRequirements from '@/store/routineStepRequirements'
 
 export default {
@@ -111,7 +111,7 @@ export default {
     updated () {
       this.typeSelectedDevice = this.$store.getters['deviceTypes/getTypeForDeviceID'](this.selectedDevice.type.id)
       this.updateRoutineStepRequirements()
-      this.$emit('updatedStep', { id: this.id, device: this.selectedDevice, action: { name: this.selectedAction.name, params: this.actionParams.toString() } })
+      this.$emit('updatedStep', { id: this.id, device: this.selectedDevice, action: { name: this.selectedAction.name, params: this.translateModeIfNeeded(this.actionParams.toString()) } })
     },
     translate (action) {
       return translations[action.name]
@@ -124,6 +124,16 @@ export default {
     },
     getValues () {
       return routineStepRequirements[this.selectedDevice.type.name][this.selectedAction.name].values
+    },
+    getTranslator () {
+      return routineStepRequirements[this.selectedDevice.type.name][this.selectedAction.name].translator
+    },
+    translateModeIfNeeded (str) {
+      const translator = this.getTranslator()
+      if (translator != null) {
+        return translator(str)
+      }
+      return str
     }
   },
   async created () {
