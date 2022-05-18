@@ -5,16 +5,6 @@
         <v-stepper-items>
           <v-stepper-content step="1" class="pa-0">
             <h1 class="cardTitle mb-5"> Agrega una Nueva Rutina </h1>
-            <!--
-            <v-row>
-              <v-col md="6">
-                <h3> Dispositivos </h3>
-              </v-col>
-              <v-col md="6">
-                <h3 class="pr-16"> Acciones </h3>
-              </v-col>
-            </v-row>
-            -->
             <v-row class="fila" v-for="i in deviceIndex" :key="i-1">
               <v-col md="11">
                 <RoutineStep :id="i-1" @updatedStep="updateRoutine"/>
@@ -42,11 +32,16 @@
           <v-stepper-content step="2" class="pa-0">
             <h1 class="cardTitle"> Nombre de la rutina </h1>
             <h2 class="mt-6"> ¿Cómo se llamará la nueva rutina?</h2>
-            <input type="text"
-                   class="deviceNameBox rounded"
-                   placeholder="Nueva rutina"
-                   v-model="newRoutineName"
-            />
+            <v-text-field class="autocomplete pa-2"
+                          height="10px"
+                          v-model="newRoutineName"
+                          :counter="12"
+                          placeholder="Nueva rutina"
+                          solo
+                          rounded
+                          required
+                          outlined
+                          clearable/>
             <v-btn class="nextButton v-size--x-large accent black--text"
                    :disabled="newRoutineName == null"
                    @click="createRoutine"> Siguiente </v-btn>
@@ -138,6 +133,11 @@ export default {
   background-image: url('../assets/background_my_device.png');
   background-size: cover;
 }
+.autocomplete{
+  width: 400px;
+  margin: 20px auto;
+}
+
 .card{
   background-color: #E8EAF6;
   border-radius: 20px;

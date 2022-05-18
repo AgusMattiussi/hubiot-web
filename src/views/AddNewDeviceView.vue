@@ -31,11 +31,16 @@
           <h1 class="cardTitle"> Nombre del Dispositivo </h1>
           <h2 class="mt-6"> ¿Cómo se llamará el nuevo dispositivo?</h2>
           <!-- todo check deviceNameFormat -->
-          <input type="text"
-                 class="deviceNameBox rounded"
-                 placeholder="Nuevo Dispositivo"
-                 v-model="newDeviceName"
-          />
+          <v-text-field class="autocomplete pa-2"
+                        height="10px"
+                        v-model="newDeviceName"
+                        :counter="12"
+                        placeholder="Nuevo dispositivo"
+                        solo
+                        rounded
+                        required
+                        outlined
+                        clearable/>
           <img class="deviceImage" :src="require(`@/assets/${newDevice.name != null? newDevice.image : 'logo.png'}`)" :alt="newDevice.name">
           <v-btn class="nextButton v-size--x-large accent black--text"
                  :disabled="newDeviceName == null"
