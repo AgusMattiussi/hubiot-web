@@ -8,13 +8,13 @@
             <v-text-field color="white"
                           v-if="this.editingMode"
                           :prepend-inner-icon="'mdi-cancel'"
-                          :append-icon="'mdi-check'"
+                          :append-icon="isNameValid(newName) ? 'mdi-check' : 'mdi-blank'"
                           @click:prepend-inner="cancelChange"
                           @click:append="checkChange"
                           v-model="newName"
                           :counter="this.maxLength"
                           :placeholder=deviceName
-                          :rules="rules"
+                          :rules="[isNameValid(newName, true)]"
                           required
                           class="deviceName centered-input ml-10 mr-4">
               </v-text-field>
@@ -82,8 +82,7 @@ export default {
       deviceTypeId: this.$route.params.deviceTypeId,
       deviceTypeName: this.$route.params.deviceTypeName,
       newName: '',
-      maxLength: 12,
-      rules: [v => v.length <= this.maxLength || 'Mínimo largo son 3 dígitos y la máxima de ' + this.maxLength]
+      maxLength: 12
     }
   },
   computed: {
@@ -100,6 +99,13 @@ export default {
       $modifyDevice: 'modify',
       $getDevice: 'get'
     }),
+    isNameValid (name, withMsg) {
+      const msg = 'El nombre debe tener entre 3 y ' + this.maxLength.toString() + ' caracteres'
+      if (name.length >= 3 && name.length <= this.maxLength) {
+        return true
+      }
+      return withMsg ? msg : false
+    },
     validate () {
       this.$refs.form.validate()
     },
@@ -128,14 +134,12 @@ export default {
             }
           }
           await this.$modifyDevice(toUpdate)
-          this.$router.go(-1)
+          this.deviceName = this.newName
         } catch (e) {
           console.log('Error changing name')
         }
       }
-      if (this.$refs.form.validate()) {
-        this.editingMode = !this.editingMode
-      }
+      this.activateEditingMode()
     },
     activateEditingMode () {
       this.editingMode = !this.editingMode

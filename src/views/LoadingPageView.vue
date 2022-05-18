@@ -37,14 +37,15 @@
         <p class="heading">Cada vez más dispositivos soportados</p>
         <p class="descriptionText">Lámparas, parlantes, puertas y más. Hubiot se expande día a día para brindarte una mayor variedad de dispositivos a tu disposición.</p>
         <h3 class="supportedDevices">¿Puedo conectar mi dispositivo?</h3>
-        <v-btn class="supportedDevicesBtn" rounded large elevation="4" >Mira nuestra lista de dispositivos soportados</v-btn>
+        <router-link to="/list">
+          <v-btn class="supportedDevicesBtn" rounded large elevation="4" >Mira nuestra lista de dispositivos soportados</v-btn>
+        </router-link>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-
 export default {
   name: 'LoadingPageView'
 }
