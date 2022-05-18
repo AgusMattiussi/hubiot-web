@@ -90,8 +90,7 @@ export default {
       deviceTypeId: this.$route.params.deviceTypeId,
       deviceTypeName: this.$route.params.deviceTypeName,
       newName: '',
-      maxLength: 12,
-      rules: [v => v.length <= this.maxLength || 'Mínimo largo son 3 dígitos y la máxima de ' + this.maxLength]
+      maxLength: 12
     }
   },
   computed: {
