@@ -32,24 +32,27 @@
           <v-stepper-content step="2" class="pa-0">
             <h1 class="cardTitle"> Nombre de la rutina </h1>
             <h2 class="mt-6"> ¿Cómo se llamará la nueva rutina?</h2>
-            <v-text-field class="autocomplete pa-2"
-                          height="10px"
-                          v-model="newRoutineName"
-                          :counter="12"
-                          placeholder="Nueva rutina"
-                          solo
-                          rounded
-                          required
-                          outlined
-                          clearable/>
-            <v-btn class="nextButton v-size--x-large accent black--text"
-                   :disabled="newRoutineName == null"
-                   @click="createRoutine"> Siguiente </v-btn>
-            <v-btn class="ms-5 v-size--x-large grey black--text"
-                   @click="currentStep = 1"> Atrás </v-btn>
+            <form ref="form" :v-model="validForm">
+              <v-text-field class="autocomplete pa-2"
+                            height="10px"
+                            v-model="newRoutineName"
+                            :counter="this.maxLength"
+                            placeholder="Nueva rutina"
+                            :rules="rules"
+                            solo
+                            rounded
+                            required
+                            outlined
+                            clearable/>
+              <v-btn class="nextButton v-size--x-large accent black--text"
+                     :disabled="newRoutineName == null"
+                     @click="createRoutine"> Siguiente </v-btn>
+              <v-btn class="ms-5 v-size--x-large grey black--text"
+                     @click="currentStep = 1"> Atrás </v-btn>
+            </form>
           </v-stepper-content>
           <v-stepper-content step="3" class="pa-0">
-            <h1 class="cardTitle"> ¡Todo Listo! </h1>
+            <h1 class="cardTitle">¡Todo Listo!</h1>
             <h2 class="pa-6"> La rutina "{{newRoutineName}}" fue creada con éxito</h2>
             <v-icon color="success" class="checkIcon d-block" size="150px">mdi-check-circle</v-icon>
             <router-link class="text-decoration-none" to="routines">
@@ -84,7 +87,10 @@ export default {
       steps: [{}],
       newRoutineName: null,
       result: null,
-      routine: null
+      routine: null,
+      maxLength: 12,
+      validForm: false,
+      rules: [v => v.length <= this.maxLength || 'Máxima cantidad de caracteres excedida']
     }
   },
   methods: {

@@ -5,6 +5,7 @@
         <GoBackButton/>
         <v-main>
           <h1  v-if="!this.editingMode" class="mx-auto">{{ deviceName }}</h1>
+          <form ref="form" :v-model="validForm"></form>
           <v-text-field
                         color="white"
                         v-if="this.editingMode"
@@ -12,7 +13,12 @@
                         :append-icon="'mdi-check'"
                         @click:prepend-inner="cancelChange"
                         @click:append="checkChange"
-                        v-model="newName" :placeholder=deviceName class="my-text-field centered-input text--black ml-10 mr-4">
+                        v-model="newName"
+                        :counter="this.maxLength"
+                        :placeholder=deviceName
+                        :rules="rules"
+                        required
+                        class="my-text-field centered-input text--black ml-10 mr-4">
             </v-text-field>
         </v-main>
         <v-container v-if="!this.editingMode">
@@ -29,11 +35,7 @@
         <v-col md="4">
           <v-img :src="require(`@/assets/${device.image}`)" alt="parlante" class="img"></v-img>
         </v-col>
-        <v-col md="4">
-          <button @click="modifyDevice">
-            <ModifyButton class="modifyBtn"/>
-          </button>
-        </v-col>
+        <v-col md="4"></v-col>
       </v-row>
       <v-divider class="mx-4"></v-divider>
       <v-card-title class="sectionTitle">Estado</v-card-title>
@@ -62,12 +64,10 @@ import DeleteButton from '@/components/DeleteButton'
 import StateContainer from '@/components/StateContainer'
 import ActionsContainer from '@/components/ActionsContainer'
 import { mapActions, mapState } from 'vuex'
-import ModifyButton from '@/components/ModifyButton'
 
 export default {
   name: 'DeviceView',
   components: {
-    ModifyButton,
     StateContainer,
     DeleteButton,
     GoBackButton,
@@ -81,7 +81,10 @@ export default {
       deviceName: this.$route.params.deviceName,
       deviceTypeId: this.$route.params.deviceTypeId,
       deviceTypeName: this.$route.params.deviceTypeName,
-      newName: ''
+      newName: '',
+      validForm: false,
+      maxLength: 12,
+      rules: [v => v.length <= this.maxLength || 'Mínima cantidad necesaria es de 3 dígitos y la máxima cantidad de caracteres excedida']
     }
   },
   computed: {
@@ -98,6 +101,9 @@ export default {
       $modifyDevice: 'modify',
       $getDevice: 'get'
     }),
+    validate () {
+      this.$refs.form.validate()
+    },
     async deleteDevice () {
       try {
         await this.$deleteDevice(this.deviceId)
@@ -123,12 +129,15 @@ export default {
             }
           }
           await this.$modifyDevice(toUpdate)
+          this.$router.go(-1)
         } catch (e) {
           console.log('Error changing name: ')
+          console.log(e)
         }
       }
-      this.editingMode = !this.editingMode
-      console.log(this.editingMode)
+      if (this.$refs.form.validate()) {
+        this.editingMode = !this.editingMode
+      }
     },
     activateEditingMode () {
       this.editingMode = !this.editingMode
