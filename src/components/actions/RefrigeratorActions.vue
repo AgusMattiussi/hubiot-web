@@ -1,5 +1,5 @@
 <template>
-  <v-container @click="getRefrigeratorState" class="fill-height container">
+  <v-container class="fill-height container">
     <img v-if="loading"
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">

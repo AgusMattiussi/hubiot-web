@@ -1,6 +1,6 @@
 <template>
   <span>
-    <button class="btn">
+    <button class="btn" @click="clicked">
       <v-icon class="icon">
         mdi-trash-can-outline
       </v-icon>
@@ -10,12 +10,18 @@
 
 <script>
 export default {
-  name: 'DeleteButton'
+  name: 'DeleteButton',
+  methods: {
+    clicked () {
+      this.$emit('deleteClicked')
+    }
+  }
 }
 </script>
 
 <style scoped>
 .btn{
+  margin: 5px;
   background-color: #d14545;
   border-radius: 100px;
   border: 0;

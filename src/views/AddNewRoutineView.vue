@@ -32,24 +32,28 @@
           <v-stepper-content step="2" class="pa-0">
             <h1 class="cardTitle"> Nombre de la rutina </h1>
             <h2 class="mt-6"> ¿Cómo se llamará la nueva rutina?</h2>
-            <v-text-field class="autocomplete pa-2"
-                          height="10px"
-                          v-model="newRoutineName"
-                          :counter="12"
-                          placeholder="Nueva rutina"
-                          solo
-                          rounded
-                          required
-                          outlined
-                          clearable/>
-            <v-btn class="nextButton v-size--x-large accent black--text"
-                   :disabled="newRoutineName == null"
-                   @click="createRoutine"> Siguiente </v-btn>
-            <v-btn class="ms-5 v-size--x-large grey black--text"
-                   @click="currentStep = 1"> Atrás </v-btn>
+            <form ref="form">
+              <v-text-field class="autocomplete pa-2"
+                            height="10px"
+                            v-model="newRoutineName"
+                            :counter="this.maxLength"
+                            placeholder="Nueva rutina"
+                            :rules="[isNameValid(newRoutineName, true)]"
+                            solo
+                            rounded
+                            required
+                            outlined
+                            clearable
+                            @click:clear="newRoutineName = ''"/>
+              <v-btn class="nextButton v-size--x-large accent black--text"
+                     :disabled="!isNameValid(newRoutineName)"
+                     @click="createRoutine"> Siguiente </v-btn>
+              <v-btn class="ms-5 v-size--x-large grey black--text"
+                     @click="currentStep = 1"> Atrás </v-btn>
+            </form>
           </v-stepper-content>
           <v-stepper-content step="3" class="pa-0">
-            <h1 class="cardTitle"> ¡Todo Listo! </h1>
+            <h1 class="cardTitle">¡Todo Listo!</h1>
             <h2 class="pa-6"> La rutina "{{newRoutineName}}" fue creada con éxito</h2>
             <v-icon color="success" class="checkIcon d-block" size="150px">mdi-check-circle</v-icon>
             <router-link class="text-decoration-none" to="routines">
@@ -82,15 +86,23 @@ export default {
       currentStep: 1,
       deviceIndex: 1,
       steps: [{}],
-      newRoutineName: null,
+      newRoutineName: '',
       result: null,
-      routine: null
+      routine: null,
+      maxLength: 12
     }
   },
   methods: {
     ...mapActions('routines', {
       $createRoutine: 'create'
     }),
+    isNameValid (name, withMsg) {
+      const msg = 'El nombre debe tener entre 3 y ' + this.maxLength.toString() + ' caracteres'
+      if (name.length >= 3 && name.length <= this.maxLength) {
+        return true
+      }
+      return withMsg ? msg : false
+    },
     setResult (result) {
       this.result = JSON.stringify(result, null, 2)
     },

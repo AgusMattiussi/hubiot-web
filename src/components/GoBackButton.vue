@@ -20,10 +20,6 @@ export default {
 </script>
 
 <style scoped>
-.go-back{
-  display: flex;
-  cursor: pointer;
-}
 .btn{
   margin: 5px;
   background-color: #E8EAF6;

@@ -30,22 +30,25 @@
         <v-stepper-content step="2" class="stepperContent">
           <h1 class="cardTitle"> Nombre del Dispositivo </h1>
           <h2 class="subtitle"> ¿Cómo se llamará el nuevo dispositivo?</h2>
+          <form ref="form">
           <v-text-field class="autocomplete"
                         height="10px"
                         v-model="newDeviceName"
-                        :counter="12"
+                        :counter="this.maxLength"
                         placeholder="Nuevo dispositivo"
                         solo
+                        :rules="[isNameValid(newDeviceName, true)]"
+                        @click:clear="newDeviceName = ''"
                         rounded
                         required
                         outlined
                         clearable/>
           <img class="deviceImage" :src="require(`@/assets/${newDevice.name != null? newDevice.image : 'logo.png'}`)" :alt="newDevice.name">
           <v-btn class="nextButton"
-                 :disabled="newDeviceName == null"
-                 @click="createDevice()"> Siguiente </v-btn>
+                 :disabled="!isNameValid(newDeviceName)"
+                 @click="createDevice()">Siguiente</v-btn>
           <v-btn class="cancelButton"
-                 @click="currentStep = 1"> Atrás </v-btn>
+                 @click="currentStep = 1">Atrás</v-btn>
         </v-stepper-content>
         <v-stepper-content step="3" class="stepperContent">
           <h1 class="cardTitle"> ¡Todo Listo! </h1>
@@ -80,15 +83,26 @@ export default {
       currentStep: 1,
       devices: store.devices,
       newDevice: {},
-      newDeviceName: null,
+      newDeviceName: '',
       result: null,
-      device: null
+      device: null,
+      maxLength: 12
     }
   },
   methods: {
     ...mapActions('devices', {
       $createDevice: 'create'
     }),
+    isNameValid (name, withMsg) {
+      const msg = 'El nombre debe tener entre 3 y ' + this.maxLength.toString() + ' caracteres'
+      if (name.length >= 3 && name.length <= this.maxLength) {
+        return true
+      }
+      return withMsg ? msg : false
+    },
+    validate () {
+      this.$refs.form.validate()
+    },
     setResult (result) {
       this.result = JSON.stringify(result, null, 2)
     },
