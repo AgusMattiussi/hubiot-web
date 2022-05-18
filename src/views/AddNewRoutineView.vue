@@ -1,6 +1,7 @@
 <template>
-  <v-container class="fill-height background justify-center" fluid>
-    <v-card class="card" elevation="24">
+  <v-main class="fill-height background justify-center" fluid>
+    <v-container>
+      <v-card class="card" elevation="24">
       <v-stepper class="stepper secondary" v-model="currentStep" elevation="0">
         <v-stepper-items>
           <v-stepper-content step="1" class="pa-0">
@@ -70,7 +71,8 @@
         </v-stepper-header>
       </v-stepper>
     </v-card>
-  </v-container>
+    </v-container>
+  </v-main>
 </template>
 
 <script>
@@ -151,10 +153,11 @@ export default {
 }
 
 .card{
+  margin-left: auto;
+  margin-right: auto;
   background-color: #E8EAF6;
   border-radius: 20px;
-  margin: auto;
-  width: 500px;
+  width: 60%;
 }
 .cardTitle{
   height: 70px;
@@ -164,19 +167,13 @@ export default {
   color: #FFFFFF;
   margin: 0;
 }
-.deviceNameBox{
-  background-color: #FFFFFF;
-  outline-color: #5C6BC0;
-  margin: 20px auto;
-  padding: 8px;
-  width: 400px;
-  display: block;
-}
 .nextButton{
   margin: 20px auto;
 }
 .stepper{
-  width: 600px;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
 }
 .checkIcon{
   height: auto;
