@@ -67,7 +67,6 @@ export default {
       try {
         this.blinds = await this.$getBlindsState(this.deviceId)
       } catch (e) {
-        // this.setResult(e)
         console.log('getBlindStateError')
       }
     },
@@ -103,7 +102,7 @@ export default {
     async setLevel () {
       const action = {
         name: 'setLevel',
-        data: [this.level]
+        data: [Math.trunc(this.level)]
       }
       await this.executeAction(action)
     }
