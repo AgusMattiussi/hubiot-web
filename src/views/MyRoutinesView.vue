@@ -16,6 +16,7 @@
                                   @click:append="searchedClicked"
                                   placeholder="Buscar rutina"
                                   solo
+                                  rounded
                                   required
                                   outlined
                                   clearable/>

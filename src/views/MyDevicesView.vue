@@ -18,6 +18,7 @@
                                   @click:append="searchedClicked"
                                   placeholder="Buscar dispositivo"
                                   solo
+                                  rounded
                                   required
                                   outlined
                                   clearable/>
