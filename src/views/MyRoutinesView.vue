@@ -104,11 +104,11 @@ export default {
 .deviceCard {
   margin: 10px;
   border-radius: 20px;
-  min-width: 100px;
-  min-height: 100px;
-  max-width: 160px;
-  padding: 20px 10px 10px 10px;
+  width: 120px;
+  height: 100px;
+  padding: 10px;
 }
+
 .routineName{
   text-decoration: none;
   font-size: 1.5vw;

@@ -4,7 +4,8 @@
       <v-sheet class="fill-height" elevation="24">
         <v-container class="secondary fill-height" fluid>
         <v-row>
-          <v-col md="2"></v-col>
+          <v-col md="2">
+          </v-col>
           <v-col md="8">
             <v-container><!-- Container para centrar contenido -->
               <h1 class="mb-3">Mis dispositivos</h1>
