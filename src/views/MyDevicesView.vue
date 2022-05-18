@@ -10,7 +10,7 @@
             <v-container><!-- Container para centrar contenido -->
               <h1 class="mb-3">Mis Dispositivos</h1>
               <v-main>
-                <form action="">
+                <form>
                   <div class="d-flex">
                     <v-text-field :counter="18"
                                   :append-icon="'mdi-magnify'"
@@ -77,9 +77,6 @@ export default {
     ...mapActions('devices', {
       $getAllDevices: 'getAll'
     }),
-    validate () {
-      this.$refs.form.validate()
-    },
     getElementsIncluding (str, array) {
       return array.filter(elem => elem.name.toLowerCase().includes(str.toLowerCase()))
     },
