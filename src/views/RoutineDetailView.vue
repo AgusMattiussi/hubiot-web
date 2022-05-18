@@ -16,7 +16,7 @@
                       {{ action.device.name }}
                     </v-card-title>
                     <v-card-subtitle class="actionName">
-                      {{ translate(action) }}
+                      {{ translate(action.actionName) }}: {{action.params[0].toString()}}
                     </v-card-subtitle>
                   </div>
                 <v-avatar class="img">
@@ -77,8 +77,8 @@ export default {
       $getAllRoutines: 'getAll',
       $execute: 'executeRoutine'
     }),
-    translate (action) {
-      return translations[action.actionName]
+    translate (actionName) {
+      return translations[actionName]
     }
   },
   async created () {
