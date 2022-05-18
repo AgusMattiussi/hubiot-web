@@ -7,13 +7,13 @@
             <v-col md="2"></v-col>
             <v-col md="8">
               <v-container class="niceWidth"> <!-- Container para centrar contenido -->
-                <h1 class="mb-3">Mis rutinas</h1>
+                <h1 class="mb-3">Mis Rutinas</h1>
                 <form action="">
                   <div class="d-flex">
-                    <v-text-field v-model="routine"
+                    <v-text-field v-model="searchedString"
                                   :counter="18"
                                   :append-icon="'mdi-magnify'"
-                                  @click:append="searchedClicked"
+                                  @click:clear="searchedString = ''"
                                   placeholder="Buscar rutina"
                                   solo
                                   rounded
@@ -27,7 +27,7 @@
                 </form>
                 <v-main mt="10">
                   <div class="devicesParent">
-                    <v-sheet class="deviceCard" v-for="routine in routines" :key="routine.id">
+                    <v-sheet class="deviceCard" v-for="routine in getElementsIncluding(searchedString, routines)" :key="routine.id">
                       <router-link :to="{ name: 'routineDetails', params: {id: routine.id}}" class="routineName">
                         <v-icon class="mb-2" x-large color="black">mdi-timer-outline</v-icon>
                         <h4>{{ routine.name }}</h4>
@@ -55,8 +55,8 @@ export default {
   data () {
     return {
       valid: true,
-      routine: null,
-      result: null
+      result: null,
+      searchedString: ''
     }
   },
   computed: {
@@ -71,11 +71,11 @@ export default {
     validate () {
       this.$refs.form.validate()
     },
-    searchedClicked () {
-      this.valid = false
-    },
     setResult (result) {
       this.result = JSON.stringify(result, null, 2)
+    },
+    getElementsIncluding (str, array) {
+      return array.filter(elem => elem.name.toLowerCase().includes(str.toLowerCase()))
     },
     async getAllRoutines () {
       try {
@@ -87,7 +87,7 @@ export default {
     }
   },
   async created () {
-    await this.$getAllRoutines()
+    await this.getAllRoutines()
   }
 }
 </script>
@@ -98,7 +98,7 @@ export default {
   display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   align-self: stretch;
 }
 

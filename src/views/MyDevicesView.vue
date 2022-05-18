@@ -8,14 +8,14 @@
           </v-col>
           <v-col md="8">
             <v-container><!-- Container para centrar contenido -->
-              <h1 class="mb-3">Mis dispositivos</h1>
+              <h1 class="mb-3">Mis Dispositivos</h1>
               <v-main>
                 <form action="">
                   <div class="d-flex">
-                    <v-text-field v-model="device"
-                                  :counter="18"
+                    <v-text-field :counter="18"
                                   :append-icon="'mdi-magnify'"
-                                  @click:append="searchedClicked"
+                                  @click:clear="searchedString = ''"
+                                  v-model="searchedString"
                                   placeholder="Buscar dispositivo"
                                   solo
                                   rounded
@@ -30,7 +30,7 @@
               </v-main>
               <v-main mt="10">
                 <div class="devicesParent">
-                  <v-sheet class="deviceCard" v-for="device in devices" :key="device.id">
+                  <v-sheet class="deviceCard" v-for="device in getElementsIncluding(searchedString, devices)" :key="device.id">
                     <router-link :to="{ name: 'deviceDetails',
                                         params: {slug: device.name,
                                                  deviceId: device.id,
@@ -64,8 +64,8 @@ export default {
   data () {
     return {
       valid: true,
-      device: null,
-      result: null
+      result: null,
+      searchedString: ''
     }
   },
   computed: {
@@ -80,8 +80,8 @@ export default {
     validate () {
       this.$refs.form.validate()
     },
-    searchedClicked () {
-      console.log('funkando')
+    getElementsIncluding (str, array) {
+      return array.filter(elem => elem.name.toLowerCase().includes(str.toLowerCase()))
     },
     setResult (result) {
       this.result = JSON.stringify(result, null, 2)
@@ -99,7 +99,7 @@ export default {
     }
   },
   async created () {
-    await this.$getAllDevices()
+    await this.getAllDevices()
     //   .then(() => {
     //   console.log('Funka')
     // })
@@ -113,7 +113,7 @@ export default {
   display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   align-self: stretch;
 }
 
