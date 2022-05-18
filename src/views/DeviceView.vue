@@ -23,10 +23,10 @@
         </v-main>
         <v-main v-if="!this.editingMode" class="mt-1">
           <v-card v-if="!this.editingMode" class="primary pa-0" elevation="0">
-            <v-card-title class="pa-0">
+            <v-card-title class="pa-0 white--text">
               {{ deviceName }}
               <v-btn class="ml-2" outlined small fab color="primary" @click="activateEditingMode">
-                <v-icon color="black">mdi-pencil</v-icon>
+                <v-icon color="white">mdi-pencil</v-icon>
               </v-btn>
             </v-card-title>
           </v-card>
