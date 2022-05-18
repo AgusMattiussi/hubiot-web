@@ -113,7 +113,7 @@ export default {
   display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   align-self: stretch;
 }
 
