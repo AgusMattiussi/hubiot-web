@@ -5,9 +5,6 @@ export default {
   state: {
     devices: []
   },
-  // getters: {
-  // Chequear si hay que agregar getters
-  // },
   actions: {
     async create (context, device) {
       const result = await DevicesApi.add(device)
