@@ -31,24 +31,25 @@
           <h1 class="cardTitle"> Nombre del Dispositivo </h1>
           <h2 class="subtitle"> ¿Cómo se llamará el nuevo dispositivo?</h2>
           <form ref="form">
-          <v-text-field class="autocomplete"
-                        height="10px"
-                        v-model="newDeviceName"
-                        :counter="this.maxLength"
-                        placeholder="Nuevo dispositivo"
-                        solo
-                        :rules="[isNameValid(newDeviceName, true)]"
-                        @click:clear="newDeviceName = ''"
-                        rounded
-                        required
-                        outlined
-                        clearable/>
-          <img class="deviceImage" :src="require(`@/assets/${newDevice.name != null? newDevice.image : 'logo.png'}`)" :alt="newDevice.name">
-          <v-btn class="nextButton"
-                 :disabled="!isNameValid(newDeviceName)"
-                 @click="createDevice()">Siguiente</v-btn>
-          <v-btn class="cancelButton"
-                 @click="currentStep = 1">Atrás</v-btn>
+            <v-text-field class="autocomplete"
+                          height="10px"
+                          v-model="newDeviceName"
+                          :counter="this.maxLength"
+                          placeholder="Nuevo dispositivo"
+                          solo
+                          :rules="[isNameValid(newDeviceName, true)]"
+                          @click:clear="newDeviceName = ''"
+                          rounded
+                          required
+                          outlined
+                          clearable/>
+            <img class="deviceImage" :src="require(`@/assets/${newDevice.name != null? newDevice.image : 'logo.png'}`)" :alt="newDevice.name">
+            <v-btn class="nextButton"
+                   :disabled="!isNameValid(newDeviceName)"
+                   @click="createDevice()">Siguiente</v-btn>
+            <v-btn class="cancelButton"
+                   @click="currentStep = 1">Atrás</v-btn>
+          </form>
         </v-stepper-content>
         <v-stepper-content step="3" class="stepperContent">
           <h1 class="cardTitle"> ¡Todo Listo! </h1>

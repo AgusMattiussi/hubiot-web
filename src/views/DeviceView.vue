@@ -4,7 +4,7 @@
       <div class="cardTitle">
         <GoBackButton/>
         <v-main>
-          <form ref="form" :v-model="validForm">
+          <form ref="form">
             <v-text-field
                           color="white"
                           v-if="this.editingMode"
@@ -50,7 +50,6 @@
       <v-divider class="mx-4"></v-divider>
       <v-card-title class="sectionTitle">Acciones</v-card-title>
       <v-card-actions class="actions">
-          <!-- ACA VAN LAS ACCIONES -->
         <actions-container :device-id="deviceId.toString()"
                            :device-type-id="deviceTypeId.toString()"
                            :device-type-name="deviceTypeName.toString()"/>
@@ -91,7 +90,6 @@ export default {
       deviceTypeId: this.$route.params.deviceTypeId,
       deviceTypeName: this.$route.params.deviceTypeName,
       newName: '',
-      validForm: false,
       maxLength: 12,
       rules: [v => v.length <= this.maxLength || 'Mínimo largo son 3 dígitos y la máxima de ' + this.maxLength]
     }
@@ -140,8 +138,7 @@ export default {
           await this.$modifyDevice(toUpdate)
           this.$router.go(-1)
         } catch (e) {
-          console.log('Error changing name: ')
-          console.log(e)
+          console.log('Error changing name')
         }
       }
       if (this.$refs.form.validate()) {
