@@ -1,7 +1,7 @@
 <template>
   <span class="go-back">
     <button @click="goBack" class="btn icon">
-      <v-icon class="mx-auto" dark color="black">
+      <v-icon class="" dark color="black">
         mdi-arrow-left
       </v-icon>
     </button>
@@ -20,10 +20,6 @@ export default {
 </script>
 
 <style scoped>
-.go-back{
-  display: flex;
-  cursor: pointer;
-}
 .btn{
   margin: 5px;
   background-color: #E8EAF6;

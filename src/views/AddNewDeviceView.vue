@@ -32,25 +32,25 @@
           <h2 class="mt-6"> ¿Cómo se llamará el nuevo dispositivo?</h2>
           <!-- todo check deviceNameFormat -->
           <form ref="form" :v-model="validForm" >
-          <v-text-field class="autocomplete pa-2"
-                        height="10px"
-                        v-model="newDeviceName"
-                        :counter="this.maxLength"
-                        placeholder="Nuevo dispositivo"
-                        solo
-                        :rules="rules"
-                        rounded
-                        required
-                        outlined
-                        clearable/>
-            <img class="deviceImage" :src="require(`@/assets/${newDevice.name != null? newDevice.image : 'logo.png'}`)" :alt="newDevice.name">
-            <v-btn class="nextButton v-size--x-large accent black--text"
-                   @click="createDevice()"
-            > Siguiente </v-btn>
-            <v-btn class="ms-5 v-size--x-large grey black--text"
-                   @click="currentStep = 1">
-              Atrás
-            </v-btn>
+            <v-text-field class="autocomplete pa-2"
+                          height="10px"
+                          v-model="newDeviceName"
+                          :counter="this.maxLength"
+                          placeholder="Nuevo dispositivo"
+                          solo
+                          :rules="rules"
+                          rounded
+                          required
+                          outlined
+                          clearable/>
+              <img class="deviceImage" :src="require(`@/assets/${newDevice.name != null? newDevice.image : 'logo.png'}`)" :alt="newDevice.name">
+              <v-btn class="nextButton v-size--x-large accent black--text"
+                     @click="createDevice()"
+              > Siguiente </v-btn>
+              <v-btn class="ms-5 v-size--x-large grey black--text"
+                     @click="currentStep = 1">
+                Atrás
+              </v-btn>
           </form>
         </v-stepper-content>
         <v-stepper-content step="3" class="pa-0">
