@@ -30,7 +30,7 @@
                     <v-sheet class="routineCard" v-for="routine in getElementsIncluding(searchedString, routines)" :key="routine.id">
                       <router-link :to="{ name: 'routineDetails', params: {id: routine.id}}" class="routineName">
                         <v-icon class="routineIcon">mdi-timer-outline</v-icon>
-                        <h4>{{ routine.name }}</h4>
+                        <h4 class="name">{{ routine.name }}</h4>
                       </router-link>
                     </v-sheet>
                   </div>
@@ -115,14 +115,17 @@ export default {
   width: 120px;
   height: 100px;
   padding: 10px;
+  overflow: hidden;
 }
 .routineName{
   text-decoration: none;
-  font-size: 1.5vw;
 }
 .routineIcon{
   margin-bottom: 2px;
   color: black;
   font-size: 40px;
+}
+.name{
+  margin-top: 10px;
 }
 </style>

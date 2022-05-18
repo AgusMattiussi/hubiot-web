@@ -126,9 +126,9 @@ export default {
   border-radius: 20px;
   max-width: 120px;
   padding: 10px;
+  overflow: hidden;
 }
 .deviceName{
   text-decoration: none;
-  font-size: 1.5vw;
 }
 </style>

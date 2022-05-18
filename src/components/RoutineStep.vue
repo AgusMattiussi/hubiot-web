@@ -1,7 +1,8 @@
 <template>
   <v-container>
     <v-row>
-      <v-col md="5">
+      <v-col md="1"/>
+      <v-col md="4">
         <v-autocomplete
           height="10px"
           class="autocomplete"
@@ -19,7 +20,7 @@
          @change="updatedDevice">
         </v-autocomplete>
       </v-col>
-      <v-col md="5">
+      <v-col md="4">
         <v-autocomplete
           height="10px"
           class="autocomplete"
@@ -37,7 +38,7 @@
           @change="updated">
         </v-autocomplete>
       </v-col>
-      <v-col md="2">
+      <v-col md="3">
         <v-text-field v-if="req === 1"
                       type="text"
                       clearable

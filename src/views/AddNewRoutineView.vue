@@ -157,7 +157,7 @@ export default {
   margin-right: auto;
   background-color: #E8EAF6;
   border-radius: 20px;
-  width: 60%;
+  width: 70%;
 }
 .cardTitle{
   height: 70px;
