@@ -16,7 +16,7 @@
           v-model="selectedDevice"
           value=""
           hide-details
-         @change="updated">
+          @change="updated">
         </v-autocomplete>
       </v-col>
       <v-col>
