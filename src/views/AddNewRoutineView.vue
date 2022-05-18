@@ -32,20 +32,21 @@
           <v-stepper-content step="2" class="pa-0">
             <h1 class="cardTitle"> Nombre de la rutina </h1>
             <h2 class="mt-6"> ¿Cómo se llamará la nueva rutina?</h2>
-            <form ref="form" :v-model="validForm">
+            <form ref="form">
               <v-text-field class="autocomplete pa-2"
                             height="10px"
                             v-model="newRoutineName"
                             :counter="this.maxLength"
                             placeholder="Nueva rutina"
-                            :rules="rules"
+                            :rules="[isNameValid(newRoutineName, true)]"
                             solo
                             rounded
                             required
                             outlined
-                            clearable/>
+                            clearable
+                            @click:clear="newRoutineName = ''"/>
               <v-btn class="nextButton v-size--x-large accent black--text"
-                     :disabled="newRoutineName == null"
+                     :disabled="!isNameValid(newRoutineName)"
                      @click="createRoutine"> Siguiente </v-btn>
               <v-btn class="ms-5 v-size--x-large grey black--text"
                      @click="currentStep = 1"> Atrás </v-btn>
@@ -85,18 +86,23 @@ export default {
       currentStep: 1,
       deviceIndex: 1,
       steps: [{}],
-      newRoutineName: null,
+      newRoutineName: '',
       result: null,
       routine: null,
-      maxLength: 12,
-      validForm: false,
-      rules: [v => v.length <= this.maxLength || 'Máxima cantidad de caracteres excedida']
+      maxLength: 12
     }
   },
   methods: {
     ...mapActions('routines', {
       $createRoutine: 'create'
     }),
+    isNameValid (name, withMsg) {
+      const msg = 'El nombre debe tener entre 3 y ' + this.maxLength.toString() + ' caracteres'
+      if (name.length >= 3 && name.length <= this.maxLength) {
+        return true
+      }
+      return withMsg ? msg : false
+    },
     setResult (result) {
       this.result = JSON.stringify(result, null, 2)
     },

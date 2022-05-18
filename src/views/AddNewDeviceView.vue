@@ -31,20 +31,22 @@
           <h1 class="cardTitle"> Nombre del Dispositivo </h1>
           <h2 class="mt-6"> ¿Cómo se llamará el nuevo dispositivo?</h2>
           <!-- todo check deviceNameFormat -->
-          <form ref="form" :v-model="validForm" >
+          <form ref="form">
           <v-text-field class="autocomplete pa-2"
                         height="10px"
                         v-model="newDeviceName"
                         :counter="this.maxLength"
                         placeholder="Nuevo dispositivo"
                         solo
-                        :rules="rules"
+                        :rules="[isNameValid(newDeviceName, true)]"
+                        @click:clear="newDeviceName = ''"
                         rounded
                         required
                         outlined
                         clearable/>
             <img class="deviceImage" :src="require(`@/assets/${newDevice.name != null? newDevice.image : 'logo.png'}`)" :alt="newDevice.name">
             <v-btn class="nextButton v-size--x-large accent black--text"
+                   :disabled="!isNameValid(newDeviceName)"
                    @click="createDevice()"
             > Siguiente </v-btn>
             <v-btn class="ms-5 v-size--x-large grey black--text"
@@ -86,18 +88,23 @@ export default {
       currentStep: 1,
       devices: store.devices,
       newDevice: {},
-      newDeviceName: null,
+      newDeviceName: '',
       result: null,
       device: null,
-      maxLength: 12,
-      rules: [v => v.length <= this.maxLength || 'Mínima cantidad necesaria es de 3 dígitos y la máxima cantidad de caracteres excedida'],
-      validForm: false
+      maxLength: 12
     }
   },
   methods: {
     ...mapActions('devices', {
       $createDevice: 'create'
     }),
+    isNameValid (name, withMsg) {
+      const msg = 'El nombre debe tener entre 3 y ' + this.maxLength.toString() + ' caracteres'
+      if (name.length >= 3 && name.length <= this.maxLength) {
+        return true
+      }
+      return withMsg ? msg : false
+    },
     validate () {
       this.$refs.form.validate()
     },
