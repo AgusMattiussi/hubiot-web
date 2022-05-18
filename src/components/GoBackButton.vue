@@ -1,7 +1,7 @@
 <template>
   <span class="go-back">
-    <button @click="goBack" class="btn icon">
-      <v-icon class="mx-auto" dark color="black">
+    <button @click="goBack" class="btn">
+      <v-icon class="icon">
         mdi-arrow-left
       </v-icon>
     </button>
@@ -31,5 +31,9 @@ export default {
   border: 0;
   height: 40px;
   width: 40px;
+}
+.icon{
+  color: black;
+  font-size: 25px;
 }
 </style>

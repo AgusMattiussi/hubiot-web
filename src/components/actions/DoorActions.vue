@@ -1,5 +1,5 @@
 <template>
-  <v-container class="fill-height pa-0 ma-0">
+  <v-container class="fill-height container">
     <img v-if="loading"
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
@@ -7,7 +7,7 @@
       <div class="actions">
         <div v-if="door.lock === 'unlocked'" class="action">
           <button class="btn" @click="lock">
-            <v-icon class="mx-auto" color="black">
+            <v-icon class="icon">
               mdi-lock-outline
             </v-icon>
           </button>
@@ -15,7 +15,7 @@
         </div>
         <div v-else class="action" @click="unlock">
           <button class="btn">
-            <v-icon class="mx-auto" color="black">
+            <v-icon class="icon">
               mdi-lock-open-outline
             </v-icon>
           </button>
@@ -25,7 +25,7 @@
       <div class="actions">
         <div v-if="door.status === 'closed'" class="action">
           <button class="btn" @click="open">
-            <v-icon class="mx-auto" color="black">
+            <v-icon class="icon">
               mdi-door-open
             </v-icon>
           </button>
@@ -33,7 +33,7 @@
         </div>
         <div v-else class="action">
           <button class="btn" @click="close">
-            <v-icon class="mx-auto" color="black">
+            <v-icon class="icon">
               mdi-door
             </v-icon>
           </button>
@@ -114,6 +114,10 @@ export default {
 </script>
 
 <style scoped>
+.container{
+  padding: 0;
+  margin: 0;
+}
 .actions{
   display: flex;
   justify-content: space-between;
@@ -128,5 +132,9 @@ export default {
   border: 2px solid black;
   height: 40px;
   width: 40px;
+}
+.icon{
+  margin: auto;
+  color: black;
 }
 </style>

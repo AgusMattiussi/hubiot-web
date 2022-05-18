@@ -1,5 +1,5 @@
 <template>
-  <v-container class="fill-height pa-0 ma-0">
+  <v-container class="fill-height container">
     <img v-if="loading"
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
@@ -7,7 +7,7 @@
       <div class="actions">
         <div v-if="ac.status === 'off'">
           <button class="btn" @click="turnOn">
-            <v-icon class="mx-auto" color="black">
+            <v-icon class="icon">
               mdi-lightning-bolt-circle
             </v-icon>
           </button>
@@ -15,7 +15,7 @@
         </div>
         <div v-else>
           <button class="btn" @click="turnOff">
-            <v-icon class="mx-auto" color="black">
+            <v-icon class="icon">
               mdi-minus-circle-off-outline
             </v-icon>
           </button>
@@ -197,6 +197,10 @@ export default {
 </script>
 
 <style scoped>
+.container{
+  padding: 0;
+  margin: 0;
+}
 .actions{
   justify-content: space-between;
   margin: auto;
@@ -208,6 +212,10 @@ export default {
   margin-bottom: 10px;
   height: 40px;
   width: 40px;
+}
+.icon{
+  margin: auto;
+  color: black;
 }
 .inputAction{
   display: flex;

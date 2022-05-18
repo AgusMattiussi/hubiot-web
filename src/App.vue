@@ -3,7 +3,6 @@
       <v-app id="app">
         <NavigationBar/>
         <router-view :key="$route.path"/>
-        <BottomBar/>
       </v-app>
     </div>
 </template>
@@ -27,17 +26,13 @@ nav a {
   color: #FFFFFF;
 }
 
-/*nav a.router-link-exact-active {*/
-/*  color: #5B6DCB;*/
-/*}*/
 </style>
 
 <script>
 import NavigationBar from '@/components/NavigationBar'
-import BottomBar from '@/components/BottomBar'
 export default {
   name: 'App',
-  components: { NavigationBar, BottomBar },
+  components: { NavigationBar },
   data: () => ({
   })
 }

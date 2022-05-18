@@ -1,14 +1,14 @@
 <template>
 <v-container class="fill-height background justify-center" fluid>
   <v-card class="card" elevation="24">
-    <v-stepper class="stepper secondary" v-model="currentStep" elevation="0">
+    <v-stepper class="stepper" v-model="currentStep" elevation="0">
       <v-stepper-items>
-        <v-stepper-content step="1" class="pa-0">
+        <v-stepper-content step="1" class="stepperContent">
           <h1 class="cardTitle"> Tipo de Dispositivo </h1>
-          <h2 class="mt-6"> ¿Qué tipo de dispositivo es?</h2>
+          <h2 class="subtitle"> ¿Qué tipo de dispositivo es?</h2>
           <v-autocomplete
             height="10px"
-            class="autocomplete pa-2"
+            class="autocomplete"
             :items="devices"
             placeholder="Seleccionar"
             rounded
@@ -20,18 +20,17 @@
             v-model="newDevice"
           >
           </v-autocomplete>
-          <v-btn class="nextButton v-size--x-large accent black--text"
+          <v-btn class="nextButton"
                  :disabled="newDevice.id == null"
-                 @click="currentStep = 2"> Siguiente </v-btn>
-          <router-link class="text-decoration-none" to="devices">
-            <v-btn class="ma-5 v-size--x-large grey black--text"> Cancelar </v-btn>
+                 @click="currentStep = 2">Siguiente</v-btn>
+          <router-link class="button" to="devices">
+            <v-btn class="cancelButton">Cancelar</v-btn>
           </router-link>
         </v-stepper-content>
-        <v-stepper-content step="2" class="pa-0">
+        <v-stepper-content step="2" class="stepperContent">
           <h1 class="cardTitle"> Nombre del Dispositivo </h1>
-          <h2 class="mt-6"> ¿Cómo se llamará el nuevo dispositivo?</h2>
-          <!-- todo check deviceNameFormat -->
-          <v-text-field class="autocomplete pa-2"
+          <h2 class="subtitle"> ¿Cómo se llamará el nuevo dispositivo?</h2>
+          <v-text-field class="autocomplete"
                         height="10px"
                         v-model="newDeviceName"
                         :counter="12"
@@ -42,27 +41,27 @@
                         outlined
                         clearable/>
           <img class="deviceImage" :src="require(`@/assets/${newDevice.name != null? newDevice.image : 'logo.png'}`)" :alt="newDevice.name">
-          <v-btn class="nextButton v-size--x-large accent black--text"
+          <v-btn class="nextButton"
                  :disabled="newDeviceName == null"
                  @click="createDevice()"> Siguiente </v-btn>
-          <v-btn class="ms-5 v-size--x-large grey black--text"
+          <v-btn class="cancelButton"
                  @click="currentStep = 1"> Atrás </v-btn>
         </v-stepper-content>
-        <v-stepper-content step="3" class="pa-0">
+        <v-stepper-content step="3" class="stepperContent">
           <h1 class="cardTitle"> ¡Todo Listo! </h1>
-          <h2 class="pa-6"> El dispostivo "{{newDeviceName}}" fue creado con éxito</h2>
-          <v-icon color="success" class="checkIcon d-block" size="150px">mdi-check-circle</v-icon>
-          <router-link class="text-decoration-none" to="devices">
-            <v-btn class="ma-5 v-size--x-large accent black--text"> Volver a "Mis Dispositivos" </v-btn>
+          <h2 class="successMsg"> El dispostivo "{{newDeviceName}}" fue creado con éxito</h2>
+          <v-icon color="success" class="checkIcon" size="150px">mdi-check-circle</v-icon>
+          <router-link class="button" to="devices">
+            <v-btn class="nextButton"> Volver a "Mis Dispositivos" </v-btn>
           </router-link>
         </v-stepper-content>
       </v-stepper-items>
-      <v-stepper-header class="elevation-0 white">
-        <v-stepper-step :color="currentStep === 1? 'primary' : 'success'" class="ml-16" :complete="currentStep > 1" step="1"></v-stepper-step>
+      <v-stepper-header class="stepperHeader">
+        <v-stepper-step :color="currentStep === 1? 'primary' : 'success'" class="stepCounter1" :complete="currentStep > 1" step="1"></v-stepper-step>
         <v-divider></v-divider>
         <v-stepper-step :color="currentStep === 2? 'primary' : 'success'" :complete="currentStep > 2" step="2"></v-stepper-step>
         <v-divider></v-divider>
-        <v-stepper-step :completed="true" :color="currentStep === 3? 'success' : 'grey'" class="mr-16" step="3"></v-stepper-step>
+        <v-stepper-step :completed="true" :color="currentStep === 3? 'success' : 'grey'" class="stepCounter2" step="3"></v-stepper-step>
       </v-stepper-header>
     </v-stepper>
   </v-card>
@@ -115,7 +114,6 @@ export default {
     background-size: cover;
   }
   .card{
-    elevation: 24deg;
     border-radius: 20px;
     margin: auto;
     background-color: #C3CCFF;
@@ -128,13 +126,8 @@ export default {
     color: #FFFFFF;
     margin: 0;
   }
-  .deviceNameBox{
-    background-color: #FFFFFF;
-    outline-color: #5C6BC0;
-    margin: 20px auto;
-    padding: 8px;
-    width: 400px;
-    display: block;
+  .subtitle{
+    margin-top: 10px;
   }
   .deviceImage{
     max-width: 200px;
@@ -145,18 +138,54 @@ export default {
     background-color: #FFFFFF;
     border: 1px solid #5C6BC0;
   }
+  .stepperContent{
+    padding: 0;
+  }
+  .button{
+    text-decoration: none;
+  }
   .nextButton{
     margin: 20px auto;
+    color: black;
+    background-color: #8C9EFF !important;
+    font-size: 16px;
+    height: 55px !important;
+    width: fit-content;
+  }
+  .cancelButton{
+    margin: 5px;
+    background-color: #9E9E9E !important;
+    color: black;
+    font-size: 16px;
+    height: 55px !important;
+    width: 140px;
   }
   .stepper{
+    background-color: #C5CAE9 !important;
     width: 600px;
   }
   .autocomplete{
     width: 400px;
     margin: 20px auto;
+    padding: 2px;
+  }
+  .successMsg{
+    padding: 6px;
   }
   .checkIcon{
-    height: auto;
+    height: 150px;
     margin: 20px auto;
+    width: 150px;
+    display: block;
+  }
+  .stepperHeader{
+    elevation: 0;
+    background-color: white;
+  }
+  .stepCounter1{
+    margin-left: 64px;
+  }
+  .stepCounter2{
+    margin-right: 64px;
   }
 </style>

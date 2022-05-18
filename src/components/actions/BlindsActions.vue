@@ -1,5 +1,5 @@
 <template>
-  <v-container @click="getBlindsState" class="fill-height pa-0 ma-0">
+  <v-container @click="getBlindsState" class="fill-height container">
     <img v-if="loading"
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
@@ -7,7 +7,7 @@
       <div class="action">
         <div v-if="blinds.status === 'closed'" class="action">
           <button class="btn" @click="open">
-            <v-icon class="mx-auto" color="black">
+            <v-icon class="icon">
               mdi-window-open-variant
             </v-icon>
           </button>
@@ -15,7 +15,7 @@
         </div>
         <div v-else class="action">
           <button class="btn" @click="close">
-            <v-icon class="mx-auto" color="black">
+            <v-icon class="icon">
               mdi-blinds
             </v-icon>
           </button>
@@ -118,6 +118,10 @@ export default {
 </script>
 
 <style scoped>
+.container{
+  margin: 0;
+  padding: 0;
+}
 .actions{
   display: flex;
   justify-content: space-between;
@@ -150,5 +154,9 @@ export default {
   padding: 8px;
   width: 58px;
   display: block;
+}
+.icon{
+  margin: auto;
+  color: black;
 }
 </style>

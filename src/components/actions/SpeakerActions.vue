@@ -1,5 +1,5 @@
 <template>
-  <v-container @click="getSpeakerState" class="fill-height pa-0 ma-0">
+  <v-container @click="getSpeakerState" class="fill-height container">
     <img v-if="loading"
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading" />
@@ -7,7 +7,7 @@
       <div class="actions">
         <div class="action">
           <button class="btn" @click="previousSong">
-            <v-icon class="mx-auto" color="black">
+            <v-icon class="icon">
               mdi-skip-previous
             </v-icon>
           </button>
@@ -16,7 +16,7 @@
         <div class="action">
           <div v-if="speaker.status === 'playing'" @click="pause">
             <button class="btn">
-              <v-icon class="mx-auto" color="black">
+              <v-icon class="icon">
                 mdi-pause
               </v-icon>
             </button>
@@ -24,7 +24,7 @@
           </div>
           <div v-else>
             <button class="btn" @click="resume">
-              <v-icon class="mx-auto" color="black">
+              <v-icon class="icon">
                 mdi-play
               </v-icon>
             </button>
@@ -34,7 +34,7 @@
         <div class="action">
         <div v-if="speaker.status === 'stopped' ">
           <button class="btn" @click="play">
-            <v-icon class="mx-auto" color="black">
+            <v-icon class="icon">
               mdi-play
             </v-icon>
           </button>
@@ -42,7 +42,7 @@
         </div>
         <div v-else @click="stop">
           <button class="btn">
-            <v-icon class="mx-auto" color="black">
+            <v-icon class="icon">
               mdi-stop
             </v-icon>
           </button>
@@ -51,7 +51,7 @@
       </div>
         <div class="action">
           <button class="btn" @click="nextSong">
-            <v-icon class="mx-auto" color="black">
+            <v-icon class="icon">
               mdi-skip-next
             </v-icon>
           </button>
@@ -63,7 +63,7 @@
       <v-slider v-model="sliderOpt.val" :color="sliderOpt.color" :label="sliderOpt.label" max="10" min="0" @end="volumeChanged"></v-slider>
       <v-autocomplete
         height="10px"
-        class="autocomplete ps-2"
+        class="autocomplete"
         :items="supportedGenres"
         placeholder="Seleccionar género"
         rounded
@@ -246,6 +246,10 @@ export default {
 </script>
 
 <style scoped>
+.container{
+  padding: 0;
+  margin: 0;
+}
 .actions {
   display: flex;
   justify-content: space-between;
@@ -262,5 +266,11 @@ export default {
   height: 40px;
   width: 40px;
 }
-
+.icon{
+  margin: auto;
+  color: black;
+}
+.autocomplete{
+  padding: 2px;
+}
 </style>

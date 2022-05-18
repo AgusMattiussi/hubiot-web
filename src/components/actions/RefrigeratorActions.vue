@@ -1,5 +1,5 @@
 <template>
-  <v-container @click="getRefrigeratorState" class="fill-height pa-0 ma-0">
+  <v-container @click="getRefrigeratorState" class="fill-height container">
     <img v-if="loading"
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
@@ -12,7 +12,7 @@
                v-model="freezerTemp"
                :rules="[isFreezerTempValid(freezerTemp, true)]"
         />
-        <v-btn class="btn2" @click="setFreezerTemperature"
+        <v-btn class="btn" @click="setFreezerTemperature"
         :disabled="!isFreezerTempValid(freezerTemp)">
           Modificar
         </v-btn>
@@ -20,12 +20,12 @@
       <div class="inputAction">
         <v-text-field type="text"
                       clearable
-                      class=" textBox rounded"
+                      class="textBox rounded"
                       placeholder="Temperatura Heladera"
                       v-model="temperature"
                       :rules="[isRefrigeratorTempValid(temperature, true)]"
         />
-        <v-btn class="btn2 " @click="setTemperature"
+        <v-btn class="btn " @click="setTemperature"
                :disabled="!isRefrigeratorTempValid(temperature)">
           Modificar
         </v-btn>
@@ -150,6 +150,10 @@ export default {
 </script>
 
 <style scoped>
+.container{
+  padding: 0;
+  margin: 0;
+}
 .actions{
   display: inline-block;
   margin: auto;
@@ -166,7 +170,7 @@ export default {
   width: 180px !important;
   display: block;
 }
-.btn2{
+.btn{
   background-color: #FF8A65 !important;
   border-radius: 100px;
   border: 2px solid black;

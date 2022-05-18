@@ -1,7 +1,7 @@
 <template>
   <span>
-    <button class="btn icon">
-      <v-icon class="mx-auto" x-large color="white">
+    <button class="btn">
+      <v-icon class="icon">
         mdi-plus
       </v-icon>
     </button>
@@ -24,5 +24,10 @@ export default {
   width: 60px;
   box-shadow: 2px 0 4px 1px rgba(0, 0, 0, 0.2);
   text-decoration: none;
+}
+.icon{
+  margin: auto;
+  color: white;
+  font-size: 40px;
 }
 </style>

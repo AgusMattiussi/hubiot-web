@@ -1,7 +1,7 @@
 <template>
   <span>
     <button class="btn">
-      <v-icon class="mx-auto" color="black">
+      <v-icon class="icon">
         mdi-trash-can-outline
       </v-icon>
     </button>
@@ -21,5 +21,10 @@ export default {
   border: 0;
   height: 40px;
   width: 40px;
+}
+.icon{
+  margin: auto;
+  color: black;
+  font-size: 25px;
 }
 </style>

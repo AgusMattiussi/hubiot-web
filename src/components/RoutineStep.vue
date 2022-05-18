@@ -4,7 +4,7 @@
       <v-col>
         <v-autocomplete
           height="10px"
-          class="autocomplete ps-2"
+          class="autocomplete"
           :items="devices"
           placeholder="Seleccionar dispositivo"
           rounded
@@ -22,7 +22,7 @@
       <v-col>
         <v-autocomplete
           height="10px"
-          class="autocomplete ps-2"
+          class="autocomplete"
           :items="typeSelectedDevice.actions"
           :disabled="selectedDevice.id == null"
           placeholder="Seleccionar acción"
@@ -90,4 +90,7 @@ export default {
 </script>
 
 <style scoped>
+.autocomplete{
+  padding: 2px;
+}
 </style>
