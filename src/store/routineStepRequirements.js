@@ -52,6 +52,25 @@ function isRefrigeratorTempValid (temp, withMsg) {
     return withMsg != null ? msg : false
   }
 }
+
+function translateAcMode (mode) {
+  switch (mode) {
+    case 'Frío': return 'cool'
+    case 'Calor': return 'heat'
+    case 'Ventilador': return 'fan'
+    default: return mode
+  }
+}
+
+function translateRefrigeratorMode (mode) {
+  switch (mode) {
+    case 'Predeterminado': return 'default'
+    case 'Vacaciones': return 'vacation'
+    case 'Fiesta': return 'party'
+    default: return mode
+  }
+}
+
 const supportedGenres = ['classical', 'country', 'dance', 'latina', 'pop', 'rock']
 const supportedAcModes = ['Frío', 'Calor', 'Ventilador']
 const supportedVerticalSwings = ['auto', '22', '45', '67', '90']
@@ -80,7 +99,7 @@ export default {
     turnOn: { type: NO_FIELD },
     turnOff: { type: NO_FIELD },
     setTemperature: { type: TEXTFIELD, rule: isAcTemperatureValid },
-    setMode: { type: AUTOCOMPLETE, values: supportedAcModes },
+    setMode: { type: AUTOCOMPLETE, values: supportedAcModes, translator: translateAcMode },
     setVerticalSwing: { type: AUTOCOMPLETE, values: supportedVerticalSwings },
     setHorizontalSwing: { type: AUTOCOMPLETE, values: supportedHorizontalSwings },
     setFanSpeed: { type: AUTOCOMPLETE, values: supportedFanSpeeds }
@@ -101,7 +120,7 @@ export default {
   refrigerator: {
     setFreezerTemperature: { type: TEXTFIELD, rule: isFreezerTempValid },
     setTemperature: { type: TEXTFIELD, rule: isRefrigeratorTempValid },
-    setMode: { type: AUTOCOMPLETE, values: supportedRefrigeratorModes }
+    setMode: { type: AUTOCOMPLETE, values: supportedRefrigeratorModes, translator: translateRefrigeratorMode }
   }
 }
 /* TIPOS DE REQUERIMIENTOS

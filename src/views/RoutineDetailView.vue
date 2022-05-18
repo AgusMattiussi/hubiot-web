@@ -12,11 +12,11 @@
               <v-card class="card">
                 <div class="routineActions">
                   <div>
-                    <v-card-title class="deviceName">
+                    <v-card-title class="deviceName" @click="printName(action.params)">
                       {{ action.device.name }}
                     </v-card-title>
                     <v-card-subtitle class="actionName">
-                      {{ translate(action.actionName) }}: {{action.params[0].toString()}}
+                      {{ translate(action.actionName) }}{{action.params[0] !== '' ? ': ' : ''}}{{translateModeIfNeeded(action.actionName, action.params[0])}}
                     </v-card-subtitle>
                   </div>
                 <v-avatar class="img">
@@ -44,7 +44,7 @@
 
 <script>
 import { mapGetters, mapState, mapActions } from 'vuex'
-import translations from '@/store/translations'
+import translations from '@/store/englishTranslations'
 
 export default {
   name: 'RoutineDetail.vue',
@@ -77,8 +77,17 @@ export default {
       $getAllRoutines: 'getAll',
       $execute: 'executeRoutine'
     }),
+    printName (str) {
+      console.log(str)
+    },
     translate (actionName) {
       return translations[actionName]
+    },
+    translateModeIfNeeded (actionName, mode) {
+      if (actionName === 'setMode') {
+        return this.translate(mode)
+      }
+      return mode
     }
   },
   async created () {
