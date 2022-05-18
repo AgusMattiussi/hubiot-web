@@ -28,7 +28,7 @@
           placeholder="Seleccionar acción"
           rounded
           solo
-          item-text="name"
+          :item-text="translate"
           auto-select-first
           return-object
           hide-details
@@ -43,6 +43,8 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import translations from '@/store/translations'
+
 export default {
   name: 'RoutineStep.vue',
   props: {
@@ -53,7 +55,7 @@ export default {
   },
   data () {
     return {
-      typeSelectedDevice: [],
+      typeSelectedDevice: {},
       selectedDevice: {},
       selectedAction: {}
     }
@@ -72,7 +74,12 @@ export default {
     }),
     updated () {
       this.typeSelectedDevice = this.$store.getters['deviceTypes/getTypeForDeviceID'](this.selectedDevice.type.id)
+      console.log(this.typeSelectedDevice)
       this.$emit('updatedStep', { id: this.id, device: this.selectedDevice, action: this.selectedAction })
+    },
+    translate (action) {
+      console.log(action)
+      return translations[action.name]
     }
   },
   async created () {
