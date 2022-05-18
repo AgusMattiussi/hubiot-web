@@ -25,7 +25,7 @@
       <div class="inputAction">
         <v-text-field type="text"
                class="textBox rounded"
-               :rules="[isLevelValid(level, 'Debe ser un número entre 0 y 100')]"
+               :rules="[isLevelValid(level, true)]"
                :placeholder="blinds.level"
                v-model="level"
         />
@@ -94,11 +94,12 @@ export default {
       }
       await this.executeAction(action)
     },
-    isLevelValid (level, msg) {
+    isLevelValid (level, withMsg) {
+      const msg = 'Debe ser un número entre 0 y 100'
       if (level >= 0 && level <= 100) {
         return true
       }
-      return msg == null ? false : msg
+      return withMsg ? msg : false
     },
     async setLevel () {
       const action = {

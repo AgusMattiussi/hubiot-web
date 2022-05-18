@@ -16,7 +16,7 @@
           v-model="selectedDevice"
           value=""
           hide-details
-         @change="updated">
+         @change="updatedDevice">
         </v-autocomplete>
       </v-col>
       <v-col>
@@ -37,6 +37,29 @@
           @change="updated">
         </v-autocomplete>
       </v-col>
+      <v-col>
+        <v-text-field v-if="req === 1"
+                      type="text"
+                      clearable
+                      class="textBox rounded"
+                      placeholder="Valor"
+                      v-model="userInput"
+                      @change="updatedParams"
+                      :rules="[getRule()(userInput, true)]"
+        />
+        <v-autocomplete
+          v-if="req === 2"
+          class="autocomplete"
+          :items="getValues()"
+          placeholder="Modo"
+          rounded
+          solo
+          return-object
+          hide-no-data
+          @change="updatedParams"
+          v-model="userInput"
+        />
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -44,6 +67,7 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import translations from '@/store/translations'
+import routineStepRequirements from '@/store/routineStepRequirements'
 
 export default {
   name: 'RoutineStep.vue',
@@ -57,7 +81,11 @@ export default {
     return {
       typeSelectedDevice: {},
       selectedDevice: {},
-      selectedAction: {}
+      selectedAction: {},
+      actionParams: '',
+      routineStepRequirements,
+      userInput: '',
+      req: null
     }
   },
   computed: {
@@ -72,14 +100,30 @@ export default {
     ...mapActions('deviceTypes', {
       $getAllTypes: 'getAll'
     }),
+    updatedDevice () {
+      this.req = 0
+      this.updated()
+    },
+    updatedParams () {
+      this.actionParams = this.userInput
+      this.updated()
+    },
     updated () {
       this.typeSelectedDevice = this.$store.getters['deviceTypes/getTypeForDeviceID'](this.selectedDevice.type.id)
-      console.log(this.typeSelectedDevice)
-      this.$emit('updatedStep', { id: this.id, device: this.selectedDevice, action: this.selectedAction })
+      this.updateRoutineStepRequirements()
+      this.$emit('updatedStep', { id: this.id, device: this.selectedDevice, action: { name: this.selectedAction.name, params: this.actionParams.toString() } })
     },
     translate (action) {
-      console.log(action)
       return translations[action.name]
+    },
+    updateRoutineStepRequirements () {
+      this.req = routineStepRequirements[this.selectedDevice.type.name][this.selectedAction.name].type
+    },
+    getRule () {
+      return routineStepRequirements[this.selectedDevice.type.name][this.selectedAction.name].rule
+    },
+    getValues () {
+      return routineStepRequirements[this.selectedDevice.type.name][this.selectedAction.name].values
     }
   },
   async created () {

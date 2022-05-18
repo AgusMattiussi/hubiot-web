@@ -65,13 +65,13 @@
       <div>
         <div class="inputAction">
           <v-text-field type="text"
-                        :rules="[isCodeValid(oldCode, 'Debe ser un número entre 0000 y 9999')]"
+                        :rules="[isCodeValid(oldCode, true)]"
                         class="textBox rounded"
                         placeholder="Viejo"
                         v-model="oldCode"
           />
           <v-text-field type="text"
-                        :rules="[isCodeValid(newCode, 'Debe ser un número entre 0000 y 9999')]"
+                        :rules="[isCodeValid(newCode, true)]"
                         class="textBox rounded"
                         placeholder="Nuevo"
                         v-model="newCode"
@@ -130,11 +130,12 @@ export default {
         console.log('Error en ' + action.name)
       }
     },
-    isCodeValid (code, msg) {
+    isCodeValid (code, withMsg) {
+      const msg = 'Debe ser un número entre 0000 y 9999'
       if (code >= 0 && code < 10000) {
         return true
       }
-      return msg == null ? false : msg
+      return withMsg ? msg : false
     },
     async armStay () {
       const action = {

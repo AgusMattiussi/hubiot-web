@@ -120,7 +120,7 @@ export default {
             id: step.device.id
           },
           actionName: step.action.name,
-          params: [], // Acá irían los métodos obtenidos del step.
+          params: [step.action.params], // Acá irían los métodos obtenidos del step.
           meta: {}
         }
       })
