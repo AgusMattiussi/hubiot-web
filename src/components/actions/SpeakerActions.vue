@@ -11,7 +11,7 @@
               mdi-skip-previous
             </v-icon>
           </button>
-          <p>Previous</p>
+          <p>Anterior</p>
         </div>
         <div class="action">
           <div v-if="speaker.status === 'playing'" @click="pause">
@@ -28,7 +28,7 @@
                 mdi-play
               </v-icon>
             </button>
-            <p>Resume</p>
+            <p>Reproducir</p>
           </div>
         </div>
         <div class="action">
@@ -38,7 +38,7 @@
               mdi-play
             </v-icon>
           </button>
-          <p>Play</p>
+          <p>Reproducir</p>
         </div>
         <div v-else @click="stop">
           <button class="btn">
@@ -46,7 +46,7 @@
               mdi-stop
             </v-icon>
           </button>
-          <p>Stop</p>
+          <p>Parar</p>
         </div>
       </div>
         <div class="action">
@@ -55,7 +55,7 @@
               mdi-skip-next
             </v-icon>
           </button>
-          <p>Next</p>
+          <p>Siguiente</p>
         </div>
       </div>
     </div>

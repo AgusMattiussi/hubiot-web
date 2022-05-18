@@ -1,10 +1,10 @@
 <template>
-  <v-container class="fill-height pa-0 ma-0">
+  <v-container class="fill-height container">
     <img v-if="loading"
          :src="require('@/assets/ajax-loader.gif')"
          alt="loading">
     <div v-else>
-      <v-card min-height="10vh" width="auto" class="secondary pr-6">
+      <v-card class="stateCard">
         <v-card-text>
           <ul class="list">
             <li v-if="alarm.status === 'disarmed'">
@@ -86,6 +86,16 @@ export default {
 </script>
 
 <style scoped>
+.container{
+  padding: 0;
+  margin: 0;
+}
+.stateCard{
+  min-height: 5vh;
+  width: auto;
+  background-color: #C5CAE9;
+  padding-right: 10px;
+}
 .list {
   list-style: none;
   color: black;

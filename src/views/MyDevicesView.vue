@@ -1,54 +1,53 @@
 <template>
   <v-container class="fill-height" fluid>
-    <v-main class="fill-height mx-2">
+    <v-main class="fill-height">
       <v-sheet class="fill-height" elevation="24">
-        <v-container class="secondary fill-height" fluid>
-        <v-row>
-          <v-col md="2">
-          </v-col>
-          <v-col md="8">
-            <v-container><!-- Container para centrar contenido -->
-              <h1 class="mb-3">Mis Dispositivos</h1>
-              <v-main>
-                <form>
-                  <div class="d-flex">
-                    <v-text-field :counter="18"
-                                  :append-icon="'mdi-magnify'"
-                                  @click:clear="searchedString = ''"
-                                  v-model="searchedString"
-                                  placeholder="Buscar dispositivo"
-                                  solo
-                                  rounded
-                                  required
-                                  outlined
-                                  clearable/>
-                    <router-link to="new_device">
-                      <AddButton/>
-                    </router-link>
+        <v-container class="mainContainer fill-height" fluid>
+          <v-row>
+            <v-col md="2"/>
+            <v-col md="8">
+              <v-container>
+                <h1 class="heading">Mis Dispositivos</h1>
+                <v-main class="mainContainer">
+                  <form action="">
+                    <div class="actionsBar">
+                      <v-text-field :counter="18"
+                                    :append-icon="'mdi-magnify'"
+                                    @click:clear="searchedString = ''"
+                                    v-model="searchedString"
+                                    placeholder="Buscar dispositivo"
+                                    solo
+                                    rounded
+                                    required
+                                    outlined
+                                    clearable/>
+                      <router-link to="new_device">
+                        <AddButton/>
+                      </router-link>
+                    </div>
+                  </form>
+                </v-main>
+                <v-main class="devices">
+                  <div class="devicesParent">
+                    <v-sheet class="deviceCard" v-for="device in getElementsIncluding(searchedString, devices)" :key="device.id">
+                      <router-link :to="{ name: 'deviceDetails',
+                                          params: {slug: device.name,
+                                                  deviceId: device.id,
+                                                  deviceName: device.name,
+                                                  deviceTypeId: device.type.id,
+                                                  deviceTypeName: device.type.name}}"
+                                  class="deviceName">
+                        <v-img :src="require(`@/assets/${device.meta.image}`)" />
+                        <h4>{{ device.name }}</h4>
+                      </router-link>
+                    </v-sheet>
                   </div>
-                </form>
-              </v-main>
-              <v-main mt="10">
-                <div class="devicesParent">
-                  <v-sheet class="deviceCard" v-for="device in getElementsIncluding(searchedString, devices)" :key="device.id">
-                    <router-link :to="{ name: 'deviceDetails',
-                                        params: {slug: device.name,
-                                                 deviceId: device.id,
-                                                 deviceName: device.name,
-                                                 deviceTypeId: device.type.id,
-                                                 deviceTypeName: device.type.name}}"
-                                 class="deviceName">
-                      <v-img :src="require(`@/assets/${device.meta.image}`)" />
-                      <h4>{{ device.name }}</h4>
-                    </router-link>
-                  </v-sheet>
-                </div>
-              </v-main>
-            </v-container>
-          </v-col>
-          <v-col md="2"></v-col>
-        </v-row>
-      </v-container>
+                </v-main>
+              </v-container>
+            </v-col>
+            <v-col md="2"/>
+          </v-row>
+        </v-container>
       </v-sheet>
     </v-main>
   </v-container>
@@ -97,15 +96,23 @@ export default {
   },
   async created () {
     await this.getAllDevices()
-    //   .then(() => {
-    //   console.log('Funka')
-    // })
   }
 }
 </script>
 
 <style scoped>
-
+.mainContainer{
+  background-color: #C5CAE9;
+}
+.heading{
+  margin-bottom: 6px;
+}
+.actionsBar{
+  display: flex;
+}
+.devices{
+  margin-top: 10px;
+}
 .devicesParent {
   display: inline-flex;
   flex-direction: row;

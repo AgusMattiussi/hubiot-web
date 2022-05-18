@@ -5,8 +5,7 @@
         <GoBackButton/>
         <v-main>
           <form ref="form">
-            <v-text-field
-                          color="white"
+            <v-text-field color="white"
                           v-if="this.editingMode"
                           :prepend-inner-icon="'mdi-cancel'"
                           :append-icon="isNameValid(newName) ? 'mdi-check' : 'mdi-blank'"
@@ -17,13 +16,13 @@
                           :placeholder=deviceName
                           :rules="[isNameValid(newName, true)]"
                           required
-                          class="my-text-field centered-input text--black ml-10 mr-4">
+                          class="deviceName centered-input ml-10 mr-4">
               </v-text-field>
           </form>
         </v-main>
         <v-main v-if="!this.editingMode" class="mt-1">
           <v-card v-if="!this.editingMode" class="primary pa-0" elevation="0">
-            <v-card-title class="pa-0 white--text">
+            <v-card-title class="title">
               {{ deviceName }}
               <v-btn class="ml-2" outlined small fab color="primary" @click="activateEditingMode">
                 <v-icon color="white">mdi-pencil</v-icon>
@@ -36,13 +35,13 @@
       <v-row>
         <v-col md="4"/>
         <v-col md="4">
-          <v-img :src="require(`@/assets/${device.image}`)" alt="parlante" class="img"></v-img>
+          <v-img :src="require(`@/assets/${device.image}`)" alt="parlante" class="img"/>
         </v-col>
-        <v-col md="4"></v-col>
+        <v-col md="4"/>
       </v-row>
       <v-divider class="mx-4"></v-divider>
       <v-card-title class="sectionTitle">Estado</v-card-title>
-      <v-card-text class="text-left">
+      <v-card-text class="state">
         <state-container :device-id="deviceId.toString()"
                          :device-type-id="deviceTypeId.toString()"
                          :device-type-name="deviceTypeName.toString()"/>
@@ -59,7 +58,6 @@
 </template>
 
 <script>
-
 import store from '@/store/store'
 import GoBackButton from '@/components/GoBackButton'
 import DeleteButton from '@/components/DeleteButton'
@@ -74,12 +72,6 @@ export default {
     DeleteButton,
     GoBackButton,
     ActionsContainer
-  },
-  props: {
-    toExecute: {
-      type: Object,
-      required: true
-    }
   },
   data () {
     return {
@@ -157,7 +149,6 @@ export default {
 </script>
 
 <style scoped>
-
 .topBar h1 {
   display: inline;
   margin-top: 12px;
@@ -166,17 +157,11 @@ export default {
 .topBar v-icon {
 
 }
-
-.one-line {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.my-text-field .v-icon {
+.deviceName .v-icon {
   position: absolute;
   top: 12px;
   right: 8px;
+  color: white;
 }
 
 .centered-input >>> input {
@@ -201,13 +186,14 @@ export default {
   display: flex;
   border-radius: 20px 20px 0 0;
 }
-.deleteBtn{
-  margin: 5px;
-  float: right;
+.title{
+  font-size: 30px !important;
+  font-weight: bold;
+  color: white;
+  padding: 0;
 }
-.modifyBtn{
-  margin-top: 5px;
-  float: right;
+.state{
+  text-align: left;
 }
 .img{
   border-radius: 50%;

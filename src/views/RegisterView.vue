@@ -54,6 +54,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 .bg {
   background-image: url("../assets/login_background.png");

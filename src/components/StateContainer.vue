@@ -6,7 +6,6 @@
     <blinds-state v-if="deviceTypeName === 'blinds'" :device-id="deviceId"/>
     <ac-state v-if="deviceTypeName === 'ac'" :device-id="deviceId"/>
     <refrigerator-state v-if="deviceTypeName === 'refrigerator'" :device-id="deviceId"/>
-    <!--  <h1 v-else> NO SE ENCONTRO EL DISPOSITIVO </h1>-->
   </v-container>
 </template>
 

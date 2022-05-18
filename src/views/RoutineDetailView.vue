@@ -16,7 +16,7 @@
                       {{ action.device.name }}
                     </v-card-title>
                     <v-card-subtitle class="actionName">
-                      {{ action.actionName }}
+                      {{ translate(action) }}
                     </v-card-subtitle>
                   </div>
                 <v-avatar class="img">
@@ -44,6 +44,7 @@
 
 <script>
 import { mapGetters, mapState, mapActions } from 'vuex'
+import translations from '@/store/translations'
 
 export default {
   name: 'RoutineDetail.vue',
@@ -75,7 +76,10 @@ export default {
       $getRoutine: 'get',
       $getAllRoutines: 'getAll',
       $execute: 'executeRoutine'
-    })
+    }),
+    translate (action) {
+      return translations[action.actionName]
+    }
   },
   async created () {
     await this.$getAllRoutines()

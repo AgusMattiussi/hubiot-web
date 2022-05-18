@@ -209,7 +209,6 @@ export default {
   background-color: #FF8A65;
   border-radius: 100px;
   border: 2px solid black;
-  margin-bottom: 10px;
   height: 40px;
   width: 40px;
 }
