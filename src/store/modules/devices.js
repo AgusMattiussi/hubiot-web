@@ -9,7 +9,6 @@ export default {
     async create (context, device) {
       const result = await DevicesApi.add(device)
       context.dispatch('getAll')
-      // return result
       return Object.assign(new Device(), result)
     },
     async modify (context, device) {

@@ -70,7 +70,7 @@ export default {
     }
   },
   mounted () {
-    this.$root.$on('speakerStateUpdated', (msg) => {
+    this.$root.$on('speakerStateUpdated', () => {
       this.getSpeakerState()
     })
   },

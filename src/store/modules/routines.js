@@ -5,13 +5,10 @@ export default {
   state: {
     routines: []
   },
-  // getters: {
-  // },
   actions: {
     async create (context, routine) {
       const result = await RoutinesApi.add(routine)
       await context.dispatch('getAll')
-      // return result
       return Object.assign(new Routine(), result)
     },
     async modify (context, routine) {

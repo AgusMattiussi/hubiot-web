@@ -7,7 +7,6 @@ export default {
   },
   getters: {
     getTypeForDeviceID: (state) => (id) => {
-      console.log(state.deviceTypes.find(deviceType => deviceType.id === id))
       return state.deviceTypes.find(deviceType => deviceType.id === id)
     }
   },

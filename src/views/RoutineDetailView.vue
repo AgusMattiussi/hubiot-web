@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import translations from '@/store/englishTranslations'
 
 export default {
@@ -69,9 +69,6 @@ export default {
       await this.$execute(this.routineID)
       this.$router.go(-1)
     },
-    ...mapGetters('devices', {
-      $getDevices: 'get'
-    }),
     ...mapActions('routines', {
       $getRoutine: 'get',
       $getAllRoutines: 'getAll',

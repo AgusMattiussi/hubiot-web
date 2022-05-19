@@ -56,7 +56,7 @@ export default {
     })
   },
   mounted () {
-    this.$root.$on('alarmStateUpdated', (msg) => {
+    this.$root.$on('alarmStateUpdated', () => {
       this.getAlarmState()
     })
   },

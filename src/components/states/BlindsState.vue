@@ -74,7 +74,7 @@ export default {
     })
   },
   mounted () {
-    this.$root.$on('blindsStateUpdated', (msg) => {
+    this.$root.$on('blindsStateUpdated', () => {
       this.getBlindsState()
     })
   },

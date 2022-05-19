@@ -1,25 +1,4 @@
 export default {
-  routines: [
-    {
-      id: 0,
-      name: 'Chill Time',
-      slug: 'chilltime',
-      iconName: 'mdi-bell-cancel',
-      description: 'Sape.',
-      actions: [
-        {
-          id: 0,
-          deviceID: 1,
-          actionID: 0
-        },
-        {
-          id: 1,
-          deviceID: 2,
-          actionID: 1
-        }
-      ]
-    }
-  ],
   devices: [
     {
       name: 'Parlante',

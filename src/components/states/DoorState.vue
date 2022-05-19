@@ -63,7 +63,7 @@ export default {
     })
   },
   mounted () {
-    this.$root.$on('doorStateUpdated', (msg) => {
+    this.$root.$on('doorStateUpdated', () => {
       this.getDoorState()
     })
   },
@@ -78,7 +78,6 @@ export default {
       try {
         this.door = await this.$getDoorState(this.deviceId)
       } catch (e) {
-        // this.setResult(e)
         console.log('StateError')
       }
     }

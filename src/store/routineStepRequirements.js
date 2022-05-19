@@ -111,7 +111,6 @@ export default {
     unlock: { type: NO_FIELD }
   },
   alarm: {
-    // Corregir despues
     changeSecurityCode: { type: TEXTFIELD },
     armStay: { type: NO_FIELD },
     armAway: { type: NO_FIELD },

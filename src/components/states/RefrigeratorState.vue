@@ -56,7 +56,7 @@ export default {
     })
   },
   mounted () {
-    this.$root.$on('refrigeratorStateUpdated', (msg) => {
+    this.$root.$on('refrigeratorStateUpdated', () => {
       this.getRefrigeratorState()
     })
   },

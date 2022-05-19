@@ -106,9 +106,6 @@ export default {
       }
       return withMsg ? msg : false
     },
-    validate () {
-      this.$refs.form.validate()
-    },
     async deleteDevice () {
       try {
         await this.$deleteDevice(this.deviceId)
@@ -116,7 +113,7 @@ export default {
         this.device = null
         this.clearResult()
       } catch (e) {
-        this.setResult(e)
+        console.log('deleteDeviceError')
       }
     },
     async cancelChange () {
