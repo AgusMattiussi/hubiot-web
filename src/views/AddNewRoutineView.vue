@@ -2,16 +2,16 @@
   <v-main class="fill-height background justify-center" fluid>
     <v-container>
       <v-card class="card" elevation="24">
-      <v-stepper class="stepper secondary" v-model="currentStep" elevation="0">
+      <v-stepper class="stepper" v-model="currentStep" elevation="0">
         <v-stepper-items>
-          <v-stepper-content step="1" class="pa-0">
-            <h1 class="cardTitle mb-5"> Agrega una Nueva Rutina </h1>
+          <v-stepper-content step="1" class="stepperContent">
+            <h1 class="cardTitle"> Agrega una Nueva Rutina </h1>
             <v-row class="fila" v-for="i in deviceIndex" :key="i-1">
               <v-col md="11">
                 <RoutineStep :id="i-1" @updatedStep="updateRoutine"/>
               </v-col>
               <v-col md="1">
-                <v-container class="fill-height justify-center pl-0 pt-0 pb-0 pr-8" >
+                <v-container class="fill-height justify-center removeStep" >
                   <v-icon v-if="i===deviceIndex && i!==1" class="icon" @click="removeLast">
                     mdi-close
                   </v-icon>
@@ -19,22 +19,22 @@
               </v-col>
             </v-row>
             <div class="mt-5">
-              <v-btn class="nextButton v-size--small contras black--text"
+              <v-btn class="newStepBtn"
               @click="deviceIndex++">
                 Añadir Paso
               </v-btn>
             </div>
-            <v-btn class="nextButton v-size--x-large accent black--text"
+            <v-btn class="nextButton"
                    @click="currentStep = 2"> Siguiente </v-btn>
             <router-link class="text-decoration-none" to="routines">
-              <v-btn class="ma-5 v-size--x-large grey black--text"> Cancelar </v-btn>
+              <v-btn class="cancelButton"> Cancelar </v-btn>
             </router-link>
           </v-stepper-content>
-          <v-stepper-content step="2" class="pa-0">
+          <v-stepper-content step="2" class="stepperContent">
             <h1 class="cardTitle"> Nombre de la rutina </h1>
-            <h2 class="mt-6"> ¿Cómo se llamará la nueva rutina?</h2>
+            <h2 class="subtitle"> ¿Cómo se llamará la nueva rutina?</h2>
             <form ref="form">
-              <v-text-field class="autocomplete pa-2"
+              <v-text-field class="textBox"
                             height="10px"
                             v-model="newRoutineName"
                             :counter="this.maxLength"
@@ -46,28 +46,28 @@
                             outlined
                             clearable
                             @click:clear="newRoutineName = ''"/>
-              <v-btn class="nextButton v-size--x-large accent black--text"
+              <v-btn class="nextButton"
                      :disabled="!isNameValid(newRoutineName)"
                      @click="createRoutine"> Siguiente </v-btn>
-              <v-btn class="ms-5 v-size--x-large grey black--text"
+              <v-btn class="cancelButton"
                      @click="currentStep = 1"> Atrás </v-btn>
             </form>
           </v-stepper-content>
-          <v-stepper-content step="3" class="pa-0">
+          <v-stepper-content step="3" class="stepperContent">
             <h1 class="cardTitle">¡Todo Listo!</h1>
-            <h2 class="pa-6"> La rutina "{{newRoutineName}}" fue creada con éxito</h2>
-            <v-icon color="success" class="checkIcon d-block" size="150px">mdi-check-circle</v-icon>
-            <router-link class="text-decoration-none" to="routines">
-              <v-btn class="ma-5 v-size--x-large accent black--text"> Volver a "Mis Rutinas" </v-btn>
+            <h2 class="successMsg"> La rutina "{{newRoutineName}}" fue creada con éxito</h2>
+            <v-icon color="success" class="checkIcon" size="150px">mdi-check-circle</v-icon>
+            <router-link class="lastButton" to="routines">
+              <v-btn class="nextButton"> Volver a "Mis Rutinas" </v-btn>
             </router-link>
           </v-stepper-content>
         </v-stepper-items>
-        <v-stepper-header class="elevation-0 white">
-          <v-stepper-step :color="currentStep === 1? 'primary' : 'success'" class="ml-16" :complete="currentStep > 1" step="1"></v-stepper-step>
+        <v-stepper-header class="stepperHeader">
+          <v-stepper-step :color="currentStep === 1? 'primary' : 'success'" class="stepCounter1" :complete="currentStep > 1" step="1"></v-stepper-step>
           <v-divider></v-divider>
           <v-stepper-step :color="currentStep === 2? 'primary' : 'success'" :complete="currentStep > 2" step="2"></v-stepper-step>
           <v-divider></v-divider>
-          <v-stepper-step :completed="true" :color="currentStep === 3? 'success' : 'grey'" class="mr-16" step="3"></v-stepper-step>
+          <v-stepper-step :completed="true" :color="currentStep === 3? 'success' : 'grey'" class="stepCounter2" step="3"></v-stepper-step>
         </v-stepper-header>
       </v-stepper>
     </v-card>
@@ -147,7 +147,7 @@ export default {
   background-image: url('../assets/background_my_device.png');
   background-size: cover;
 }
-.autocomplete{
+.textBox{
   width: 400px;
   margin: 20px auto;
 }
@@ -167,15 +167,44 @@ export default {
   color: #FFFFFF;
   margin: 0;
 }
+.subtitle{
+  margin-top: 10px;
+}
+.newStepBtn{
+  margin: 20px auto;
+  color: black;
+  background-color: #FF8A65 !important;
+  font-size: 16px;
+  height: 40px !important;
+  width: fit-content;
+}
 .nextButton{
   margin: 20px auto;
+  color: black;
+  background-color: #8C9EFF !important;
+  font-size: 16px;
+  height: 55px !important;
+  width: fit-content;
+}
+.cancelButton{
+  margin: 5px;
+  background-color: #9E9E9E !important;
+  color: black;
+  font-size: 16px;
+  height: 55px !important;
+  width: 140px;
 }
 .stepper{
+  background-color: #C5CAE9 !important;
   margin-top: 10%;
   margin-left: auto;
   margin-right: auto;
 }
+.stepperContent{
+  padding: 0;
+}
 .checkIcon{
+  display: block;
   height: auto;
   margin: 20px auto;
 }
@@ -184,5 +213,24 @@ export default {
 }
 .fila{
   max-height: 70px;
+}
+.removeStep{
+  padding: 0 16px 0 0;
+}
+.successMsg{
+  padding: 6px;
+}
+.stepperHeader{
+  elevation: 0;
+  background-color: white;
+}
+.stepCounter1{
+  margin-left: 64px;
+}
+.stepCounter2{
+  margin-right: 64px;
+}
+.lastButton{
+  text-decoration: none;
 }
 </style>

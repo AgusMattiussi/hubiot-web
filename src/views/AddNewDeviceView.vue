@@ -55,7 +55,7 @@
           <h1 class="cardTitle"> ¡Todo Listo! </h1>
           <h2 class="successMsg"> El dispostivo "{{newDeviceName}}" fue creado con éxito</h2>
           <v-icon color="success" class="checkIcon" size="150px">mdi-check-circle</v-icon>
-          <router-link class="button" to="devices">
+          <router-link class="lastButton" to="devices">
             <v-btn class="nextButton"> Volver a "Mis Dispositivos" </v-btn>
           </router-link>
         </v-stepper-content>
@@ -156,7 +156,7 @@ export default {
   .stepperContent{
     padding: 0;
   }
-  .button{
+  .lastButton{
     text-decoration: none;
   }
   .nextButton{
