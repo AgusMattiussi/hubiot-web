@@ -1,0 +1,8 @@
+{"_id":"05137bbbcc8f2418","name":"Alarmoide","typeId":"mxztsyjzsrq7iaqc","state":{"status":"armedStay","securityCode":"1234"},"meta":{"image":"alarm.png"}}
+{"_id":"65a0d239b9b07431","name":"Parlantoide","typeId":"c89b94e8581855bc","state":{"status":"stopped","volume":5,"genre":"pop","songIndex":0,"playingSince":null,"pausedSince":null,"pausedInteval":0},"meta":{"image":"parlante.png"}}
+{"_id":"6d813e80c5eb1002","name":"hjhj","typeId":"lsf78ly0eqrjbz91","state":{"status":"closed","lock":"locked"},"meta":{"image":"puerta.png"}}
+{"_id":"9d60f82698ff1b55","name":"APocaLooz","typeId":"eu0v2xgprrhhg41g","state":{"status":"opened","level":10,"actionEndBy":null,"actionTimerIndex":null},"meta":{"image":"persiana.png"}}
+{"_id":"a41cf0bedf5bf973","name":"MCongelo","typeId":"rnizejqr2di0okho","state":{"freezerTemperature":-8,"temperature":2,"mode":"default","previousFreezerTemperature":-8,"previousTemperature":2,"partyModeEndBy":null,"partyModeTimerIndex":null},"meta":{"image":"heladera.png"}}
+{"_id":"d8a586d4c5e8df29","name":"jgjhhj","typeId":"li6cbv5sdlatti0j","state":{"status":"off","temperature":23,"mode":"heat","verticalSwing":"90","horizontalSwing":"auto","fanSpeed":"auto"},"meta":{"image":"aire.png"}}
+{"_id":"fc182629964cc666","name":"Airetoide","typeId":"li6cbv5sdlatti0j","state":{"status":"off","temperature":24,"mode":"cool","verticalSwing":"auto","horizontalSwing":"auto","fanSpeed":"auto"},"meta":{"image":"aire.png"}}
+{"$$indexCreated":{"fieldName":"name","unique":true,"sparse":false}}

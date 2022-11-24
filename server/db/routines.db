@@ -1,0 +1,2 @@
+{"_id":"77f1863d828c7b14","name":"jhhjkjkh","actions":[{"device":{"id":"1ccade94e2ea3403"},"actionName":"setVolume","params":["2"],"meta":{}},{"device":{"id":"d8a586d4c5e8df29"},"actionName":"setTemperature","params":["23"],"meta":{}}],"meta":{}}
+{"$$indexCreated":{"fieldName":"name","unique":true,"sparse":false}}
